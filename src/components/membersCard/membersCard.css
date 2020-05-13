@@ -1,0 +1,41 @@
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+.compagnyName {
+  color: #f7316b;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.1rem;
+}
+
+.textActivity,
+.textManager {
+  color: #1da1f2;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.textAreaActivity,
+.textRepresent {
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+.memberBouton {
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 17px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #f7316b;
+  background-color: #fff;
+  border: 2px solid #f7316b;
+}
+
+.memberBouton:hover {
+  color: #fff;
+  background-color: #f7316b;
+}
