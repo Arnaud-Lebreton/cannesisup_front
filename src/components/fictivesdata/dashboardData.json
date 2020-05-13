@@ -1,0 +1,43 @@
+{
+  "dashboardColumnListInit": [
+    "id",
+    "membershipNumber",
+    "memberActive",
+    "requestDate",
+    "validationDate",
+    "membershipEmail",
+    "membershipPassword",
+    "compagnyName",
+    "compagnyAdress",
+    "compagnyAdditionalAdress",
+    "compagnyPostalCode",
+    "compagnyCity",
+    "compagnyTelephon",
+    "compagnyEmail",
+    "compagnyWebside",
+    "compagnyFacebook",
+    "compagnyInstagram",
+    "compagnyLinkedin",
+    "compagnyTwitter",
+    "compagnyActivityArea",
+    "compagnyActivityDescription",
+    "compagnyLogo",
+    "compagnyCoverPhoto",
+    "compagnyPresentationFile",
+    "compagnyRepresentName",
+    "compagnyRepresentLastname",
+    "compagnyRepresentFunction",
+    "compagnyRepresentQuote",
+    "compagnyRepresentPhoto",
+    "charterSigning"
+  ],
+  "dashboardColumnListShow": [
+    {
+      "membershipNumber": "N°Adhérent",
+      "memberActive": "actif?",
+      "requestDate": "date de demande",
+      "validationDate": "date de validation",
+      "membershipEmail": "email du membre"
+    }
+  ]
+}
