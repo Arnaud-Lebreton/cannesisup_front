@@ -36,9 +36,12 @@
   "dashboardColumnListShow": [
     {
       "id": "Identifiant DB",
+      "memberActive": "Actif?",
+      "membershipNumber": "N°Adhérent",
       "compagnyEmail": "email",
       "compagnyRepresentName": "Nom du représentant",
-      "compagnyRepresentLastname": "Prénom du représentant"
+      "compagnyRepresentLastname": "Prénom du représentant",
+      "compagnyRepresentFunction": "Fonction"
     }
   ]
 }

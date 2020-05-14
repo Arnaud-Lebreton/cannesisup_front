@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Container, Table, Button } from "react-bootstrap";
+import {
+  Container,
+  Table,
+  Button,
+  Image,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 //Import css
 import "./membershipStyle.css";
 //Import des données fictives JSON
@@ -13,6 +20,7 @@ class MembershipList extends Component {
       membershipData: [{}],
       dashboardColumnListInit: [],
       dashboardColumnListShow: [{}],
+      membershipFilterData: [{}],
     };
   }
   // Lancement des extractions de données
@@ -69,9 +77,9 @@ class MembershipList extends Component {
       );
     }
   };
-  textHeaderCreate = (array) => {
-    return Object.keys(array).map((element) => {
-      return <th>{element}</th>;
+  textHeaderCreate = (objet) => {
+    return Object.keys(objet).map((element) => {
+      return <th>{this.state.dashboardColumnListShow[0][element]}</th>;
     });
   };
   //---------------------------------------------
@@ -90,40 +98,44 @@ class MembershipList extends Component {
       });
     }
   };
+
   boutonCreate = (index, id, status) => {
-    let colorStatus, textButton;
+    let colorStatus, textStatus;
     if (status) {
       colorStatus = "success";
-      textButton = "En ligne";
+      textStatus = "En ligne";
     } else {
       colorStatus = "secondary";
-      textButton = "En Attente";
+      textStatus = "Attente";
     }
     return (
       <td>
         <Button
+          className="tableText"
           variant={colorStatus}
           key={index}
           value={id}
           onClick={this.membershipSelection}
         >
-          {textButton}
+          {textStatus}
         </Button>
         <Button
+          className="tableText"
           variant="info"
           key={index}
           value={id}
           onClick={this.membershipSelection}
         >
-          Accès au Profil
+          Modifier
         </Button>
         <Button
+          className="tableText"
           variant="danger"
           key={index}
           value={id}
           onClick={this.membershipSelection}
         >
-          Supprimer
+          Retirer
         </Button>
       </td>
     );
@@ -143,7 +155,7 @@ class MembershipList extends Component {
   render() {
     return (
       <Container>
-        <Table striped bordered hover responsive>
+        <Table className="tableText" striped bordered hover responsive>
           <thead>{this.headerTable()}</thead>
           <tbody>{this.dataTable()}</tbody>
         </Table>
