@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
-//Import Bootstrap - table
-import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
-import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { Container, Table, Button } from "react-bootstrap";
 //Import css
 import "./membershipStyle.css";
 //Import des données fictives JSON
@@ -15,9 +12,7 @@ class MembershipList extends Component {
     this.state = {
       membershipData: [{}],
       dashboardColumnListInit: [],
-      dashboardColumnListShow: [],
-      dashboardColumnListKey: [],
-      dashboardColumnListHeader: [],
+      dashboardColumnListShow: [{}],
     };
   }
   // Lancement des extractions de données
@@ -33,14 +28,24 @@ class MembershipList extends Component {
     let dashboardJsonDataInit = dashboardJson.dashboardColumnListInit;
     let dashboardJsonDataShow = dashboardJson.dashboardColumnListShow;
     let membershipsJsonData = membershipsJson.membershipData;
-    let dashboardListKey = Object.keys(dashboardJsonDataShow[0]);
-    let dashboardListHeader = Object.values(dashboardJsonDataShow[0]);
+    let dashboardJsonDataInitKey = Object.keys(dashboardJsonDataShow[0]);
+    let dataList = [];
+    //Constitution des données d'affichage
+    //Display data creation
+    membershipsJsonData.forEach((elementData) => {
+      let dataObject = {};
+      dashboardJsonDataInitKey.forEach((elementkey) => {
+        if (elementData[elementkey]) {
+          dataObject[elementkey] = elementData[elementkey];
+        }
+      });
+      dataList.push(dataObject);
+    });
     this.setState({
       membershipData: membershipsJsonData,
       dashboardColumnListInit: dashboardJsonDataInit,
       dashboardColumnListShow: dashboardJsonDataShow,
-      dashboardColumnListKey: dashboardListKey,
-      dashboardColumnListHeader: dashboardListHeader,
+      membershipFilterData: dataList,
     });
   };
   //---------------------------------------------
@@ -52,67 +57,99 @@ class MembershipList extends Component {
   //
   //---------------------------------------------
 
-  tableSearch = () => {
+  // Constrution des entêtes du tableau des adhérents
+  //build memberships header's table
+  headerTable = () => {
+    if (this.state.membershipFilterData) {
+      return (
+        <tr>
+          <th>Action</th>
+          {this.textHeaderCreate(this.state.membershipFilterData[0])}
+        </tr>
+      );
+    }
+  };
+  textHeaderCreate = (array) => {
+    return Object.keys(array).map((element) => {
+      return <th>{element}</th>;
+    });
+  };
+  //---------------------------------------------
+
+  // Construction du corps du tableau des adhérents
+  // build memberships boby's table
+  dataTable = () => {
+    if (this.state.membershipFilterData) {
+      return this.state.membershipFilterData.map((element, index) => {
+        return (
+          <tr>
+            {this.boutonCreate(index, element.id, element.memberActive)}
+            {this.textBodyCreate(element)}
+          </tr>
+        );
+      });
+    }
+  };
+  boutonCreate = (index, id, status) => {
+    let colorStatus, textButton;
+    if (status) {
+      colorStatus = "success";
+      textButton = "En ligne";
+    } else {
+      colorStatus = "secondary";
+      textButton = "En Attente";
+    }
     return (
-      <Container className="marginBottom">
-        <BootstrapTable
-          data={this.state.membershipData}
-          search={true}
-          pagination
-          scrollTop={"Bottom"}
+      <td>
+        <Button
+          variant={colorStatus}
+          key={index}
+          value={id}
+          onClick={this.membershipSelection}
         >
-          <TableHeaderColumn
-            dataField={"membershipNumber"}
-            isKey
-            searchable={false}
-            width="150"
-          >
-            membershipNumber
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            dataSort={true}
-            width="150"
-            dataField="compagnyRepresentName"
-          >
-            compagnyRepresentName
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            dataSort={true}
-            width="150"
-            dataField="compagnyRepresentName"
-          >
-            compagnyRepresentName
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            dataSort={true}
-            width="150"
-            dataField="compagnyEmail"
-          >
-            compagnyEmail
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            dataSort={true}
-            width="150"
-            dataField="compagnyRepresentName"
-          >
-            compagnyRepresentName
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            dataSort={true}
-            width="150"
-            dataField="compagnyRepresentName"
-          >
-            compagnyRepresentName
-          </TableHeaderColumn>
-        </BootstrapTable>
-      </Container>
+          {textButton}
+        </Button>
+        <Button
+          variant="info"
+          key={index}
+          value={id}
+          onClick={this.membershipSelection}
+        >
+          Accès au Profil
+        </Button>
+        <Button
+          variant="danger"
+          key={index}
+          value={id}
+          onClick={this.membershipSelection}
+        >
+          Supprimer
+        </Button>
+      </td>
     );
   };
+  textBodyCreate = (array) => {
+    return Object.values(array).map((element) => {
+      return <td>{element}</td>;
+    });
+  };
+  // Gestion des boutons de ligne
+  // Line button management
+  membershipSelection = (e) => {
+    console.log(e.target.value);
+  };
+  //---------------------------------------------
 
   render() {
-    return <div>{this.tableSearch()}</div>;
+    return (
+      <Container>
+        <Table striped bordered hover responsive>
+          <thead>{this.headerTable()}</thead>
+          <tbody>{this.dataTable()}</tbody>
+        </Table>
+      </Container>
+    );
   }
 }
 
-/*{this.tableSearch()}*/
 export default MembershipList;
