@@ -38,11 +38,11 @@ function Profil() {
         Description
         */}
         <div id = "side_bloc">
-            <img/>
-            <h2></h2>
-            <p></p>
-            <h2></h2>
-            <p></p>
+            <img  {/* Photo de profil */}/>
+            <h2> {/* Profession */}</h2>
+            <p> {/* Nom */}</p>
+            <h2> {/* Description */}</h2>
+            <p>{/* Description */}</p>
         </div>
     </div>
     );
