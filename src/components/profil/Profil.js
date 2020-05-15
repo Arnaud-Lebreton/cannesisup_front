@@ -17,20 +17,20 @@ class Profil extends Component{
                     </div>
                     <div>
                         <h2>Nom de Société</h2>
-                        <input placeholder = "Nom de Votre Societé..." />
-                        <input placeholder = "Parlez-nous de celle-ci..." />
-                        <input placeholder = "Son Secteur d'Activité..." />
+                        <input placeholder = "Nom de Votre Societé..." value= {/*Mettre, si existant, valeur de la donnée actuelle */}  />
+                        <textarea placeholder = "Parlez-nous de celle-ci..." value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
+                        <input placeholder = "Son Secteur d'Activité..." value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
                     </div>
                     <div>
                         <h2>Coordonnées : </h2>
                         <p>{/*Placer le mail input*/}</p>
-                        <input type = "email" placeholder = "Email" />
+                        <input type = "email" placeholder = "Email" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
                         <p>{/*Placer le adresse input*/}</p>
-                        <input type = "text" placeholder = "Adresse" />
+                        <input type = "text" placeholder = "Adresse" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
                         <p>{/*Placer le Telephone input*/}</p>
-                        <input type = "tel" placeholder = "Telephone" />
+                        <input type = "tel" placeholder = "Telephone" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
                         <a href = {/*Input result */}></a>
-                        <input type = "text" placeholder = "Site" />
+                        <input type = "text" placeholder = "Site" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
                     </div>
                     <div>
                         <h2>Reseaux Sociaux : </h2>
@@ -44,15 +44,15 @@ class Profil extends Component{
                     </div>
                     <div>
                         <h2>{/*Placer le texte input*/}</h2>
-                        <input placeholder="Nom et Prenom" />
+                        <input placeholder="Nom et Prenom" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
                     </div>
                     <div>
                         <h2>{/*Placer le texte input*/}</h2>
-                        <input placeholder="Profession" />
+                        <input placeholder="Profession" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
                     </div>
                     <div>
                         <h2>Paroles de membre</h2>
-                        <textarea placeholder = "Description..." />
+                        <textarea placeholder = "Description..." value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
                     </div>
                 </div>
                 {/* Confirmation des infos */}
