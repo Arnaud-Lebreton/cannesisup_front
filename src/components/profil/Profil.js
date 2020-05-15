@@ -3,7 +3,18 @@ import React, { Component } from 'react';
 class Profil extends Component{
     constructor(props){
         super(props);
-        this.state = {value: ''};
+        this.state = {
+            name : "",
+            society_name : "",
+            society_description : "",
+            society_activity_sector : "",
+            society_adress : "",
+            phone_number : "",
+            society_website : "",
+            email : "",
+            work : "",
+            work_description : "",
+        }
 
         this.handleChange = this.handleChange.bind(this);
     }
@@ -11,6 +22,7 @@ class Profil extends Component{
     handleChange(event){
         this.setState({value : event.target.value})
     }
+    {/*Faire en sorte que lors du click du button confirmer, les valeurs change puis les inputs disparaissent */}
     render(){
         return (
             <div>
@@ -18,12 +30,12 @@ class Profil extends Component{
                     {/* Lorsque l'utilisateur clique a un autre endroit que le champ input, Ce qui y est ecrit est automatiquement sauvegardé */}
                     <div>
                         <img id= "image_Fond"/>
-                        <a onClick = {/* Ouvre l'explorateur pour recuperer l'image puis l'envoyer a un id */}>Changer le fond</a>
+                        <input type="file" />
                     </div>
         
                     <div>
                         <img source={/* Charger l'image a partir de celle envoyé*/} id= "image_Logo" />
-                        <button onClick = {/* Ouvre l'explorateur pour recuperer l'image puis l'envoyer a un id */}>Telecharger Brochure</button>
+                        <input type="file" />
                     </div>
                     <div>
                         <h2>Nom de Société</h2>
