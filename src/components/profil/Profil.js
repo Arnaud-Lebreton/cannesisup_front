@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 
 class Profil extends Component{
+    constructor(props){
+        super(props);
+        this.state = {value: ''};
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event){
+        this.setState({value : event.target.value})
+    }
     render(){
         return (
             <div>
@@ -54,10 +64,11 @@ class Profil extends Component{
                         <h2>Paroles de membre</h2>
                         <textarea placeholder = "Description..." value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
                     </div>
+                    <button onClick = {/*Entre en mode modificaction */}>Modifier</button>
                 </div>
-                {/* Confirmation des infos */}
                 <button onClick = {/* Sauvegarder changement et cacher button*/}>Confirmer</button>
             </div>
+        )
     }
 }
 
