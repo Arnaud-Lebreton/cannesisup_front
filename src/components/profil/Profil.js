@@ -18,7 +18,9 @@ class Profil extends Component{
 
         this.handleChange = this.handleChange.bind(this);
     }
-
+    hide_show(){
+        {/* Fonction qui cache ou montre un element */}   
+    }
     handleChange(event){
         this.setState({value : event.target.value})
     }
@@ -38,21 +40,21 @@ class Profil extends Component{
                         <input type="file" />
                     </div>
                     <div>
-                        <h2>Nom de Société</h2>
-                        <input placeholder = "Nom de Votre Societé..." value= {/*Mettre, si existant, valeur de la donnée actuelle */}  />
-                        <textarea placeholder = "Parlez-nous de celle-ci..." value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
-                        <input placeholder = "Son Secteur d'Activité..." value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
+                        <h2>{this.state.society_name}</h2>
+                        <input placeholder = "Nom de Votre Societé..." value= {this.state.society_name} />
+                        <textarea placeholder = "Parlez-nous de celle-ci..." value= {this.state.society_description} />
+                        <input placeholder = "Son Secteur d'Activité..." value= {this.state.society_activity_sector} />
                     </div>
                     <div>
                         <h2>Coordonnées : </h2>
-                        <p>{/*Placer le mail input*/}</p>
-                        <input type = "email" placeholder = "Email" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
-                        <p>{/*Placer le adresse input*/}</p>
-                        <input type = "text" placeholder = "Adresse" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
-                        <p>{/*Placer le Telephone input*/}</p>
-                        <input type = "tel" placeholder = "Telephone" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
-                        <a href = {/*Input result */}></a>
-                        <input type = "text" placeholder = "Site" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
+                        <p>{this.state.email}</p>
+                        <input type = "email" placeholder = "Email" value= {this.state.email} />
+                        <p>{this.state.society_adress}</p>
+                        <input type = "text" placeholder = "Adresse" value= {this.state.society_adress} />
+                        <p>{this.state.phone_number}</p>
+                        <input type = "tel" placeholder = "Telephone" value= {this.state.phone_number}/>
+                        <a href = {this.state.society_website}></a>
+                        <input type = "text" placeholder = "Site" value= {this.state.society_website} />
                     </div>
                     <div>
                         <h2>Reseaux Sociaux : </h2>
@@ -65,20 +67,20 @@ class Profil extends Component{
                         <a onClick = {/* Ouvre l'explorateur pour recuperer l'image puis l'envoyer a un id */} >Ajouter une Photo de Profil</a>
                     </div>
                     <div>
-                        <h2>{/*Placer le texte input*/}</h2>
-                        <input placeholder="Nom et Prenom" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
+                        <h2>{this.state.name}</h2>
+                        <input placeholder="Nom et Prenom" value={this.state.name} />
                     </div>
                     <div>
-                        <h2>{/*Placer le texte input*/}</h2>
-                        <input placeholder="Profession" value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
+                        <h2>{this.state.work} </h2>
+                        <input placeholder="Profession" value= {this.state.work} />
                     </div>
                     <div>
-                        <h2>Paroles de membre</h2>
-                        <textarea placeholder = "Description..." value= {/*Mettre, si existant, valeur de la donnée actuelle */} />
+                        <h2>{this.state.work_description}</h2>
+                        <textarea placeholder = "Description..." value= {this.state.work_description} />
                     </div>
-                    <button onClick = {/*Entre en mode modificaction */}>Modifier</button>
+                    <button onClick = {hide_show()}>Modifier</button>
                 </div>
-                <button onClick = {/* Sauvegarder changement et cacher button*/}>Confirmer</button>
+                <button onClick = {hide_show()}>Confirmer</button>
             </div>
         )
     }
