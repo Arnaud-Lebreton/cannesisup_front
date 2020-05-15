@@ -1,0 +1,11 @@
+#middle_bloc{
+    background-color: rgb(194, 159, 159);
+}
+
+#side_bloc{
+    background-color: rgb(107, 107, 110);
+}
+
+.Hover :hover{
+    background-color: crimson;
+}

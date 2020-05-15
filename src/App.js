@@ -1,10 +1,10 @@
 import React from 'react';
-import profil from "./components/profil/Profil";
+import Profil from "./components/profil/Profil";
 
 function App() {
   return (
     <div>
-      <profil />
+      <Profil/>
     </div>
   );
 }
