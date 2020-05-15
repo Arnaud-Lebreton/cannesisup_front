@@ -4,4 +4,11 @@
 }
 .tableText {
   font-size: small;
+  text-align: center;
+}
+.tableInput {
+  width: 200px;
+}
+.inputText {
+  font-size: small;
 }
