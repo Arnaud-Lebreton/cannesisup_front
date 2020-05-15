@@ -14,6 +14,7 @@ class Profil extends Component{
             email : "",
             work : "",
             work_description : "",
+            isShow : true,
         }
 
         this.handleChange = this.handleChange.bind(this);
