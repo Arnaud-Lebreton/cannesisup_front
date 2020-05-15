@@ -5,6 +5,7 @@ import {
   Button,
   InputGroup,
   FormControl,
+  Pagination,
 } from "react-bootstrap";
 //Import css
 import "./membershipStyle.css";
@@ -132,7 +133,7 @@ class MembershipList extends Component {
     if (this.state.membershipFilterData) {
       return (
         <tr>
-          <th>Action</th>
+          <th className="tableheaderText tableAction">Action</th>
           {this.textHeaderCreate(this.state.membershipFilterData[0])}
         </tr>
       );
@@ -146,7 +147,7 @@ class MembershipList extends Component {
       return Object.keys(this.state.dashboardColumnListShow[0]).map(
         (element, index) => {
           return (
-            <th key={index}>
+            <th className="tableheaderText" key={index}>
               {this.state.dashboardColumnListShow[0][element]}
             </th>
           );
@@ -154,9 +155,13 @@ class MembershipList extends Component {
       );
     } else {
       return Object.keys(objet).map((element, index) => {
-        return (
-          <th key={index}>{this.state.dashboardColumnListShow[0][element]}</th>
-        );
+        if (index > 1) {
+          return (
+            <th className="tableheaderText " key={index}>
+              {this.state.dashboardColumnListShow[0][element]}
+            </th>
+          );
+        }
       });
     }
   };
@@ -167,7 +172,7 @@ class MembershipList extends Component {
     if (!this.state.membershipFilterData[0]) {
       let n = Object.keys(this.state.dashboardColumnListShow[0]).length;
       return (
-        <tr>
+        <tr className="tableText cellTable">
           <td colSpan={n + 1}>aucun élément n'a été trouvé</td>
         </tr>
       );
@@ -199,9 +204,10 @@ class MembershipList extends Component {
       disabledStatus = false;
     }
     return (
-      <td key={index} className="tableText">
+      <td className="cellTable" key={index}>
         <Button
-          className="tableText"
+          className="tableButton"
+          size="sm"
           variant={colorStatus}
           value={id}
           onClick={this.membershipSelection}
@@ -210,7 +216,8 @@ class MembershipList extends Component {
           {textStatus}
         </Button>
         <Button
-          className="tableText"
+          className="tableButton"
+          size="sm"
           variant="info"
           value={id}
           onClick={this.membershipSelection}
@@ -218,7 +225,8 @@ class MembershipList extends Component {
           Modifier
         </Button>
         <Button
-          className="tableText"
+          className="tableButton"
+          size="sm"
           variant="danger"
           value={id}
           onClick={this.membershipSelection}
@@ -232,8 +240,15 @@ class MembershipList extends Component {
   // Récupération de la clé de recherche
   // Retrieving the search key
   textBodyCreate = (array) => {
-    return Object.values(array).map((element, index) => {
-      return <td key={index}>{element}</td>;
+    console.log(array);
+    return Object.keys(array).map((element, index) => {
+      if (index > 1) {
+        return (
+          <td className="tableText cellTable" key={index}>
+            {array[element]}
+          </td>
+        );
+      }
     });
   };
   //---------------------------------------------
@@ -253,6 +268,7 @@ class MembershipList extends Component {
     return (
       <InputGroup className="tableInput">
         <FormControl
+          size="sm"
           className="inputText"
           placeholder="Recherche"
           aria-label="Recipient's username"
@@ -262,7 +278,8 @@ class MembershipList extends Component {
         />
         <InputGroup.Append>
           <Button
-            className="tableText"
+            size="sm"
+            className="filterText"
             variant="dark"
             onClick={this.dashbordDataBuild}
           >
@@ -279,12 +296,38 @@ class MembershipList extends Component {
     console.log(e.target.value);
   };
   //---------------------------------------------
+  // Affichage de la pagination
+  // Pagination display
+  paginationTable = () => {
+    return (
+      <Pagination className="paginationStyle" size="sm">
+        {this.paginationItem()}
+      </Pagination>
+    );
+  };
+  //---------------------------------------------
+  // Calcul du contenu de la pagination
+  // Content of the pagination calculation
+  paginationItem = () => {
+    let active = 2;
+    let items = [];
+    for (let number = 1; number <= 5; number++) {
+      items.push(
+        <Pagination.Item key={number} active={number === active}>
+          {number}
+        </Pagination.Item>
+      );
+    }
+    return items;
+  };
+  //---------------------------------------------
 
   render() {
     return (
-      <Container>
+      <Container className="colSize">
         <div>{this.inputFilterTable()}</div>
-        <Table className="tableText" striped bordered hover responsive>
+        <div>{this.paginationTable()}</div>
+        <Table striped bordered hover responsive>
           <thead>{this.headerTable()}</thead>
           <tbody>{this.dataTable()}</tbody>
         </Table>
@@ -292,5 +335,4 @@ class MembershipList extends Component {
     );
   }
 }
-
 export default MembershipList;

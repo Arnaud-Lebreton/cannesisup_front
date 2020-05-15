@@ -2,7 +2,7 @@
   "dashboardColumnListInit": [
     {
       "id": "Identifiant DB",
-      "membershipNumber": "N°Adhérent",
+      "membershipNumber": "N° Adhérent",
       "memberActive": "Actif?",
       "requestDate": "Date d'inscription",
       "validationDate": "Date d'adhésion",
@@ -14,7 +14,7 @@
       "compagnyPostalCode": "Code Postal",
       "compagnyCity": "Ville",
       "compagnyTelephon": "Téléphone",
-      "compagnyEmail": "email",
+      "compagnyEmail": "Email",
       "compagnyWebside": "Site",
       "compagnyFacebook": "FaceBook",
       "compagnyInstagram": "Instagram",
@@ -37,11 +37,18 @@
     {
       "id": "Identifiant DB",
       "memberActive": "Actif?",
-      "membershipNumber": "N°Adhérent",
-      "compagnyEmail": "email",
+      "membershipNumber": "N° Adhérent",
+      "compagnyEmail": "Email",
       "compagnyRepresentName": "Nom du représentant",
       "compagnyRepresentLastname": "Prénom du représentant",
-      "compagnyRepresentFunction": "Fonction"
+      "compagnyRepresentFunction": "Fonction",
+      "compagnyName": "Nom",
+      "compagnyCity": "Ville",
+      "compagnyTelephon": "Téléphone",
+      "compagnyFacebook": "FaceBook",
+      "compagnyInstagram": "Instagram",
+      "compagnyLinkedin": "Linkedin",
+      "compagnyTwitter": "Twitter"
     }
   ]
 }

@@ -1,14 +1,44 @@
 .tableButton {
-  width: 25px;
-  height: 25px;
+  width: 62px;
+  padding: 0.2rem 0.2rem;
+  margin: 0.2rem;
+  font-size: 0.65rem;
 }
 .tableText {
   font-size: small;
   text-align: center;
+  color: #156ec6;
+}
+.tableheaderText {
+  vertical-align: top !important;
+  font-size: 0.85rem;
+  color: #156ec6;
+  text-align: center;
+  width: 200px;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 .tableInput {
   width: 200px;
 }
 .inputText {
   font-size: small;
+}
+.paginationStyle {
+  margin-bottom: 0px;
+}
+.cellTable {
+  padding: 0px !important;
+  vertical-align: baseline !important;
+}
+.tableAction {
+  min-width: 210px;
+  vertical-align: baseline !important;
+}
+.filterText {
+  font-size: small;
+  text-align: center;
+}
+.colSize {
+  max-width: 95%;
 }
