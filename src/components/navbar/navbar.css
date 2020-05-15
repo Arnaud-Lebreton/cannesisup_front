@@ -1,0 +1,38 @@
+.containtNavbar {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+}
+
+.containtLogo {
+  margin: 10px;
+  margin-right: 10%;
+}
+
+.containtNavbarItem {
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  border-top: 5px solid #1da1f2;
+  height: 85px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: center;
+}
+
+.navLink {
+  padding: 0 15px;
+  line-height: 80px;
+  font-size: 14px;
+  color: #454545;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  color: #f7316b;
+}

@@ -35,44 +35,55 @@ class MembersCard extends Component {
   cardDeck = () => {
     return this.state.cardDeck.map((element, index) => {
       return (
-        <Card style={{ width: "20rem" }}>
+        <Card className="container" style={{ width: "20rem" }}>
           <Col>
-            <Card.Img variant="top" src={element.compagnyCoverPhoto} />
+            <Card.Img
+              className="coverPhoto"
+              variant="top"
+              src={element.compagnyCoverPhoto}
+            />
           </Col>
-          <Col>
-            <Image src={element.compagnyRepresentPhoto} roundedCircle />
+          <Col className="containtRepresentPhoto">
+            <Image
+              className="representPhoto"
+              src={element.compagnyRepresentPhoto}
+            />
           </Col>
-          <Col>
-            <Card.Img src={element.compagnyLogo} />
+          <Col className="containtLogo">
+            <Card.Img className="logo" src={element.compagnyLogo} />
           </Col>
-          <Card.Body>
+          <Card.Body className="bodyCard">
             <Card.Title className="compagnyName">
               {element.compagnyName}
             </Card.Title>
-            <Card.Text>{element.compagnyActivityDescription}</Card.Text>
+            <Card.Text className="textDescription">
+              {element.compagnyActivityDescription}
+            </Card.Text>
+            <ListGroup>
+              <ListGroupItem>
+                <Card.Text className="textActivity">
+                  Secteur d'activité
+                </Card.Text>
+                <Card.Text className="textAreaActivity">
+                  {element.compagnyActivityArea}
+                </Card.Text>
+              </ListGroupItem>
+              <ListGroupItem>
+                <Card.Text className="textManager">Dirigeant</Card.Text>
+                <Card.Text className="textRepresent">
+                  {element.compagnyRepresentName}{" "}
+                  {element.compagnyRepresentLastname}
+                </Card.Text>
+              </ListGroupItem>
+            </ListGroup>
           </Card.Body>
-          <ListGroup>
-            <ListGroupItem>
-              <Card.Text className="textActivity">Secteur d'activité</Card.Text>
-              <Card.Text className="textAreaActivity">
-                {element.compagnyActivityArea}
-              </Card.Text>
-            </ListGroupItem>
-            <ListGroupItem>
-              <Card.Text className="textManager">Dirigeant</Card.Text>
-              <Card.Text className="textRepresent">
-                {element.compagnyRepresentName}{" "}
-                {element.compagnyRepresentLastname}
-              </Card.Text>
-            </ListGroupItem>
-          </ListGroup>
           <Button className="memberBouton">voir le membre</Button>
         </Card>
       );
     });
   };
   render() {
-    return <CardDeck>{this.cardDeck()}</CardDeck>;
+    return <CardDeck className="bodyContainer">{this.cardDeck()}</CardDeck>;
   }
 }
 
