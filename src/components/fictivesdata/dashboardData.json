@@ -2,8 +2,8 @@
   "dashboardColumnListInit": [
     {
       "id": "Identifiant DB",
-      "membershipNumber": "N° Adhérent",
       "memberActive": "Actif?",
+      "membershipNumber": "N° Adhérent",
       "requestDate": "Date d'inscription",
       "validationDate": "Date d'adhésion",
       "membershipEmail": "Email adhérent",
@@ -44,11 +44,7 @@
       "compagnyRepresentFunction": "Fonction",
       "compagnyName": "Nom",
       "compagnyCity": "Ville",
-      "compagnyTelephon": "Téléphone",
-      "compagnyFacebook": "FaceBook",
-      "compagnyInstagram": "Instagram",
-      "compagnyLinkedin": "Linkedin",
-      "compagnyTwitter": "Twitter"
+      "compagnyTelephon": "Téléphone"
     }
   ]
 }

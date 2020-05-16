@@ -7,9 +7,12 @@ import {
   FormControl,
   Pagination,
   Modal,
+  Form,
 } from "react-bootstrap";
+//Import components
+import ColumnList from "./ColumnList";
 //Import css
-import "./membershipStyle.css";
+import "./dashboardStyle.css";
 //Import des données fictives JSON
 import membershipsJson from "../fictivesdata/membershipData.json";
 import dashboardJson from "../fictivesdata/dashboardData.json";
@@ -18,14 +21,25 @@ class MembershipList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dashboardColumnListShow: [{}], //Données extraite collection Dashboard - liste colonnne a afficher
       membershipData: [{}], //Données extraite collection adhérent complète
+      dashboardColumnListShow: [{}], //Données extraite collection Dashboard - liste colonnne a afficher
       dashboardColumnListInit: [{}], // Données extraite collection dashboard - Liste des colonnes disponibles
-      membershipFilterData: [{}],
+      membershipFilterList: [{}], //Données filtrées et paginées
+      membershipFilterPaginationData: [{}], //Données filtrées et paginées
+      membershipColumFilterData: [{}], //Données filtrées
       textSearch: "",
       modalShow: false,
       textAction: "",
       id: "",
+      dataRange: [0, 5],
+      nPerPage: 5,
+      activePage: 1,
+      lignCounter: 0,
+      membershipNumber: 0,
+      modalColumnshow: false,
+      listColumn: "",
+      remainingList: [],
+      currentList: [],
     };
   }
   // Lancement des extractions de données
@@ -49,9 +63,9 @@ class MembershipList extends Component {
     let dashboardJsonDataShow = dashboardJson.dashboardColumnListShow;
     let membershipsJsonData = membershipsJson.membershipData;
     let dashboardJsonDataInitKey = Object.keys(dashboardJsonDataShow[0]);
-    let dataList = [];
     //Constitution des données d'affichage
     //Display data creation
+    let dataList = [];
     membershipsJsonData.forEach((elementData) => {
       let dataObject = {};
       dashboardJsonDataInitKey.forEach((elementkey) => {
@@ -61,35 +75,32 @@ class MembershipList extends Component {
       });
       dataList.push(dataObject);
     });
+    //Pagination
+    let first = this.state.dataRange[0];
+    let last = this.state.dataRange[1];
     this.setState({
       membershipData: membershipsJsonData,
       dashboardColumnListInit: dashboardJsonDataInit,
       dashboardColumnListShow: dashboardJsonDataShow,
-      membershipFilterData: dataList,
+      membershipFilterPaginationData: dataList.slice(first, last),
+      membershipColumFilterData: dataList,
+      membershipFilterList: dataList,
+      membershipNumber: dataList.length,
     });
   };
   //---------------------------------------------
-
-  // Construction des données initiale pour affichage dans le tableau
+  // Reconstruit la liste filtrée avec pagination
   // build useful data for display in the table
   dashbordDataBuildInit = () => {
-    let dashboardJsonDataShow = this.state.dashboardColumnListShow;
-    let membershipsJsonData = this.state.membershipData;
-    let dashboardJsonDataInitKey = Object.keys(dashboardJsonDataShow[0]);
-    let dataList = [];
-    //Constitution des données d'affichage
-    //Display data creation
-    membershipsJsonData.forEach((elementData) => {
-      let dataObject = {};
-      dashboardJsonDataInitKey.forEach((elementkey) => {
-        if (elementData[elementkey]) {
-          dataObject[elementkey] = elementData[elementkey];
-        }
-      });
-      dataList.push(dataObject);
-    });
+    //Pagination
+    let first = this.state.dataRange[0];
+    let last = this.state.dataRange[1];
     this.setState({
-      membershipFilterData: dataList,
+      membershipFilterPaginationData: this.state.membershipColumFilterData.slice(
+        first,
+        last
+      ),
+      membershipFilterList: this.state.membershipColumFilterData,
     });
   };
   //---------------------------------------------
@@ -97,48 +108,50 @@ class MembershipList extends Component {
   // Construction des données filtrées pour affichage dans le tableau
   // build useful data for display in the table
   dashbordDataBuild = () => {
-    //Fitre si textSearch non null
-    if (this.state.textSearch !== "") {
-      let membershipsData = this.state.membershipData;
-      let dashboardDataShow = this.state.dashboardColumnListShow;
-      let dataList = [];
-      let SearchValidation = false;
-      membershipsData.forEach((elementData) => {
-        let dataObject = {};
-        Object.keys(dashboardDataShow[0]).forEach((elementkey) => {
-          if (elementData[elementkey]) {
-            dataObject[elementkey] = elementData[elementkey];
-          }
-        });
-        // recherche dans tous les champs dataObject si contient le filtre
-        for (let i in dataObject) {
-          let searchData = dataObject[i].toString().toUpperCase();
-          if (searchData.includes(this.state.textSearch.toUpperCase())) {
-            SearchValidation = true;
-          }
-        }
-        if (SearchValidation) {
-          dataList.push(dataObject);
-          SearchValidation = false;
+    console.log("ici");
+    let membershipsData = this.state.membershipData;
+    let dashboardDataShow = this.state.dashboardColumnListShow;
+    let dataList = [];
+    let SearchValidation = false;
+    membershipsData.forEach((elementData) => {
+      let dataObject = {};
+      Object.keys(dashboardDataShow[0]).forEach((elementkey) => {
+        if (elementData[elementkey]) {
+          dataObject[elementkey] = elementData[elementkey];
         }
       });
-      this.setState({
-        membershipFilterData: dataList,
-      });
-    } else {
-      this.dashbordDataBuildInit();
-    }
+      // recherche dans tous les champs dataObject si contient le filtre
+      for (let i in dataObject) {
+        let searchData = dataObject[i].toString().toUpperCase();
+        if (searchData.includes(this.state.textSearch.toUpperCase())) {
+          SearchValidation = true;
+        }
+      }
+      if (SearchValidation) {
+        dataList.push(dataObject);
+        SearchValidation = false;
+      }
+    });
+    let first = 0;
+    let last = this.state.nPerPage;
+    this.setState({
+      membershipFilterPaginationData: dataList.slice(first, last),
+      membershipFilterList: dataList,
+      activePage: 1,
+      dataRange: [0, this.state.nPerPage],
+      membershipNumber: dataList.length,
+    });
   };
   //---------------------------------------------
 
   // Constrution du tableau des adhérents
   //build memberships header's table
   headerTable = () => {
-    if (this.state.membershipFilterData) {
+    if (this.state.membershipFilterPaginationData) {
       return (
         <tr>
           <th className="tableheaderText tableAction">Action</th>
-          {this.textHeaderCreate(this.state.membershipFilterData[0])}
+          {this.textHeaderCreate(this.state.membershipFilterPaginationData[0])}
         </tr>
       );
     }
@@ -173,7 +186,7 @@ class MembershipList extends Component {
   // Construction du corps du tableau des adhérents
   // build memberships boby's table
   dataTable = () => {
-    if (!this.state.membershipFilterData[0]) {
+    if (!this.state.membershipFilterPaginationData[0]) {
       let n = Object.keys(this.state.dashboardColumnListShow[0]).length;
       return (
         <tr className="tableText cellTable">
@@ -181,15 +194,17 @@ class MembershipList extends Component {
         </tr>
       );
     } else {
-      if (this.state.membershipFilterData) {
-        return this.state.membershipFilterData.map((element, index) => {
-          return (
-            <tr key={index}>
-              {this.boutonCreate(index, element.id, element.memberActive)}
-              {this.textBodyCreate(element)}
-            </tr>
-          );
-        });
+      if (this.state.membershipFilterPaginationData) {
+        return this.state.membershipFilterPaginationData.map(
+          (element, index) => {
+            return (
+              <tr key={index}>
+                {this.boutonCreate(index, element.id, element.memberActive)}
+                {this.textBodyCreate(element)}
+              </tr>
+            );
+          }
+        );
       }
     }
   };
@@ -264,7 +279,11 @@ class MembershipList extends Component {
     this.setState({ [e.target.name]: e.target.value });
     if (!e.target.value) {
       this.dashbordDataBuildInit();
-      this.setState({ [e.target.name]: "" });
+      this.setState({
+        [e.target.name]: e.target.value,
+        activePage: 1,
+        dataRange: [0, 4],
+      });
     }
   };
   //---------------------------------------------
@@ -307,7 +326,6 @@ class MembershipList extends Component {
   };
 
   alertShow = () => {
-    console.log(this.state.modalShow);
     if (this.state.modalShow) {
       return (
         <>
@@ -353,32 +371,185 @@ class MembershipList extends Component {
   paginationTable = () => {
     return (
       <Pagination className="paginationStyle" size="sm">
-        {this.paginationItem()}
+        {this.paginationNumberItem()}
       </Pagination>
     );
   };
   //---------------------------------------------
-  // Calcul du contenu de la pagination
-  // Content of the pagination calculation
-  paginationItem = () => {
-    let active = 2;
-    let items = [];
-    for (let number = 1; number <= 5; number++) {
-      items.push(
-        <Pagination.Item key={number} active={number === active}>
-          {number}
-        </Pagination.Item>
-      );
+  // Calcul du nombre de page à afficher
+  // Calculation of the number of pages to display
+  paginationNumberItem = () => {
+    let nItem = this.state.membershipFilterList.length;
+    if (nItem > 0) {
+      let n = this.state.nPerPage;
+      let xPage = Math.ceil(nItem / n);
+      let items = [];
+      for (let page = 1; page <= xPage; page++) {
+        items.push(
+          <Pagination.Item
+            key={page}
+            active={page === this.state.activePage}
+            onClick={() => {
+              this.paginationData(page);
+            }}
+          >
+            {page}
+          </Pagination.Item>
+        );
+      }
+      return items;
+    } else {
+      return <Pagination.Item active={1}>0</Pagination.Item>;
     }
-    return items;
   };
   //---------------------------------------------
+  // Calcul du contenu de la pagination
+  // Content of the pagination calculation
+  paginationData = (page) => {
+    let first, last, activPage;
+    if (!page) {
+      first = this.state.dataRange[0];
+      last = this.state.dataRange[1];
+      activPage = 1;
+    } else if (page === 1) {
+      first = 0;
+      last = this.state.nPerPage;
+      activPage = page;
+    } else {
+      first = this.state.nPerPage * (page - 1);
+      last = this.state.nPerPage * page;
+      activPage = page;
+    }
+    this.setState({
+      dataRange: [first, last],
+      membershipFilterPaginationData: this.state.membershipFilterList.slice(
+        first,
+        last
+      ),
+      activePage: activPage,
+    });
+  };
+  //---------------------------------------------
+  // Lance la modale de gestion des colonnes
+  //
+  modalColumnList = () => {
+    //Modal
+    let listRemaining = this.state.dashboardColumnListInit[0];
+    let listRemainingObjet = Object.values(listRemaining);
+    console.log(listRemainingObjet.slice(2));
+    const handleClose = () => this.setState({ modalColumnshow: false });
+    const handleShow = () => this.setState({ modalColumnshow: true });
+    return (
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          Gestion des champs
+        </Button>
+        <Modal
+          show={this.state.modalColumnshow}
+          onHide={handleClose}
+          animation={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Gestion des champs</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{this.listField()}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  };
+
+  listShow = (list) => {
+    return list.map((element) => {
+      return <option>{element}</option>;
+    });
+  };
+
+  subData = (e) => {
+    let field = e.target.value;
+    for (let i = 0; i < this.state.currentList.length; i++) {
+      if (this.state.currentList[i] == field) {
+        this.state.currentList.splice(i, 1);
+        this.state.remainingList.push(field);
+        this.state.remainingList.sort();
+        break;
+      }
+    }
+    console.log(field);
+    console.log(this.state.remainingList);
+    console.log(this.state.currentList);
+    this.setState({ list1: 1 });
+  };
+
+  addData = (e) => {
+    let field = e.target.value;
+    for (let i = 0; i < this.state.currentList.length; i++) {
+      if (this.state.remainingList[i] == field) {
+        this.state.remainingList.splice(i, 1);
+        this.state.currentList.push(field);
+        this.state.currentList.sort();
+        break;
+      }
+    }
+    console.log(field);
+    console.log(this.state.remainingList);
+    console.log(this.state.currentList);
+    this.setState({ listColumn: 1 });
+  };
+
+  listField = () => {
+    return (
+      <div className="ListRow">
+        <Form.Group
+          className="listWidth"
+          controlId="exampleForm.ControlSelect2"
+        >
+          <Form.Label>Champs restant</Form.Label>
+          <Form.Control
+            name="list1"
+            as="select"
+            multiple
+            onDoubleClick={this.addData}
+          >
+            {this.listShow(this.state.remainingList)}
+          </Form.Control>
+        </Form.Group>
+        <Form.Group
+          className="listWidth"
+          controlId="exampleForm.ControlSelect2"
+        >
+          <Form.Label>Champs en cours</Form.Label>
+          <Form.Control
+            name="list2"
+            as="select"
+            multiple
+            onDoubleClick={this.subData}
+          >
+            {this.listShow(this.state.currentList)}
+          </Form.Control>
+        </Form.Group>
+      </div>
+    );
+  };
 
   render() {
     return (
       <Container className="colSize">
-        <div>{this.inputFilterTable()}</div>
-        <div>{this.paginationTable()}</div>
+        <div className="filter">{this.inputFilterTable()}</div>
+        <div className="alignButton">
+          <div>{this.paginationTable()}</div>
+          <div>{this.modalColumnList()}</div>
+        </div>
+        <p className="counterText">
+          Nombre d'adhérents trouvé : {this.state.membershipNumber}
+        </p>
         <Table striped bordered hover responsive>
           <thead>{this.headerTable()}</thead>
           <tbody>{this.dataTable()}</tbody>

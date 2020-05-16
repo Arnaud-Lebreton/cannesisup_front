@@ -1,16 +1,7 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Table,
-  Button,
-  InputGroup,
-  FormControl,
-  Pagination,
-  Modal,
-  Image,
-} from "react-bootstrap";
+import { Container, Image, Row, Col } from "react-bootstrap";
 //Import css
-import "./membershipStyle.css";
+import "./dashboardStyle.css";
 
 class Graphe extends Component {
   ShowGraph1 = () => {
@@ -22,8 +13,10 @@ class Graphe extends Component {
   render() {
     return (
       <Container className="alignGraphe">
-        {this.ShowGraph1()}
-        {this.ShowGraph2()}
+        <Row>
+          <Col lg={6}>{this.ShowGraph1()}</Col>
+          <Col lg={6}>{this.ShowGraph2()}</Col>
+        </Row>
       </Container>
     );
   }
