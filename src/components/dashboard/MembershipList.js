@@ -6,6 +6,7 @@ import {
   InputGroup,
   FormControl,
   Pagination,
+  Modal,
 } from "react-bootstrap";
 //Import css
 import "./membershipStyle.css";
@@ -22,6 +23,9 @@ class MembershipList extends Component {
       dashboardColumnListInit: [{}], // Données extraite collection dashboard - Liste des colonnes disponibles
       membershipFilterData: [{}],
       textSearch: "",
+      modalShow: false,
+      textAction: "",
+      id: "",
     };
   }
   // Lancement des extractions de données
@@ -212,6 +216,7 @@ class MembershipList extends Component {
           value={id}
           onClick={this.membershipSelection}
           disabled={disabledStatus}
+          name="activer"
         >
           {textStatus}
         </Button>
@@ -221,6 +226,7 @@ class MembershipList extends Component {
           variant="info"
           value={id}
           onClick={this.membershipSelection}
+          name="modifier"
         >
           Modifier
         </Button>
@@ -230,6 +236,7 @@ class MembershipList extends Component {
           variant="danger"
           value={id}
           onClick={this.membershipSelection}
+          name="supprimer"
         >
           Retirer
         </Button>
@@ -240,7 +247,6 @@ class MembershipList extends Component {
   // Récupération de la clé de recherche
   // Retrieving the search key
   textBodyCreate = (array) => {
-    console.log(array);
     return Object.keys(array).map((element, index) => {
       if (index > 1) {
         return (
@@ -280,7 +286,7 @@ class MembershipList extends Component {
           <Button
             size="sm"
             className="filterText"
-            variant="dark"
+            variant="primary"
             onClick={this.dashbordDataBuild}
           >
             OK
@@ -293,7 +299,53 @@ class MembershipList extends Component {
   // Gestion des boutons de ligne
   // Line button management
   membershipSelection = (e) => {
-    console.log(e.target.value);
+    this.setState({
+      modalShow: !this.state.modalShow,
+      textAction: e.target.name,
+      id: e.target.value,
+    });
+  };
+
+  alertShow = () => {
+    console.log(this.state.modalShow);
+    if (this.state.modalShow) {
+      return (
+        <>
+          <Modal
+            show={this.state.modalShow}
+            onHide={() => {
+              this.setState({ modalShow: !this.state.modalShow });
+            }}
+            animation={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>
+                {this.state.textAction} : {this.state.id}
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Voulez vous continuer la commande</Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() =>
+                  this.setState({ modalShow: !this.state.modalShow })
+                }
+              >
+                Annuler
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() =>
+                  this.setState({ modalShow: !this.state.modalShow })
+                }
+              >
+                valider
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
+      );
+    }
   };
   //---------------------------------------------
   // Affichage de la pagination
@@ -331,6 +383,7 @@ class MembershipList extends Component {
           <thead>{this.headerTable()}</thead>
           <tbody>{this.dataTable()}</tbody>
         </Table>
+        {this.alertShow()}
       </Container>
     );
   }
