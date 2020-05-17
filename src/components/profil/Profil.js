@@ -15,12 +15,13 @@ class Profil extends Component{
             work : "",
             work_description : "",
             isShow : true,
+            isDisabled:false,
         };
 
         this.handleChange = this.handleChange.bind(this);
     }
     hide(){
-         
+        this.setState.isDisabled = false;
     }
     handleChange(event){
         this.setState({value : event.target.value});
@@ -40,17 +41,17 @@ class Profil extends Component{
                     </div>
                     <div>
                         <h2>{this.state.society_name}</h2>
-                        <input placeholder = "Nom de Votre Societé..." value= "BABA" disabled={false}/>
-                        <textarea placeholder = "Parlez-nous de celle-ci..." value= {this.state.society_description} disabled={false}/>
-                        <input placeholder = "Son Secteur d'Activité..." value= {this.state.society_activity_sector} disabled={false}/>
+                        <input placeholder = "Nom de Votre Societé..." value= "BABA" disabled={this.state.isDisabled}/>
+                        <textarea placeholder = "Parlez-nous de celle-ci..." value= {this.state.society_description} disabled={this.state.isDisabled}/>
+                        <input placeholder = "Son Secteur d'Activité..." value= {this.state.society_activity_sector} disabled={this.state.isDisabled}/>
                     </div>
                     <div>
                         <h2>Coordonnées : </h2>
-                        <input type = "email" placeholder = "Email" value= {this.state.email} disabled={false} />
-                        <input type = "text" placeholder = "Adresse" value= {this.state.society_adress} disabled={false} />
-                        <input type = "tel" placeholder = "Telephone" value= {this.state.phone_number} disabled={false}/>
+                        <input type = "email" placeholder = "Email" value= {this.state.email} disabled={this.state.isDisabled} />
+                        <input type = "text" placeholder = "Adresse" value= {this.state.society_adress} disabled={this.state.isDisabled} />
+                        <input type = "tel" placeholder = "Telephone" value= {this.state.phone_number} disabled={this.state.isDisabled}/>
                         <a href = {this.state.society_website}></a>
-                        <input type = "text" placeholder = "Site" value= {this.state.society_website} disabled={false} />
+                        <input type = "text" placeholder = "Site" value= {this.state.society_website} disabled={this.state.isDisabled} />
                     </div>
                     <div>
                         <h2>Reseaux Sociaux : </h2>
@@ -64,15 +65,15 @@ class Profil extends Component{
                     </div>
                     <div>
                         <h2>{this.state.name}</h2>
-                        <input placeholder="Nom et Prenom" value={this.state.name} disabled={false}/>
+                        <input placeholder="Nom et Prenom" value={this.state.name} disabled={this.state.isDisabledfalse}/>
                     </div>
                     <div>
                         <h2>{this.state.work} </h2>
-                        <input placeholder="Profession" value= {this.state.work} disabled={false}/>
+                        <input placeholder="Profession" value= {this.state.work} disabled={this.state.isDisabled}/>
                     </div>
                     <div>
                         <h2>{this.state.work_description}</h2>
-                        <textarea placeholder = "Description..." value= {this.state.work_description} disabled={false} />
+                        <textarea placeholder = "Description..." value= {this.state.work_description} disabled={this.state.isDisabled} />
                     </div>
                     <button onClick = {this.hide()}>Modifier</button>
                 </div>
