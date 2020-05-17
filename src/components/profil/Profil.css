@@ -18,7 +18,7 @@ button{
 }
 button:hover{
     transition: background-color 0.2s linear;
-    background-color : #e9e9e96b;
+    background-color: rgba(204, 184, 184, 0.473);
 }
 #image_Logo img{
     width: 25%;
@@ -29,7 +29,22 @@ button:hover{
     right: 10px;
     width: 100px;
 }
+#profil_image button{
+    position: absolute;
+    left: 25%;
+}
+#profil_image img{
+    position: relative;
+    left: 25%;
+    top: -100px;
+    
+    border-radius: 50%;
+    width: 50%;
+    border: 2px solid #00ccff;
+}
+
 #middle_bloc{
+    margin-top: 15%;
     margin-left: 15%;
     position: absolute;
     left: 0px;
@@ -43,21 +58,26 @@ input, textarea, button{
     width: 50%;
     background: none;
     border: none;
+    outline: none;
+}
+textarea{
+    width: 95%;
+    
+    resize: vertical;
+    overflow: auto;
 }
 #image_logo input{
     position: absolute;
     right: 2px;
 }
-button:hover{
-    background-color: rgb(131, 115, 115);
-}
 #middle_bloc div{
-    padding: 5px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
 }
 
 #side_bloc{
+    margin-top: 15%;
     margin-right: 15%;
     position: absolute;
     top: 0px;

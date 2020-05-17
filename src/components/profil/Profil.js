@@ -32,7 +32,7 @@ class Profil extends Component{
                 <div id="body">
                     <div id = "middle_bloc">
                         <div id="image_fond">
-                            <img/>
+                            <img />
                             <button>Ajouter Image</button>
                         </div>
             
@@ -61,9 +61,9 @@ class Profil extends Component{
                         </div>
                     </div>
                     <div id = "side_bloc">
-                        <div>
-                            <img id = "image_Profil"/>
-                            <a>Ajouter une Photo de Profil</a>
+                        <div id="profil_image">
+                            <img src={require("../Images/img_avatar.png")}/>
+                            <button>Ajouter Photo</button>
                         </div>
                         <div>
                             <h2>{this.state.name}</h2>
@@ -77,12 +77,13 @@ class Profil extends Component{
                             <h2>{this.state.work_description}</h2>
                             <textarea placeholder = "Description..." disabled={this.state.isDisabled} />
                         </div>
-                        <button onClick = {() => this.hide(false)}>Modifier</button>
-                        <button onClick = {() => this.hide(true)}>Confirmer</button>
+                        <div id="interaction">
+                            <button onClick = {() => this.hide(false)}>Modifier</button>
+                            <button onClick = {() => this.hide(true)}>Confirmer</button>
+                        </div>
+                        
                     </div>
-                </div>
-                
-                
+                </div>  
             </div>
         )
     }
