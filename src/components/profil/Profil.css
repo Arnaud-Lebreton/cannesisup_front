@@ -1,9 +1,76 @@
+#body{
+    background-color: rgb(2, 0, 0);
+}
+#image_fond{
+    background-image: url(../Images/abstrait-bleu-formes-geometriques_1035-17545.jpg);
+    height: 150px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+#image_fond button{
+    position: absolute;
+    top: 0px;
+    left: 25%;
+    top: 5%;
+}
+button{
+    transition: background-color 0.2s linear;
+}
+button:hover{
+    transition: background-color 0.2s linear;
+    background-color : #e9e9e96b;
+}
+#image_Logo img{
+    width: 25%;
+}
+#image_Logo button{
+    margin-top: 5%;
+    position: absolute;
+    right: 10px;
+    width: 100px;
+}
 #middle_bloc{
-    background-color: rgb(194, 159, 159);
+    margin-left: 15%;
+    position: absolute;
+    left: 0px;
+    background-color: white;
+    width: 40%;
+    border: 2px solid #00ccff;
+    border-radius: 20px;
+}
+input, textarea, button{
+    padding: 5px;
+    width: 50%;
+    background: none;
+    border: none;
+}
+#image_logo input{
+    position: absolute;
+    right: 2px;
+}
+button:hover{
+    background-color: rgb(131, 115, 115);
+}
+#middle_bloc div{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
 #side_bloc{
-    background-color: rgb(107, 107, 110);
+    margin-right: 15%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: white;
+    width: 25%;
+    border-radius: 20px;
+    border: 2px solid #00ccff;
+}
+#side_bloc div{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
 .Hover :hover{
