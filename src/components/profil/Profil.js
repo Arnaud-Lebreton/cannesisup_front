@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import "./Profil.css"
+
+//Il faut faire en sorte qu'à l'appuie du button confirmer || modifier certain element change
 class Profil extends Component{
     constructor(props){
         super(props);
