@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./Profil.css"
 
-//Il faut faire en sorte qu'à l'appuie du button confirmer || modifier certain element change
+//Il faut faire en sorte qu'à l'appuie du button confirmer || modifier certain element disparaissent ou reaparaisse
 class Profil extends Component{
     constructor(props){
         super(props);
@@ -18,6 +18,7 @@ class Profil extends Component{
             work_description : "",
             isShow : true,
             isDisabled:false,
+            isHidden: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -37,13 +38,11 @@ class Profil extends Component{
                             <img />
                             <button>Ajouter Image</button>
                         </div>
-            
                         <div id= "image_Logo" >
                             <img src={require("../Images/Untitled.png")}/>
                             <button>Ajouter Image</button>
                         </div>
                         <div>
-                            <h2>{this.state.society_name}</h2>
                             <input placeholder = "Nom de Votre Societé..." disabled={this.state.isDisabled}/>
                             <textarea placeholder = "Parlez-nous de celle-ci..."  disabled={this.state.isDisabled}/>
                             <input placeholder = "Son Secteur d'Activité..."  disabled={this.state.isDisabled}/>
@@ -68,22 +67,18 @@ class Profil extends Component{
                             <button>Ajouter Photo</button>
                         </div>
                         <div>
-                            <h2>{this.state.name}</h2>
                             <input placeholder="Nom et Prenom" disabled={this.state.isDisabled}/>
                         </div>
                         <div>
-                            <h2>{this.state.work} </h2>
                             <input placeholder="Profession" disabled={this.state.isDisabled}/>
                         </div>
                         <div>
-                            <h2>{this.state.work_description}</h2>
                             <textarea placeholder = "Description..." disabled={this.state.isDisabled} />
                         </div>
                         <div id="interaction">
                             <button onClick = {() => this.hide(false)}>Modifier</button>
                             <button onClick = {() => this.hide(true)}>Confirmer</button>
                         </div>
-                        
                     </div>
                 </div>  
             </div>
