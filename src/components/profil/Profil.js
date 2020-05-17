@@ -20,8 +20,8 @@ class Profil extends Component{
 
         this.handleChange = this.handleChange.bind(this);
     }
-    hide(){
-        this.setState.isDisabled = false;
+    hide(a){
+        this.setState({isDisabled : a});
     }
     handleChange(event){
         this.setState({value : event.target.value});
@@ -75,9 +75,9 @@ class Profil extends Component{
                         <h2>{this.state.work_description}</h2>
                         <textarea placeholder = "Description..." value= {this.state.work_description} disabled={this.state.isDisabled} />
                     </div>
-                    <button onClick = {this.hide()}>Modifier</button>
+                    <button onClick = {() => this.hide(false)}>Modifier</button>
                 </div>
-                <button onClick = {this.hide()}>Confirmer</button>
+                <button onClick = {() => this.hide(true)}>Confirmer</button>
             </div>
         )
     }
