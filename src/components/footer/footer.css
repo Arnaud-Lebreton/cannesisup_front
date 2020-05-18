@@ -1,6 +1,7 @@
 .footer {
   display: block;
   box-sizing: border-box;
+  margin-top: 50px;
 }
 
 a {

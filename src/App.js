@@ -22,12 +22,12 @@ class App extends Component {
               <MembersCard />
             </Route>
             <Route path="/profil">
-              <Profil/>
+              <Profil />
             </Route>
             <Route path="/dashboard">
               <Dashboard />
             </Route>
-          </Switch> 
+          </Switch>
         </div>
         <Footer />
       </Router>

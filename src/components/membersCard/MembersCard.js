@@ -35,8 +35,8 @@ class MembersCard extends Component {
   cardDeck = () => {
     return this.state.cardDeck.map((element, index) => {
       return (
-        <Card className="containerMembersCard" style={{ width: "20rem" }}>
-          <Col>
+        <Card className="containerMembersCard" style={{ width: "22rem" }}>
+          <Col className="containtCoverPhoto">
             <Card.Img
               className="coverPhoto"
               variant="top"
@@ -60,7 +60,7 @@ class MembersCard extends Component {
               {element.compagnyActivityDescription}
             </Card.Text>
             <ListGroup>
-              <ListGroupItem>
+              <ListGroupItem className="listGroupItem">
                 <Card.Text className="textActivity">
                   Secteur d'activité
                 </Card.Text>
@@ -68,7 +68,7 @@ class MembersCard extends Component {
                   {element.compagnyActivityArea}
                 </Card.Text>
               </ListGroupItem>
-              <ListGroupItem>
+              <ListGroupItem className="listGroupItem">
                 <Card.Text className="textManager">Dirigeant</Card.Text>
                 <Card.Text className="textRepresent">
                   {element.compagnyRepresentName}{" "}
