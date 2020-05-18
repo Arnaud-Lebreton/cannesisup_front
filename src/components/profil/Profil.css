@@ -1,6 +1,6 @@
 #body {
   position: relative;
-  z-index: -1;
+
   background-color: #f6fafe;
   display: flex;
   flex-direction: row;
@@ -53,6 +53,10 @@ input[name="society_name"] {
   font-weight: bold;
   color: #f7316b;
 }
+input[name="society_name"]::placeholder {
+  color: #f7316b;
+}
+
 h3 {
   color: #1da1f2;
   font-weight: bold;
@@ -63,7 +67,9 @@ input[name="name"] {
   font-weight: bold;
   color: #f7316b;
 }
-
+input[name="name"]::placeholder {
+  color: #f7316b;
+}
 #middle_bloc {
   margin-top: 100px;
   margin-left: 15%;
