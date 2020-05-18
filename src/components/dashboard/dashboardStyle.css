@@ -4,6 +4,8 @@ body {
 }
 .dashBoardMargin {
   margin-top: 85px;
+  position: relative;
+  z-index: -1;
 }
 .dashboardGlobalSize {
   max-width: 95%;
@@ -79,7 +81,7 @@ body {
 .dashboardGraphDim {
   width: auto;
   height: 40vh;
-  padding: 1%;
+  padding: 7vh;
   display: block;
 }
 .dashboardGrapheAlign {

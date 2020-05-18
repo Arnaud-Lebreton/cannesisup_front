@@ -1,117 +1,125 @@
-#body{
-    background-color: rgb(2, 0, 0);
+#body {
+  position: relative;
+  z-index: -1;
+  background-color: #f6fafe;
+  display: flex;
+  flex-direction: row;
+  margin-top: 85px;
 }
-#image_fond{
-    background-image: url(../Images/abstrait-bleu-formes-geometriques_1035-17545.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 150px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+#image_fond {
+  background-image: url(../Images/abstrait-bleu-formes-geometriques_1035-17545.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 150px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
-#image_fond button{
-    position: absolute;
-    top: 0px;
-    left: 25%;
-    top: 5%;
+#image_fond button {
+  top: 0px;
+  left: 25%;
+  top: 5%;
 }
-button{
-    transition: background-color 0.2s linear;
+button {
+  transition: background-color 0.2s linear;
 }
-button:hover{
-    transition: background-color 0.2s linear;
-    background-color: rgba(204, 184, 184, 0.473);
+button:hover {
+  transition: background-color 0.2s linear;
+  background-color: rgba(204, 184, 184, 0.473);
 }
-#image_Logo img{
-    width: 25%;
+#image_Logo img {
+  width: 25%;
 }
-#image_Logo button{
-    margin-top: 5%;
-    position: absolute;
-    right: 10px;
-    width: 100px;
+#image_Logo button {
+  margin-top: 5%;
+  position: absolute;
+  right: 10px;
+  width: 100px;
 }
-#profil_image button{
-    position: absolute;
-    left: 25%;
+#profil_image button {
+  position: absolute;
+  left: 25%;
 }
-#profil_image img{
-    position: relative;
-    left: 25%;
-    top: -100px;
-    border-radius: 50%;
-    width: 50%;
-    border: 2px solid #00ccff;
+#profil_image img {
+  position: relative;
+  left: 25%;
+  top: -75px;
+  border-radius: 50%;
+  width: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-input[name="society_name"]{
-    font-size: 30px;
-    font-weight: bold;
-    color: #ff6666;
+input[name="society_name"] {
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  color: #f7316b;
 }
-h3{
-    color: #0099ff;
-    font-weight: bold;
+h3 {
+  color: #1da1f2;
+  font-weight: bold;
 }
-input[name="name"]{
-    font-size: 20px;
-    font-weight: bold;
-    color: #ff6666;
-}
-
-#middle_bloc{
-    margin-top: 15%;
-    margin-left: 15%;
-    position: absolute;
-    left: 0px;
-    background-color: white;
-    width: 40%;
-    border: 2px solid #00ccff;
-    border-radius: 20px;
-}
-input, textarea, button{
-    padding: 5px;
-    width: 50%;
-    background: none;
-    border: none;
-    outline: none;
-}
-textarea{
-    width: 95%;
-    
-    resize: vertical;
-    overflow: auto;
-}
-#image_logo input{
-    position: absolute;
-    right: 2px;
-}
-#middle_bloc div{
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
+input[name="name"] {
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #f7316b;
 }
 
-#side_bloc{
-    margin-top: 20%;
-    margin-right: 15%;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    background-color: white;
-    width: 25%;
-    border-radius: 20px;
-    border: 2px solid #00ccff;
+#middle_bloc {
+  margin-top: 100px;
+  margin-left: 15%;
+  left: 0px;
+  background-color: white;
+  width: 40%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
 }
-#side_bloc div{
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
+input,
+textarea,
+button {
+  padding: 5px;
+  width: 50%;
+  background: none;
+  border: none;
+  outline: none;
+}
+textarea {
+  width: 95%;
+
+  resize: vertical;
+  overflow: auto;
+}
+#image_logo input {
+  position: absolute;
+  right: 2px;
+}
+#middle_bloc div {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.Hover :hover{
-    background-color: crimson;
+#side_bloc {
+  margin-top: 170px;
+  margin-right: 15%;
+  background-color: white;
+  width: 25%;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  height: 50%;
+  margin-left: 100px;
 }
-#interaction button{
-    border-radius: 15px;
-    outline: none;
+#side_bloc div {
+  position: relative;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+/*.Hover :hover {
+  background-color: crimson;
+}*/
+#interaction button {
+  border-radius: 15px;
+  outline: none;
 }
