@@ -1,0 +1,53 @@
+.containtSearchBar {
+  padding-top: 90px;
+  margin-bottom: 50px;
+}
+
+.containtForm {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+
+.form {
+  width: 33%;
+  height: 40px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border: none;
+}
+
+.textMembers {
+  text-align: center;
+  font-weight: 600;
+  font-size: small;
+  color: #454545;
+}
+
+.containerImage {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background: url(./fond_equipe.jpg);
+  background-size: cover;
+  height: 150px;
+}
+
+.containtTitle {
+  width: max-content;
+  font-size: 40px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: white;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.containtTitle::after {
+  content: "";
+  height: 1px;
+  width: 50%;
+  display: block;
+  padding-top: 10px;
+  border-bottom: 2px solid #f7316b;
+}
