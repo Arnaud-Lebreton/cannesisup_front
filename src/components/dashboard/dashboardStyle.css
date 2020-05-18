@@ -79,3 +79,6 @@ body {
 .listWidth {
   width: 50%;
 }
+.listMargin {
+  margin: 1px;
+}

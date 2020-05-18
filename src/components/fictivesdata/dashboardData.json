@@ -2,12 +2,12 @@
   "dashboardColumnListInit": [
     {
       "id": "Identifiant DB",
+      "membershipPassword": "Mot de passe Adhérent",
       "memberActive": "Actif?",
       "membershipNumber": "N° Adhérent",
       "requestDate": "Date d'inscription",
       "validationDate": "Date d'adhésion",
       "membershipEmail": "Email adhérent",
-      "membershipPassword": "Mot de passe Adhérent",
       "compagnyName": "Nom",
       "compagnyAdress": "Adresse",
       "compagnyAdditionalAdress": "Adresse complémentaire",
@@ -24,7 +24,7 @@
       "compagnyActivityDescription": "Description de l'activité",
       "compagnyLogo": "logo",
       "compagnyCoverPhoto": "Photo de couverture",
-      "compagnyPresentationFile": "a",
+      "compagnyPresentationFile": "Présentation de la société",
       "compagnyRepresentName": "Nom du représentant",
       "compagnyRepresentLastname": "Prénom du représentant",
       "compagnyRepresentFunction": "Fonction",

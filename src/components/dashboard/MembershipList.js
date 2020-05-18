@@ -36,12 +36,16 @@ class MembershipList extends Component {
       activePage: 1,
       lignCounter: 0,
       membershipNumber: 0,
-      modalColumnshow: false,
-      listColumn: "",
-      remainingList: [],
-      currentList: [],
+      //
+      modalColumnListShow: false,
+      listInit: ["a", "b", "c", "d", "e"],
+      currentList: ["a", "b", "c", "d"],
+      remainingList: ["e", "f"],
+      list1: "",
     };
   }
+
+  //**********************************************
   // Lancement des extractions de données
   // Launch of data extraction
   componentDidMount() {
@@ -51,14 +55,12 @@ class MembershipList extends Component {
 
   // Extractions des données de la base MongoDB:
   // Data extraction from the MongoDB database
-  //
-  //
-  //
   //---------------------------------------------
 
-  // Extractions des données fictive fichier Json:
-  // Fictitious data extracts from Json file:
+  // préparation des données et 1er affichage
+  // data preparation and 1st display
   extractionDashbordData = () => {
+    console.log("datademarrage");
     let dashboardJsonDataInit = dashboardJson.dashboardColumnListInit;
     let dashboardJsonDataShow = dashboardJson.dashboardColumnListShow;
     let membershipsJsonData = membershipsJson.membershipData;
@@ -78,6 +80,7 @@ class MembershipList extends Component {
     //Pagination
     let first = this.state.dataRange[0];
     let last = this.state.dataRange[1];
+
     this.setState({
       membershipData: membershipsJsonData,
       dashboardColumnListInit: dashboardJsonDataInit,
@@ -88,26 +91,29 @@ class MembershipList extends Component {
       membershipNumber: dataList.length,
     });
   };
-  //---------------------------------------------
+  //**********************************************
   // Reconstruit la liste filtrée avec pagination
   // build useful data for display in the table
   dashbordDataBuildInit = () => {
+    console.log("init");
     //Pagination
     let first = this.state.dataRange[0];
     let last = this.state.dataRange[1];
+
     this.setState({
       membershipFilterPaginationData: this.state.membershipColumFilterData.slice(
         first,
         last
       ),
       membershipFilterList: this.state.membershipColumFilterData,
+      membershipNumber: this.state.membershipColumFilterData.length,
     });
   };
   //---------------------------------------------
-
   // Construction des données filtrées pour affichage dans le tableau
   // build useful data for display in the table
   dashbordDataBuild = () => {
+    console.log("build tout court");
     console.log("ici");
     let membershipsData = this.state.membershipData;
     let dashboardDataShow = this.state.dashboardColumnListShow;
@@ -134,6 +140,7 @@ class MembershipList extends Component {
     });
     let first = 0;
     let last = this.state.nPerPage;
+
     this.setState({
       membershipFilterPaginationData: dataList.slice(first, last),
       membershipFilterList: dataList,
@@ -143,7 +150,6 @@ class MembershipList extends Component {
     });
   };
   //---------------------------------------------
-
   // Constrution du tableau des adhérents
   //build memberships header's table
   headerTable = () => {
@@ -314,7 +320,7 @@ class MembershipList extends Component {
       </InputGroup>
     );
   };
-  //---------------------------------------------
+  //**********************************************
   // Gestion des boutons de ligne
   // Line button management
   membershipSelection = (e) => {
@@ -324,7 +330,9 @@ class MembershipList extends Component {
       id: e.target.value,
     });
   };
-
+  //---------------------------------------------
+  //Gestion des confirmations de commandes
+  //Management of order confirmations
   alertShow = () => {
     if (this.state.modalShow) {
       return (
@@ -365,7 +373,7 @@ class MembershipList extends Component {
       );
     }
   };
-  //---------------------------------------------
+  //**********************************************
   // Affichage de la pagination
   // Pagination display
   paginationTable = () => {
@@ -429,23 +437,19 @@ class MembershipList extends Component {
       activePage: activPage,
     });
   };
-  //---------------------------------------------
-  // Lance la modale de gestion des colonnes
-  //
+  //**********************************************
+  // Afficahge de la modale de gestion des colonnes
+  // Display of the column management mode
   modalColumnList = () => {
-    //Modal
-    let listRemaining = this.state.dashboardColumnListInit[0];
-    let listRemainingObjet = Object.values(listRemaining);
-    console.log(listRemainingObjet.slice(2));
-    const handleClose = () => this.setState({ modalColumnshow: false });
-    const handleShow = () => this.setState({ modalColumnshow: true });
+    const handleClose = () => this.setState({ modalColumnListShow: false });
+    const handleShow = () => this.setState({ modalColumnListShow: true });
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" className="filterText" onClick={handleShow}>
           Gestion des champs
         </Button>
         <Modal
-          show={this.state.modalColumnshow}
+          show={this.state.modalColumnListShow}
           onHide={handleClose}
           animation={false}
         >
@@ -454,10 +458,18 @@ class MembershipList extends Component {
           </Modal.Header>
           <Modal.Body>{this.listField()}</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button
+              className="filterText"
+              variant="secondary"
+              onClick={handleClose}
+            >
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button
+              className="filterText"
+              variant="primary"
+              onClick={handleClose}
+            >
               Save Changes
             </Button>
           </Modal.Footer>
@@ -465,10 +477,71 @@ class MembershipList extends Component {
       </>
     );
   };
+  //---------------------------------------------
+  // Afficahge de la modale de gestion des colonnes
+  // Display of the column management mode
+  dataList = () => {
+    //Liste des colonnes
+    let remainingList = this.state.dashboardColumnListInit[0];
+    let remainingListValues = Object.values(remainingList);
+
+    let currentList = this.state.dashboardColumnListShow[0];
+    let currentListValues = Object.values(currentList).slice(2);
+
+    let listMemory = [];
+    remainingListValues.slice(2).forEach((element) => {
+      if (!currentListValues.includes(element)) {
+        listMemory.push(element);
+      }
+    });
+    console.log(currentListValues);
+
+    this.setState({
+      remainingList: listMemory,
+      currentList: currentListValues,
+    });
+  };
+
+  // Afficahge de la modale de gestion des colonnes
+  // Display of the column management mode
+  listField = () => {
+    return (
+      <div className="row center">
+        <Form.Group
+          className="listWidth"
+          controlId="exampleForm.ControlSelect2"
+        >
+          <Form.Label className="inputText">Champs disponibles</Form.Label>
+          <Form.Control
+            name="list1"
+            as="select"
+            multiple
+            onDoubleClick={this.addData}
+          >
+            {this.listShow(this.state.remainingList)}
+          </Form.Control>
+        </Form.Group>
+        <Form.Group
+          className="listWidth"
+          controlId="exampleForm.ControlSelect2"
+        >
+          <Form.Label className="inputText ">Champs affichés</Form.Label>
+          <Form.Control
+            name="list2"
+            as="select"
+            multiple
+            onDoubleClick={this.subData}
+          >
+            {this.listShow(this.state.currentList)}
+          </Form.Control>
+        </Form.Group>
+      </div>
+    );
+  };
 
   listShow = (list) => {
     return list.map((element) => {
-      return <option>{element}</option>;
+      return <option className="inputText">{element}</option>;
     });
   };
 
@@ -501,42 +574,7 @@ class MembershipList extends Component {
     console.log(field);
     console.log(this.state.remainingList);
     console.log(this.state.currentList);
-    this.setState({ listColumn: 1 });
-  };
-
-  listField = () => {
-    return (
-      <div className="ListRow">
-        <Form.Group
-          className="listWidth"
-          controlId="exampleForm.ControlSelect2"
-        >
-          <Form.Label>Champs restant</Form.Label>
-          <Form.Control
-            name="list1"
-            as="select"
-            multiple
-            onDoubleClick={this.addData}
-          >
-            {this.listShow(this.state.remainingList)}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group
-          className="listWidth"
-          controlId="exampleForm.ControlSelect2"
-        >
-          <Form.Label>Champs en cours</Form.Label>
-          <Form.Control
-            name="list2"
-            as="select"
-            multiple
-            onDoubleClick={this.subData}
-          >
-            {this.listShow(this.state.currentList)}
-          </Form.Control>
-        </Form.Group>
-      </div>
-    );
+    this.setState({ list1: 1 });
   };
 
   render() {
