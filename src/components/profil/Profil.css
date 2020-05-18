@@ -1,5 +1,5 @@
 #body{
-    background-color: rgb(2, 0, 0);
+    background-color: rgb(243, 223, 223);
 }
 #image_fond{
     background-image: url(../Images/abstrait-bleu-formes-geometriques_1035-17545.jpg);
@@ -10,7 +10,7 @@
     border-top-right-radius: 20px;
 }
 #image_fond button{
-    position: absolute;
+    position: relative;
     top: 0px;
     left: 25%;
     top: 5%;
@@ -27,7 +27,7 @@ button:hover{
 }
 #image_Logo button{
     margin-top: 5%;
-    position: absolute;
+    position: relative;
     right: 10px;
     width: 100px;
 }
@@ -46,13 +46,13 @@ button:hover{
 input[name="society_name"]{
     font-size: 30px;
     font-weight: bold;
-    color: #ff6666;
+    color: #ff0000;
 }
 h3{
     color: #0099ff;
     font-weight: bold;
 }
-input[name="name"]{
+input[name="name"], input[name="surname"]{
     font-size: 20px;
     font-weight: bold;
     color: #ff6666;
@@ -61,7 +61,6 @@ input[name="name"]{
 #middle_bloc{
     margin-top: 15%;
     margin-left: 15%;
-    position: absolute;
     left: 0px;
     background-color: white;
     width: 40%;
@@ -82,7 +81,7 @@ textarea{
     overflow: auto;
 }
 #image_logo input{
-    position: absolute;
+    position: relative;
     right: 2px;
 }
 #middle_bloc div{
