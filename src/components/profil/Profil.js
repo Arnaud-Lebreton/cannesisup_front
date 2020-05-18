@@ -29,10 +29,7 @@ class Profil extends Component{
         this.setState({isDisabled : a});
     }
     handleChange(event){
-        const value = event.target.value;
-        setState({
-            
-        });
+        this.setState({name : event.target.value});
     }
     render(){
         return (
@@ -44,7 +41,7 @@ class Profil extends Component{
                             <button>Ajouter Image</button>
                         </div>
                         <div id= "image_Logo" >
-                            <img src={require("../Images/Untitled.png")} {/*Mettre en source la data*/}/>
+                            <img src={require("../Images/Untitled.png")}/>
                             <button>Ajouter Image</button>
                         </div>
                         <div>
@@ -72,7 +69,7 @@ class Profil extends Component{
                     </div>
                     <div id = "side_bloc">
                         <div id="profil_image">
-                            <img src={require("../Images/img_avatar.png")} {/*Mettre en source la data*/}/>
+                            <img src={require("../Images/img_avatar.png")}/>
                             <button>Ajouter Photo</button>
                         </div>
                         <div>
