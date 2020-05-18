@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./footer.css";
-import {} from "react-bootstrap-icons";
+import {a} from "react-bootstrap-icons";
 
 class Footer extends Component {
   render() {
