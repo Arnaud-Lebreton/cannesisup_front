@@ -3,6 +3,8 @@
 }
 #image_fond{
     background-image: url(../Images/abstrait-bleu-formes-geometriques_1035-17545.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 150px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -37,10 +39,23 @@ button:hover{
     position: relative;
     left: 25%;
     top: -100px;
-    
     border-radius: 50%;
     width: 50%;
     border: 2px solid #00ccff;
+}
+input[name="society_name"]{
+    font-size: 30px;
+    font-weight: bold;
+    color: #ff6666;
+}
+h3{
+    color: #0099ff;
+    font-weight: bold;
+}
+input[name="name"]{
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6666;
 }
 
 #middle_bloc{
@@ -95,4 +110,8 @@ textarea{
 
 .Hover :hover{
     background-color: crimson;
+}
+#interaction button{
+    border-radius: 15px;
+    outline: none;
 }
