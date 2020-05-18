@@ -371,7 +371,7 @@ class MembershipList extends Component {
   // Pagination display
   paginationTable = () => {
     return (
-      <Pagination className="paginationStyle" size="sm">
+      <Pagination className="dashboardPaginationStyle" size="sm">
         {this.paginationNumberItem()}
       </Pagination>
     );
