@@ -35,7 +35,7 @@ class MembersCard extends Component {
   cardDeck = () => {
     return this.state.cardDeck.map((element, index) => {
       return (
-        <Card className="container" style={{ width: "20rem" }}>
+        <Card className="containerMembersCard" style={{ width: "20rem" }}>
           <Col>
             <Card.Img
               className="coverPhoto"

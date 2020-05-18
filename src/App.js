@@ -3,6 +3,7 @@ import MembersCard from "./components/membersCard/MembersCard";
 import SearchBar from "./components/membersCard/searchBar/SearchBar";
 import Navbar from "./components/navbar/Navbar";
 import { BrowserRouter as Router } from "react-router-dom";
+import Footer from "./components/footer/Footer";
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <SearchBar />
           <MembersCard />
         </div>
+        <Footer />
       </Router>
     );
   }

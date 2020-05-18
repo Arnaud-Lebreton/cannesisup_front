@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import "./searchBar.css";
+import data from "../../fictivesdata/membershipData.json";
+
+let nbMembers = data.membershipData.length;
 
 class SearchBar extends Component {
   render() {
@@ -18,7 +21,7 @@ class SearchBar extends Component {
           />
         </Form>
 
-        <p className="textMembers">xxx membres</p>
+        <p className="textMembers">{nbMembers} membres</p>
       </div>
     );
   }
