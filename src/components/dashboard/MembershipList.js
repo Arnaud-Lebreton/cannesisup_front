@@ -11,7 +11,8 @@ import {
 } from "react-bootstrap";
 //Import components
 import ColumnList from "./ColumnList";
-//Import css
+//Import style
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboardStyle.css";
 //Import des données fictives JSON
 import membershipsJson from "../fictivesdata/membershipData.json";
@@ -156,7 +157,9 @@ class MembershipList extends Component {
     if (this.state.membershipFilterPaginationData) {
       return (
         <tr>
-          <th className="tableheaderText tableAction">Action</th>
+          <th className="dashboardTableHeaderText dashboardTableHeaderCol1">
+            Action
+          </th>
           {this.textHeaderCreate(this.state.membershipFilterPaginationData[0])}
         </tr>
       );
@@ -170,7 +173,7 @@ class MembershipList extends Component {
       return Object.keys(this.state.dashboardColumnListShow[0]).map(
         (element, index) => {
           return (
-            <th className="tableheaderText" key={index}>
+            <th className="dashboardTableHeaderText" key={index}>
               {this.state.dashboardColumnListShow[0][element]}
             </th>
           );
@@ -180,7 +183,7 @@ class MembershipList extends Component {
       return Object.keys(objet).map((element, index) => {
         if (index > 1) {
           return (
-            <th className="tableheaderText " key={index}>
+            <th className=" dashboardTableHeaderText" key={index}>
               {this.state.dashboardColumnListShow[0][element]}
             </th>
           );
@@ -195,7 +198,7 @@ class MembershipList extends Component {
     if (!this.state.membershipFilterPaginationData[0]) {
       let n = Object.keys(this.state.dashboardColumnListShow[0]).length;
       return (
-        <tr className="tableText cellTable">
+        <tr className="">
           <td colSpan={n + 1}>aucun élément n'a été trouvé</td>
         </tr>
       );
@@ -204,7 +207,7 @@ class MembershipList extends Component {
         return this.state.membershipFilterPaginationData.map(
           (element, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} className="">
                 {this.boutonCreate(index, element.id, element.memberActive)}
                 {this.textBodyCreate(element)}
               </tr>
@@ -229,9 +232,9 @@ class MembershipList extends Component {
       disabledStatus = false;
     }
     return (
-      <td className="cellTable" key={index}>
+      <td className="" key={index}>
         <Button
-          className="tableButton"
+          className="dashboardTableButton"
           size="sm"
           variant={colorStatus}
           value={id}
@@ -242,7 +245,7 @@ class MembershipList extends Component {
           {textStatus}
         </Button>
         <Button
-          className="tableButton"
+          className="dashboardTableButton"
           size="sm"
           variant="info"
           value={id}
@@ -252,7 +255,7 @@ class MembershipList extends Component {
           Modifier
         </Button>
         <Button
-          className="tableButton"
+          className="dashboardTableButton"
           size="sm"
           variant="danger"
           value={id}
@@ -271,7 +274,7 @@ class MembershipList extends Component {
     return Object.keys(array).map((element, index) => {
       if (index > 1) {
         return (
-          <td className="tableText cellTable" key={index}>
+          <td className=" dashboardTableRowText" key={index}>
             {array[element]}
           </td>
         );
@@ -297,10 +300,10 @@ class MembershipList extends Component {
   // Data filter
   inputFilterTable = () => {
     return (
-      <InputGroup className="tableInput">
+      <InputGroup className="dashboardFilterSize">
         <FormControl
           size="sm"
-          className="inputText"
+          className="dashboardFilterText"
           placeholder="Recherche"
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
@@ -310,7 +313,7 @@ class MembershipList extends Component {
         <InputGroup.Append>
           <Button
             size="sm"
-            className="filterText"
+            className="dashboardFilterButtonText"
             variant="primary"
             onClick={this.dashbordDataBuild}
           >
@@ -378,7 +381,7 @@ class MembershipList extends Component {
   // Pagination display
   paginationTable = () => {
     return (
-      <Pagination className="paginationStyle" size="sm">
+      <Pagination className="dashboardPaginationStyle" size="sm">
         {this.paginationNumberItem()}
       </Pagination>
     );
@@ -445,7 +448,12 @@ class MembershipList extends Component {
     const handleShow = () => this.setState({ modalColumnListShow: true });
     return (
       <>
-        <Button variant="primary" className="filterText" onClick={handleShow}>
+        <Button
+          variant="primary"
+          size="sm"
+          className="dashboardModalButtonSize"
+          onClick={handleShow}
+        >
           Gestion des champs
         </Button>
         <Modal
@@ -456,17 +464,17 @@ class MembershipList extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Gestion des champs</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{this.listField()}</Modal.Body>
+          <Modal.Body>{this.modalListField()}</Modal.Body>
           <Modal.Footer>
             <Button
-              className="filterText"
+              className="dashboardFilterText"
               variant="secondary"
               onClick={handleClose}
             >
               Close
             </Button>
             <Button
-              className="filterText"
+              className="dashboardFilterText"
               variant="primary"
               onClick={handleClose}
             >
@@ -480,7 +488,7 @@ class MembershipList extends Component {
   //---------------------------------------------
   // Afficahge de la modale de gestion des colonnes
   // Display of the column management mode
-  dataList = () => {
+  modalDataList = () => {
     //Liste des colonnes
     let remainingList = this.state.dashboardColumnListInit[0];
     let remainingListValues = Object.values(remainingList);
@@ -504,44 +512,46 @@ class MembershipList extends Component {
 
   // Afficahge de la modale de gestion des colonnes
   // Display of the column management mode
-  listField = () => {
+  modalListField = () => {
     return (
-      <div className="row center">
+      <div className="">
         <Form.Group
-          className="listWidth"
+          className="dashboardModalListWidth"
           controlId="exampleForm.ControlSelect2"
         >
-          <Form.Label className="inputText">Champs disponibles</Form.Label>
+          <Form.Label className="dashboardInputText">
+            Champs disponibles
+          </Form.Label>
           <Form.Control
             name="list1"
             as="select"
             multiple
             onDoubleClick={this.addData}
           >
-            {this.listShow(this.state.remainingList)}
+            {this.modalListShow(this.state.remainingList)}
           </Form.Control>
         </Form.Group>
         <Form.Group
-          className="listWidth"
+          className="dashboardModalListWidth"
           controlId="exampleForm.ControlSelect2"
         >
-          <Form.Label className="inputText ">Champs affichés</Form.Label>
+          <Form.Label className=" ">Champs affichés</Form.Label>
           <Form.Control
             name="list2"
             as="select"
             multiple
             onDoubleClick={this.subData}
           >
-            {this.listShow(this.state.currentList)}
+            {this.modalListShow(this.state.currentList)}
           </Form.Control>
         </Form.Group>
       </div>
     );
   };
 
-  listShow = (list) => {
+  modalListShow = (list) => {
     return list.map((element) => {
-      return <option className="inputText">{element}</option>;
+      return <option className="dashboardInputText">{element}</option>;
     });
   };
 
@@ -579,16 +589,16 @@ class MembershipList extends Component {
 
   render() {
     return (
-      <Container className="colSize">
-        <div className="filter">{this.inputFilterTable()}</div>
-        <div className="alignButton">
+      <Container className="dashboardGlobalSize">
+        <div className="dashboardFilter">{this.inputFilterTable()}</div>
+        <div className="dashboardAlignButton">
           <div>{this.paginationTable()}</div>
           <div>{this.modalColumnList()}</div>
         </div>
-        <p className="counterText">
+        <p className="dashboardCounterText">
           Nombre d'adhérents trouvé : {this.state.membershipNumber}
         </p>
-        <Table striped bordered hover responsive>
+        <Table striped bordered hover responsive className="">
           <thead>{this.headerTable()}</thead>
           <tbody>{this.dataTable()}</tbody>
         </Table>
