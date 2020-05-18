@@ -8,9 +8,10 @@ import {
   Pagination,
   Modal,
   Form,
+  Dropdown,
+  DropdownButton,
 } from "react-bootstrap";
 //Import components
-import ColumnList from "./ColumnList";
 //Import style
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboardStyle.css";
@@ -51,11 +52,49 @@ class MembershipList extends Component {
   // Launch of data extraction
   componentDidMount() {
     this.extractionDashbordData();
+    this.getDashbordData();
   }
   //---------------------------------------------
-
   // Extractions des données de la base MongoDB:
   // Data extraction from the MongoDB database
+  /*getDashbordData = () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/dashboard/parametrers", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          this.setState({ 
+            dashboardColumnListInit: data.dashboardColumnListInit,
+            dashboardColumnListShow: data.dashboardColumnListShow });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+  /*getMembershipData = () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/dashboard/memberships", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          /*this.setState({
+            membershipsJsonData: data,
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };*/
   //---------------------------------------------
 
   // préparation des données et 1er affichage
@@ -240,7 +279,7 @@ class MembershipList extends Component {
           value={id}
           onClick={this.membershipSelection}
           disabled={disabledStatus}
-          name="activer"
+          name="ACTIVER"
         >
           {textStatus}
         </Button>
@@ -250,7 +289,7 @@ class MembershipList extends Component {
           variant="info"
           value={id}
           onClick={this.membershipSelection}
-          name="modifier"
+          name="MODIFIER"
         >
           Modifier
         </Button>
@@ -260,7 +299,7 @@ class MembershipList extends Component {
           variant="danger"
           value={id}
           onClick={this.membershipSelection}
-          name="supprimer"
+          name="SUPPRIMER"
         >
           Retirer
         </Button>
@@ -337,24 +376,33 @@ class MembershipList extends Component {
   //Gestion des confirmations de commandes
   //Management of order confirmations
   alertShow = () => {
+    let text;
     if (this.state.modalShow) {
+      if (this.state.textAction === "modifier") {
+        text = "Accès au profil en Modification";
+      } else if (this.state.textAction === "supprimer") {
+        text = "Supprimer le profil";
+      } else {
+        text = "Activer le profil";
+      }
       return (
         <>
           <Modal
+            size="sm"
             show={this.state.modalShow}
             onHide={() => {
               this.setState({ modalShow: !this.state.modalShow });
             }}
             animation={false}
           >
-            <Modal.Header closeButton>
-              <Modal.Title>
-                {this.state.textAction} : {this.state.id}
-              </Modal.Title>
+            <Modal.Header closeButton className="dashboardAlertButtonClose">
+              <Modal.Title>{this.state.textAction}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Voulez vous continuer la commande</Modal.Body>
-            <Modal.Footer>
+            <Modal.Body>{text}</Modal.Body>
+            <Modal.Footer className="">
               <Button
+                size="sm"
+                className="dashboardAlertButtonSize"
                 variant="secondary"
                 onClick={() =>
                   this.setState({ modalShow: !this.state.modalShow })
@@ -363,6 +411,8 @@ class MembershipList extends Component {
                 Annuler
               </Button>
               <Button
+                size="sm"
+                className="dashboardAlertButtonSize"
                 variant="primary"
                 onClick={() =>
                   this.setState({ modalShow: !this.state.modalShow })
@@ -441,6 +491,45 @@ class MembershipList extends Component {
     });
   };
   //**********************************************
+  // Affichage du choix de la quantité de ligne par page
+  // Display of the choice of line quantity per page
+  paginationChoise = () => {
+    return (
+      <DropdownButton
+        size="sm"
+        id="dropdown-basic-button"
+        title="Pagination"
+        className="dashboardPaginationSize"
+      >
+        <Dropdown.Item
+          onClick={() => {
+            console.log(10);
+          }}
+          className="dashboardPaginationStyle"
+        >
+          x10
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
+            console.log(20);
+          }}
+          className="dashboardPaginationStyle"
+        >
+          x20
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
+            console.log(30);
+          }}
+          className="dashboardPaginationStyle"
+        >
+          x30
+        </Dropdown.Item>
+      </DropdownButton>
+    );
+  };
+
+  //**********************************************
   // Afficahge de la modale de gestion des colonnes
   // Display of the column management mode
   modalColumnList = () => {
@@ -509,7 +598,7 @@ class MembershipList extends Component {
       currentList: currentListValues,
     });
   };
-
+  //---------------------------------------------
   // Afficahge de la modale de gestion des colonnes
   // Display of the column management mode
   modalListField = () => {
@@ -548,13 +637,17 @@ class MembershipList extends Component {
       </div>
     );
   };
-
+  //---------------------------------------------
+  // Affichage du contenu des listes de champs
+  // Displaying the content of field lists
   modalListShow = (list) => {
     return list.map((element) => {
       return <option className="dashboardInputText">{element}</option>;
     });
   };
-
+  //---------------------------------------------
+  // calcul des champs à enlever
+  // calculation of the fields to be removed
   subData = (e) => {
     let field = e.target.value;
     for (let i = 0; i < this.state.currentList.length; i++) {
@@ -570,7 +663,9 @@ class MembershipList extends Component {
     console.log(this.state.currentList);
     this.setState({ list1: 1 });
   };
-
+  //---------------------------------------------
+  // calcul des champs à ajouter
+  // calculation of fields to add
   addData = (e) => {
     let field = e.target.value;
     for (let i = 0; i < this.state.currentList.length; i++) {
@@ -592,7 +687,13 @@ class MembershipList extends Component {
       <Container className="dashboardGlobalSize">
         <div className="dashboardFilter">{this.inputFilterTable()}</div>
         <div className="dashboardAlignButton">
-          <div>{this.paginationTable()}</div>
+          <div className="dashboardPaginationRow">
+            <div className="dashboardPaginationDivSize">
+              {this.paginationChoise()}
+            </div>
+            <div>{this.paginationTable()}</div>
+          </div>
+
           <div>{this.modalColumnList()}</div>
         </div>
         <p className="dashboardCounterText">

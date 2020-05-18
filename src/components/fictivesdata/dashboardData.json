@@ -46,5 +46,6 @@
       "compagnyCity": "Ville",
       "compagnyTelephon": "Téléphone"
     }
-  ]
+  ],
+  "dashboardPagination": [0, 10]
 }
