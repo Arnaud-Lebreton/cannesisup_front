@@ -18,7 +18,6 @@ class Profil extends Component{
             email : "vadim@dtc",
             work : "Manager inter-communication de nation",
             work_description : "manger du Cuir",
-            isShow : true,
             isDisabled:true,
             image_profil:"../Images/Untitled.png",
             image_fond: "",
@@ -64,7 +63,7 @@ class Profil extends Component{
                             <label>Adresse : </label>
                             <input type = "text" placeholder = "Adresse" disabled={this.state.isDisabled} />
                             <label>Telephone : </label>
-                            <input type = "tel" placeholder = "Telephone" disabled={this.state.isDisabled}/>
+                            <input type = "decimal" placeholder = "Telephone" disabled={this.state.isDisabled}/>
                             <label>Site : </label>
                             <a href = {this.state.society_website}></a>
                             <input type = "text" placeholder = "Site" disabled={this.state.isDisabled} />
