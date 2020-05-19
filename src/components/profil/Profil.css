@@ -15,12 +15,15 @@
     left: 25%;
     top: 5%;
 }
-button{
+#body button{
     transition: background-color 0.2s linear;
 }
-button:hover{
+#body button:hover{
     transition: background-color 0.2s linear;
     background-color: rgba(204, 184, 184, 0.473);
+}
+#body label{
+    float: left;
 }
 #image_Logo img{
     width: 25%;
@@ -43,16 +46,16 @@ button:hover{
     width: 50%;
     border: 2px solid #00ccff;
 }
-input[name="society_name"]{
+#body input[name="society_name"]{
     font-size: 30px;
     font-weight: bold;
     color: #ff0000;
 }
-h3{
+#body h3{
     color: #0099ff;
     font-weight: bold;
 }
-input[name="name"], input[name="surname"]{
+#body input[name="name"], input[name="surname"]{
     font-size: 20px;
     font-weight: bold;
     color: #ff6666;
@@ -67,22 +70,21 @@ input[name="name"], input[name="surname"]{
     border: 2px solid #00ccff;
     border-radius: 20px;
 }
-input, textarea, button{
+#body input, textarea, button{
     padding: 5px;
-    width: 50%;
     background: none;
     border: none;
     outline: none;
 }
-textarea{
+#body textarea{
     width: 95%;
     
     resize: vertical;
     overflow: auto;
 }
-#image_logo input{
-    position: relative;
-    right: 2px;
+#image_Logo button{
+    display: flex;
+    flex-direction: row;
 }
 #middle_bloc div{
     padding: 10px;

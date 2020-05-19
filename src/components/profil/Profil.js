@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./Profil.css"
 
 //Il faut faire en sorte qu'à l'appuie du button confirmer || modifier certain element disparaissent ou reaparaisse
+//Pour cacher plusieur element dans une condition ternaire on peut entourer tout les elements d'une balise
 class Profil extends Component{
     constructor(props){
         super(props);
@@ -49,7 +50,7 @@ class Profil extends Component{
                             <img src={require("../Images/Untitled.png")}/>
                             {!this.state.isDisabled && <button>Ajouter Image</button>}
                             {!this.state.isDisabled && <button>Ajouter Brochure</button>}
-                            {this.state.isDisabled && <button>Telecharger Brochure</button>}
+                            {this.state.isDisabled && <a href="../Images/Untitled.png" download="Untitled.png"><button type="button"><img src={require("../Images/download.png")}/><p>Telecharger Brochure</p></button></a>}
                         </div>
                         <div>
                             <input placeholder = "Nom de Votre Societé..." disabled={this.state.isDisabled} name="society_name"/>
@@ -59,7 +60,7 @@ class Profil extends Component{
                         <div>
                             <h3>Coordonnées : </h3>
                             <label>Email : </label>
-                            <input type = "email" placeholder = "Email" disabled={this.state.isDisabled} />
+                            <input type = "email" placeholder = "Email" disabled={this.state.isDisabled}/>
                             <label>Adresse : </label>
                             <input type = "text" placeholder = "Adresse" disabled={this.state.isDisabled} />
                             <label>Telephone : </label>

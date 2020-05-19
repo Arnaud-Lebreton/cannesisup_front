@@ -1,0 +1,4 @@
+# SSL active redirection http
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://www.cannesisup.com/$1 [R=301,L]

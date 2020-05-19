@@ -1,0 +1,170 @@
+/*$$$$$$$$$$$$$$$$$$$$$$$$ Page d'accueil $$$$$$$$$$$$$$$$$$$$*/
+.pageupload {
+  height: 400px;
+  padding-top: 1%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+form {
+  text-align: center;
+  width: 70%;
+  margin: auto;
+  padding-top: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.sendfile {
+  border: #f7316b solid 1px;
+  color: black;
+  height: 35px;
+  margin-top: 4%;
+  margin-left: 5%;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}
+
+.sendfile:hover {
+  background-color: #f7316b;
+  color: white;
+}
+
+.btn-result {
+  text-align: center;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  min-width: 300px;
+  margin: 10px;
+}
+
+.etape {
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  letter-spacing: 2px;
+}
+
+#display {
+  padding-top: 0;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+}
+
+/*$$$$$$$$$$$$$$$$$$$$$$ Page Résult $$$$$$$$$$$$$$$$$*/
+.pageresult {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding-top: 2%;
+  margin-bottom: 5%;
+}
+
+.tableau {
+  margin: auto;
+  width: 70%;
+  padding-top: 2%;
+}
+
+/*$$$$$$$$$$$$$$$$$$$$$$$ Footer $$$$$$$$$$$$$$$$$$$$$*/
+footer {
+  background-color: #262626;
+  color: white;
+  padding: 1%;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/****** General Settings ******/
+#page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#content {
+  flex-grow: 1;
+}
+
+button {
+  cursor: pointer;
+}
+
+/****** tableau page display ******/
+
+.participant_line {
+  cursor: pointer;
+}
+
+/****** participant modal ******/
+.participantModal {
+  width: 70vw !important;
+  max-width: unset !important;
+}
+
+/* Loader */
+#loader {
+  display: flex;
+  justify-content: center;
+}
+
+/* Option imprimer ou sauvegarder en pdf */
+@media print {
+  #participantModal {
+    width: 100%;
+  }
+
+  .participantPlanning{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .participantPlanning th, td{
+    padding: 10px;
+    border: #262626 solid 1px;
+  }
+
+  .modal-title{
+    font-size: 40px;
+  }
+
+  .modal-content {
+    height: 100vh;
+  }
+
+  .modal-body{
+    font-size: 28px;
+    margin-top: 5%;
+  }
+
+  .modal-dialog {
+    margin: 0 !important;
+  }
+
+  .participantModal {
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0;
+  }
+
+  .modal_footer,
+  button {
+    border-top: none;
+    display: none !important;
+  }
+}
