@@ -133,7 +133,7 @@ class Profil extends Component {
               </button>
             )}
           </div>
-          <p>{this.state.name}</p>
+          {/*<p>{this.state.name}</p>*/}
         </div>
       </div>
     );
