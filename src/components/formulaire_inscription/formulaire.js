@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./Profil.css"
+import "./formulaire.css"
 
 class inscrip extends Component{
     constructor(props){
@@ -27,9 +27,9 @@ class inscrip extends Component{
     }
     render(){
         return(
-            <div>
+            <div id="formulaire">
                 <form>
-                    <h3>Info Personnel</h3>
+                    <h3>Infos Personnel</h3>
                     <label>Nom : </label>
                     <input type="text" placeholder="Nom..." required/>
                     <label>Prenom : </label>
@@ -44,7 +44,7 @@ class inscrip extends Component{
                     <input type="file" placeholder="Photo..." required/>
                     
                     <br/>
-                    <h3>Info Societé</h3>
+                    <h3>Infos Societé</h3>
                     <label>Adresse : </label>
                     <input type="text" placeholder="Adresse..." required/>
                     <label>Code Postal : </label>
@@ -81,3 +81,5 @@ class inscrip extends Component{
         )
     };
 }
+
+export default inscrip;

@@ -1,0 +1,17 @@
+#formulaire form{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    
+}
+#formulaire{
+    border-radius: 15px;
+    border : 1px solid;
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 2%;
+}
+#formulaire form textarea{
+    border : 1px solid;
+}
