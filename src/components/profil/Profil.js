@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import "./Profil.css"
+import "./Profil.css";
+import ProfilJson from "../fictivesdata/membershipData.json";
 
 //Il faut faire en sorte qu'à l'appuie du button confirmer || modifier certain element disparaissent ou reaparaisse
 //Pour cacher plusieur element dans une condition ternaire on peut entourer tout les elements d'une balise
@@ -34,6 +35,9 @@ class Profil extends Component{
     }
     handleChange(event){
         this.setState({name : event.target.value});
+    }
+    GetData = (e) => {
+        e.preventDefault
     }
     render(){
         return (

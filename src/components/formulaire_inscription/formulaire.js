@@ -5,14 +5,16 @@ class inscrip extends Component{
     constructor(props){
         super(props);
         this.state = {
-            name : "",
-            surname: "",
-            society_name : "",
-            society_description : "",
-            society_activity_sector : "",
-            society_adress : "",
-            phone_number : "",
-            society_website : "",
+            Nom : "",
+            Prenom: "",
+            Nom_Societe : "",
+            Description_Societe : "",
+            Activité_Societe : "",
+            Adresse_Societe : "",
+            Site_web_Societe : "",
+            Email_Societe: "",
+            
+            Telephone : "",
             email : "",
             work : "",
             work_description : "",
