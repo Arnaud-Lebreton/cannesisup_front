@@ -77,7 +77,9 @@ class MembersCard extends Component {
               </ListGroupItem>
             </ListGroup>
           </Card.Body>
-          <Button className="memberBouton">voir le membre</Button>
+          <Button className="memberBouton" id="memberBouton">
+            voir le membre
+          </Button>
         </Card>
       );
     });
