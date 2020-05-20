@@ -8,8 +8,44 @@ class Login extends Component {
     super(props);
     this.state = {
       showForgotPassword: false,
+      email: "",
+      password: "",
     };
   }
+
+  /********* Fonction qui récupère le champ input ********/
+
+  handleInput = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  /********* Fonction qui permet de s'identifier ********/
+
+  identify = (e) => {
+    e.preventDefault();
+    const body = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    const options = {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+      body: JSON.stringify(body),
+    };
+
+    fetch("", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
 
   /********* Fonction qui change l'état de la Modal d'oubli de mot de passe ********/
   changeShow = () => {
@@ -17,6 +53,7 @@ class Login extends Component {
   };
 
   /********* Fonction Affiche/Cache le mot de passe ********/
+
   showPwd = () => {
     let x = document.getElementById("pwd");
     if (x.type === "password") {
@@ -43,6 +80,8 @@ class Login extends Component {
               type="email"
               id="email"
               name="email"
+              value={this.state.email}
+              onChange={this.handleInput}
               placeholder="Votre Email..."
             />
           </Form.Group>
@@ -55,6 +94,8 @@ class Login extends Component {
               id="pwd"
               name="password"
               type="password"
+              value={this.state.password}
+              onChange={this.handleInput}
               placeholder="Votre Mot de Passe..."
             />
             <InputGroup.Append>
@@ -68,7 +109,11 @@ class Login extends Component {
           </Nav>
 
           <div className="containtButtonLogin">
-            <Button className="buttonLogin" type="submit">
+            <Button
+              className="buttonLogin"
+              type="submit"
+              onClick={this.identify}
+            >
               S'Identifier
             </Button>
           </div>

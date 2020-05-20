@@ -24,7 +24,7 @@ class App extends Component {
               <SearchBar />
               <MembersCard />
             </Route>
-            <Route path="/profil">
+            <Route path="/profil/:id" component={Profil}>
               <Profil />
             </Route>
             <Route path="/dashboard">
@@ -33,9 +33,9 @@ class App extends Component {
             <Route path="/login">
               <Login />
             </Route>
-            {/*<Route path="/initpassword">
+            <Route path="/initpassword">
               <InitPassword />
-    </Route>*/}
+            </Route>
           </Switch>
         </div>
         <Footer />

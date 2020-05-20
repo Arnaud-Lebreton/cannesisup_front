@@ -7,12 +7,46 @@ class ForgotPassword extends Component {
     super(props);
     this.state = {
       close: false,
+      email: "",
     };
   }
+
+  /********* Fonction qui récupère le champ input ********/
+
+  handleInput = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  /********* Fonction qui ferme la modal ********/
 
   changeclose = () => {
     this.setState({ close: !this.state.close });
   };
+
+  /********* Fonction qui permet de réinitialiser le MDP ********/
+
+  resetPassword = (e) => {
+    e.preventDefault();
+    const body = this.state.email;
+    const options = {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+      body: JSON.stringify(body),
+    };
+
+    fetch("", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+
   render() {
     return (
       <div>
@@ -37,6 +71,8 @@ class ForgotPassword extends Component {
                 type="email"
                 id="email"
                 name="email"
+                value={this.state.email}
+                onChange={this.handleInput}
                 placeholder="Votre Email..."
               />
             </Form>
@@ -45,7 +81,9 @@ class ForgotPassword extends Component {
             <Button className="buttonLogin" onClick={this.changeclose}>
               Fermer
             </Button>
-            <Button className="buttonLogin">Envoyer</Button>
+            <Button className="buttonLogin" onClick={this.resetPassword}>
+              Envoyer
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>

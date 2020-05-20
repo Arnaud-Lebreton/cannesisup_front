@@ -55,10 +55,11 @@
 }
 
 .resetPassword {
-  display: block;
+  display: flex;
   margin-top: -1.8rem;
-  text-align: end;
+  justify-content: end;
 }
+
 .resetPassword a {
   text-decoration: none;
   color: #1da1f2;
