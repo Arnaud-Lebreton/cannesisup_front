@@ -25,6 +25,7 @@ class Profil extends Component {
 
     this.handleChange = this.handleChange.bind(this);
   }
+
   hide(a) {
     this.setState({ isDisabled: a });
   }

@@ -1,0 +1,110 @@
+/*************** CSS Login.js ***************/
+
+.containtLogoLogin {
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+.containtLogoLogin h1 {
+  width: 400px;
+  font-size: 40px;
+  font-weight: 300;
+  text-align: center;
+  align-self: center;
+  color: #454545;
+}
+
+.containtLogoLogin h1 span {
+  color: #f7316b;
+}
+
+.LogoLogin {
+  width: 100px;
+}
+
+.containtLoginForm {
+  display: grid;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.containtGroupForm {
+  width: 40vh;
+  margin-bottom: 2rem;
+}
+
+.containtInputForm {
+  box-shadow: 0 0 3px rgb(29, 161, 242);
+}
+
+.containtButtonLogin {
+  display: flex;
+  justify-content: center;
+}
+
+.containtButtonPassword {
+  width: 50px;
+  background-color: white !important;
+  border-color: transparent;
+  box-shadow: 0 0 3px rgb(29, 161, 242);
+}
+
+.containtButtonPassword img:hover {
+  fill: #f7316b;
+}
+
+.resetPassword {
+  display: flex;
+  margin-top: -1.8rem;
+  justify-content: end;
+}
+
+.resetPassword a {
+  text-decoration: none;
+  color: #1da1f2;
+}
+
+.resetPassword a:hover {
+  color: #f7316b;
+}
+
+.buttonLogin {
+  width: 25vh;
+  margin: 20px;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 17px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f7316b;
+  background-color: #fff;
+  border: 2px solid #f7316b;
+}
+
+.buttonLogin:hover {
+  color: #fff;
+  background-color: #f7316b;
+  border-color: #f7316b;
+}
+
+/*************** CSS ForgotPassword.js ***************/
+
+.modalButtonLogin {
+  flex-wrap: nowrap;
+}
+
+.modalTitleForgotPassword h4 {
+  color: #454545;
+}
+
+.modalTitleForgotPassword h5 {
+  color: #f7316b;
+}
+
+.modalHeaderForgotPassword img {
+  width: 50px;
+  margin: 0 auto;
+}
+
+/*************** CSS InitPassword.js ***************/
