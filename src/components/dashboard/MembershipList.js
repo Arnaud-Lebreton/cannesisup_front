@@ -33,8 +33,8 @@ class MembershipList extends Component {
       modalShow: false,
       textAction: "",
       id: "",
-      dataRange: [0, 5],
-      nPerPage: 5,
+      dataRange: [0, 10],
+      nPerPage: 10,
       activePage: 1,
       lignCounter: 0,
       membershipNumber: 0,
@@ -52,7 +52,7 @@ class MembershipList extends Component {
   // Launch of data extraction
   componentDidMount() {
     this.extractionDashbordData();
-    this.getDashbordData();
+    /*this.getDashbordData();*/
   }
   //---------------------------------------------
   // Extractions des données de la base MongoDB:
@@ -100,7 +100,7 @@ class MembershipList extends Component {
   // préparation des données et 1er affichage
   // data preparation and 1st display
   extractionDashbordData = () => {
-    console.log("datademarrage");
+    console.log("extractionDashbordData");
     let dashboardJsonDataInit = dashboardJson.dashboardColumnListInit;
     let dashboardJsonDataShow = dashboardJson.dashboardColumnListShow;
     let membershipsJsonData = membershipsJson.membershipData;
@@ -135,11 +135,11 @@ class MembershipList extends Component {
   // Reconstruit la liste filtrée avec pagination
   // build useful data for display in the table
   dashbordDataBuildInit = () => {
-    console.log("init");
+    console.log("dashbordDataBuildInit");
     //Pagination
     let first = this.state.dataRange[0];
     let last = this.state.dataRange[1];
-
+    console.log(last);
     this.setState({
       membershipFilterPaginationData: this.state.membershipColumFilterData.slice(
         first,
@@ -153,8 +153,7 @@ class MembershipList extends Component {
   // Construction des données filtrées pour affichage dans le tableau
   // build useful data for display in the table
   dashbordDataBuild = () => {
-    console.log("build tout court");
-    console.log("ici");
+    console.log("dashbordDataBuild");
     let membershipsData = this.state.membershipData;
     let dashboardDataShow = this.state.dashboardColumnListShow;
     let dataList = [];
@@ -193,6 +192,7 @@ class MembershipList extends Component {
   // Constrution du tableau des adhérents
   //build memberships header's table
   headerTable = () => {
+    console.log("headerTable");
     if (this.state.membershipFilterPaginationData) {
       return (
         <tr>
@@ -208,6 +208,7 @@ class MembershipList extends Component {
   // Construction des entêtes tableau des adhérents
   // build memberships boby's table
   textHeaderCreate = (objet) => {
+    console.log("textHeaderCreate");
     if (!objet) {
       return Object.keys(this.state.dashboardColumnListShow[0]).map(
         (element, index) => {
@@ -234,6 +235,7 @@ class MembershipList extends Component {
   // Construction du corps du tableau des adhérents
   // build memberships boby's table
   dataTable = () => {
+    console.log("dataTable");
     if (!this.state.membershipFilterPaginationData[0]) {
       let n = Object.keys(this.state.dashboardColumnListShow[0]).length;
       return (
@@ -260,6 +262,7 @@ class MembershipList extends Component {
   // Affichage des boutons de ligne
   // Display of line buttons
   boutonCreate = (index, id, status) => {
+    console.log("boutonCreate");
     let colorStatus, textStatus, disabledStatus;
     if (status === "oui") {
       colorStatus = "success";
@@ -310,6 +313,7 @@ class MembershipList extends Component {
   // Récupération de la clé de recherche
   // Retrieving the search key
   textBodyCreate = (array) => {
+    console.log("textBodyCreate");
     return Object.keys(array).map((element, index) => {
       if (index > 1) {
         return (
@@ -324,6 +328,7 @@ class MembershipList extends Component {
   // Récupération de la clé de recherche
   // Retrieving the search key
   handleInput = (e) => {
+    console.log("handleInput");
     this.setState({ [e.target.name]: e.target.value });
     if (!e.target.value) {
       this.dashbordDataBuildInit();
@@ -338,6 +343,7 @@ class MembershipList extends Component {
   // Filtre de données
   // Data filter
   inputFilterTable = () => {
+    console.log("inputFilterTable");
     return (
       <InputGroup className="dashboardFilterSize">
         <FormControl
@@ -430,6 +436,7 @@ class MembershipList extends Component {
   // Affichage de la pagination
   // Pagination display
   paginationTable = () => {
+    console.log("paginationTable");
     return (
       <Pagination className="dashboardPaginationStyle" size="sm">
         {this.paginationNumberItem()}
@@ -440,6 +447,7 @@ class MembershipList extends Component {
   // Calcul du nombre de page à afficher
   // Calculation of the number of pages to display
   paginationNumberItem = () => {
+    console.log("paginationNumberItem");
     let nItem = this.state.membershipFilterList.length;
     if (nItem > 0) {
       let n = this.state.nPerPage;
@@ -467,6 +475,7 @@ class MembershipList extends Component {
   // Calcul du contenu de la pagination
   // Content of the pagination calculation
   paginationData = (page) => {
+    console.log("paginationData");
     let first, last, activPage;
     if (!page) {
       first = this.state.dataRange[0];
@@ -503,7 +512,7 @@ class MembershipList extends Component {
       >
         <Dropdown.Item
           onClick={() => {
-            console.log(10);
+            this.setState({ dataRange: [0, 10], activePage: 1, nPerPage: 10 });
           }}
           className="dashboardPaginationStyle"
         >
@@ -511,7 +520,7 @@ class MembershipList extends Component {
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
-            console.log(20);
+            this.setState({ dataRange: [0, 20], activePage: 1, nPerPage: 20 });
           }}
           className="dashboardPaginationStyle"
         >
@@ -519,7 +528,7 @@ class MembershipList extends Component {
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
-            console.log(30);
+            this.setState({ dataRange: [0, 30], activePage: 1, nPerPage: 30 });
           }}
           className="dashboardPaginationStyle"
         >
@@ -683,6 +692,8 @@ class MembershipList extends Component {
   };
 
   render() {
+    console.log(this.state.dataRange);
+    console.log("render");
     return (
       <Container className="dashboardGlobalSize">
         <div className="dashboardFilter">{this.inputFilterTable()}</div>
@@ -697,7 +708,8 @@ class MembershipList extends Component {
           <div>{this.modalColumnList()}</div>
         </div>
         <p className="dashboardCounterText">
-          Nombre d'adhérents trouvé : {this.state.membershipNumber}
+          Affichage : x {this.state.nPerPage} - Nombre de membres trouvé :{" "}
+          {this.state.membershipNumber}
         </p>
         <Table striped bordered hover responsive className="">
           <thead>{this.headerTable()}</thead>
