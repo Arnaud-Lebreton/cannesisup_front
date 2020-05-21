@@ -4,13 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 // Import des components
 import MembersCard from "./components/membersCard/MembersCard";
-import SearchBar from "./components/membersCard/searchBar/SearchBar";
 import Navbar from "./components/navbar/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
 import Profil from "./components/profil/Profil";
-import Formulaire from "./components/formulaire_inscription/formulaire"
+import Formulaire from "./components/formulaire_inscription/formulaire";
 import Login from "./components/login/Login";
 import InitPassword from "./components/login/InitPassword";
 
@@ -22,10 +21,11 @@ class App extends Component {
         <div>
           <Switch>
             <Route path="/" exact>
-              <SearchBar />
               <MembersCard />
             </Route>
-            <Route path="/profil/:id" component={Profil}>
+            <Route path="/profil">
+              {" "}
+              {/*/:id" component={Profil}*/}
               <Profil />
             </Route>
             <Route path="/dashboard">
@@ -38,9 +38,9 @@ class App extends Component {
               <InitPassword />
             </Route>
             <Route path="/inscription">
-              <Formulaire/>
+              <Formulaire />
             </Route>
-          </Switch> 
+          </Switch>
         </div>
         <Footer />
       </Router>

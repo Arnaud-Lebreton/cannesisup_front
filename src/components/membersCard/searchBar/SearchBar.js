@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Form, FormControl } from "react-bootstrap";
+import { Form, FormControl, Button } from "react-bootstrap";
 import "./searchBar.css";
 import data from "../../fictivesdata/membershipData.json";
 
-//let nbMembers = data.membershipData.length;
 let nbMembers = data.length;
 class SearchBar extends Component {
   constructor(props) {
@@ -18,34 +17,42 @@ class SearchBar extends Component {
   /********* Fonction pour filtrer le contenu des membres ********/
 
   handleInput = (e) => {
+    e.preventDefault();
     const searchBar = e.target.value;
     this.setState((prevState) => {
       const filteredData = prevState.cardDeck.filter((element) => {
-        return element.name.toLowerCase().includes(searchBar.toLowerCase());
+        return element.compagnyName
+          .toLowerCase()
+          .includes(searchBar.toLowerCase());
       });
       return { searchBar, filteredData };
     });
   };
 
-  /*getData = () => {
-    fetch("")
-      .then((response) => response.json())
-      .then((data) => {
-        const { query } = this.state;
-        const filteredData = data.filter((element) => {
-          return element.name.toLowerCase().includes(query.toLowerCase());
-        });
-
-        this.setState({
-          data,
-          filteredData,
-        });
-      });
+  /******* Récupération des données depuis la base de données ********/
+  extraction = () => {
+    const options = {
+      method: "GET",
+      headers: { "content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/annuaire/all", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          this.setState({
+            cardDeck: data,
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   };
 
   componentWillMount() {
-    this.getData();
-  }*/
+    this.extraction();
+  }
 
   render() {
     return (
@@ -62,10 +69,14 @@ class SearchBar extends Component {
             value={this.state.searchBar}
             onChange={this.handleInput}
           />
+          <Button className="containtButtonSearchBar">
+            >
+            <img src="Images/Icones/search-solid.svg" />
+          </Button>
         </Form>
         <div>
           {this.state.filteredData.map((i) => (
-            <p>{i.name}</p>
+            <p>{i.compagnyName}</p>
           ))}
         </div>
         <p className="textMembers">{nbMembers} membres</p>
