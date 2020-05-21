@@ -43,20 +43,24 @@ class Profil extends Component{
     handleChange(event){
         this.setState({name : event.target.value});
     } 
-    DATA(){
-        const option = {
-            method: "GET",
-            headers: {"Content-Type" : "application/json"},
-            mode:"cors",
-        };
-        fetch("http://localhost:8080/appartement/", option)
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
+    /*
+        DATA(){
+            const option = {
+                method: "GET",
+                headers: {"Content-Type" : "application/json"},
+                mode:"cors",
+            };
+            fetch("http://localhost:8080/appartement/", option)
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
 
+                });
             });
-        });
-    }
+        }
+    */
+    
+   
     render(){
         return (
             <div>

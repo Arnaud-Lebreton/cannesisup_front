@@ -108,10 +108,10 @@
     flex-direction: column;
 }
 
-.Hover :hover{
-    background-color: crimson;
-}
-#interaction button{
-    border-radius: 15px;
-    outline: none;
+/*.Hover :hover {
+  background-color: crimson;
+}*/
+#interaction button {
+  border-radius: 15px;
+  outline: none;
 }

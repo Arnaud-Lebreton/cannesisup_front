@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 //Import style
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 // Import des components
 import MembersCard from "./components/membersCard/MembersCard";
 import SearchBar from "./components/membersCard/searchBar/SearchBar";
@@ -10,6 +11,8 @@ import Footer from "./components/footer/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
 import Profil from "./components/profil/Profil";
 import Formulaire from "./components/formulaire_inscription/formulaire"
+import Login from "./components/login/Login";
+import InitPassword from "./components/login/InitPassword";
 
 class App extends Component {
   render() {
@@ -22,20 +25,22 @@ class App extends Component {
               <SearchBar />
               <MembersCard />
             </Route>
-            <Route path="/profil">
+            <Route path="/profil/:id" component={Profil}>
               <Profil />
             </Route>
             <Route path="/dashboard">
               <Dashboard />
             </Route>
-<<<<<<< HEAD
-          </Switch>
-=======
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/initpassword">
+              <InitPassword />
+            </Route>
             <Route path="/inscription">
               <Formulaire/>
             </Route>
           </Switch> 
->>>>>>> vadim
         </div>
         <Footer />
       </Router>

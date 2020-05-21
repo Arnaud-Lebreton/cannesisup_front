@@ -1,50 +1,54 @@
-{
-  "dashboardColumnListInit": [
-    {
-      "id": "Identifiant DB",
-      "membershipPassword": "Mot de passe Adhérent",
-      "memberActive": "Actif?",
-      "membershipNumber": "N° Adhérent",
-      "requestDate": "Date d'inscription",
-      "validationDate": "Date d'adhésion",
-      "membershipEmail": "Email adhérent",
-      "compagnyName": "Nom",
-      "compagnyAdress": "Adresse",
-      "compagnyAdditionalAdress": "Adresse complémentaire",
-      "compagnyPostalCode": "Code Postal",
-      "compagnyCity": "Ville",
-      "compagnyTelephon": "Téléphone",
-      "compagnyEmail": "Email",
-      "compagnyWebside": "Site",
-      "compagnyFacebook": "FaceBook",
-      "compagnyInstagram": "Instagram",
-      "compagnyLinkedin": "Linkedin",
-      "compagnyTwitter": "Twitter",
-      "compagnyActivityArea": "Domaine d'activité",
-      "compagnyActivityDescription": "Description de l'activité",
-      "compagnyLogo": "logo",
-      "compagnyCoverPhoto": "Photo de couverture",
-      "compagnyPresentationFile": "Présentation de la société",
-      "compagnyRepresentName": "Nom du représentant",
-      "compagnyRepresentLastname": "Prénom du représentant",
-      "compagnyRepresentFunction": "Fonction",
-      "compagnyRepresentQuote": "Citation",
-      "compagnyRepresentPhoto": "Photo de présentation",
-      "charterSigning": "Acceptation de la charte"
-    }
-  ],
-  "dashboardColumnListShow": [
-    {
-      "id": "Identifiant DB",
-      "memberActive": "Actif?",
-      "membershipNumber": "N° Adhérent",
-      "compagnyEmail": "Email",
-      "compagnyRepresentName": "Nom du représentant",
-      "compagnyRepresentLastname": "Prénom du représentant",
-      "compagnyRepresentFunction": "Fonction",
-      "compagnyName": "Nom",
-      "compagnyCity": "Ville",
-      "compagnyTelephon": "Téléphone"
-    }
-  ]
-}
+[
+  {
+    "dashboardPagination": [0, 30],
+    "_id": "5ec52c8135925e5358f7bc71",
+    "dashboardColumnListInit": [
+      {
+        "_id": "5ec52c8135925e5358f7bc72",
+        "memberId": "Identifiant DB",
+        "memberActive": "Actif",
+        "requestDate": "Date d'inscription",
+        "validationDate": "Date d'adhésion",
+        "membershipEmail": "Email adhérent",
+        "compagnyName": "Nom",
+        "compagnyAdress": "Adresse",
+        "compagnyAdditionalAdress": "Adresse complémentaire",
+        "compagnyPostalCode": "Code Postal",
+        "compagnyCity": "Ville",
+        "compagnyTelephon": "Téléphone",
+        "compagnyEmail": "Email",
+        "compagnyWebside": "Site",
+        "compagnyFacebook": "FaceBook",
+        "compagnyInstagram": "Instagram",
+        "compagnyLinkedin": "Linkedin",
+        "compagnyTwitter": "Twitter",
+        "compagnyActivityArea": "Domaine d'activité",
+        "compagnyActivityDescription": "Description de l'activité",
+        "compagnyLogo": "logo",
+        "compagnyCoverPhoto": "Photo de couverture",
+        "compagnyPresentationFile": "Présentation de la société",
+        "compagnyRepresentName": "Nom du représentant",
+        "compagnyRepresentLastname": "Prénom du représentant",
+        "compagnyRepresentFunction": "Fonction",
+        "compagnyRepresentQuote": "Citation",
+        "compagnyRepresentPhoto": "Photo de présentation",
+        "charterSigning": "Acceptation de la charte"
+      }
+    ],
+    "dashboardColumnListShow": [
+      {
+        "_id": "5ec5353e6d8a9a2b78790b4f",
+        "memberId": "Identifiant DB",
+        "memberActive": "Inactif",
+        "validationDate": "Date d'adhésion",
+        "compagnyName": "Nom",
+        "compagnyCity": "Ville",
+        "compagnyTelephon": "Téléphone",
+        "compagnyEmail": "Email",
+        "compagnyWebside": "Site",
+        "compagnyLinkedin": "Linkedin"
+      }
+    ],
+    "__v": 0
+  }
+]

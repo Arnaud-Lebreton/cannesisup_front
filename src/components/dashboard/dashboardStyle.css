@@ -4,6 +4,8 @@ body {
 }
 .dashBoardMargin {
   margin-top: 85px;
+  position: relative;
+  z-index: 0;
 }
 .dashboardGlobalSize {
   max-width: 95%;
@@ -21,8 +23,6 @@ body {
   vertical-align: middle !important;
   line-height: 100% !important;
 }
-.dashboardTableRowSize {
-}
 /*Boutons de ligne*/
 .dashboardAlignButton {
   display: flex;
@@ -35,7 +35,6 @@ body {
   margin-left: 0.2rem;
   font-size: 0.65rem;
 }
-
 /*Tableau header */
 .dashboardTableHeaderText {
   font-size: 0.85rem;
@@ -52,7 +51,6 @@ body {
   min-width: 225px;
   vertical-align: baseline !important;
 }
-
 /* filtre */
 .dashboardFilterSize {
   width: 200px;
@@ -69,17 +67,27 @@ body {
 .dashboardFilter {
   margin-bottom: 5px;
 }
-
 /* Pagination */
 .dashboardPaginationStyle {
   margin-bottom: 0px;
+  font-size: 0.85rem;
+  color: #156ec6;
 }
-
+.dashboardPaginationRow {
+  display: flex;
+  flex-direction: row;
+}
+.dashboardPaginationSize {
+  width: 190px;
+}
+.dashboardPaginationDivSize {
+  width: 100px;
+}
 /* Graphe */
 .dashboardGraphDim {
   width: auto;
   height: 40vh;
-  padding: 1%;
+  padding: 7vh;
   display: block;
 }
 .dashboardGrapheAlign {
@@ -87,7 +95,6 @@ body {
   flex-direction: row;
   justify-content: center;
 }
-
 /*Texte de comptage des champs affichés*/
 .dashboardCounterText {
   margin: 0;
@@ -95,7 +102,6 @@ body {
   color: #156ec6;
   font-weight: bold;
 }
-
 /*Modal des champs */
 .dashboardModalListWidth {
   width: 50%;
@@ -105,4 +111,8 @@ body {
 }
 .dashboardModalButtonSize {
   width: 150px !important;
+}
+/*Modal alerte */
+.dashboardAlertButtonSize {
+  width: 65px;
 }

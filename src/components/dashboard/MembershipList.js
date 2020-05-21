@@ -8,9 +8,10 @@ import {
   Pagination,
   Modal,
   Form,
+  Dropdown,
+  DropdownButton,
 } from "react-bootstrap";
 //Import components
-import ColumnList from "./ColumnList";
 //Import style
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboardStyle.css";
@@ -32,8 +33,8 @@ class MembershipList extends Component {
       modalShow: false,
       textAction: "",
       id: "",
-      dataRange: [0, 5],
-      nPerPage: 5,
+      dataRange: [0, 10],
+      nPerPage: 10,
       activePage: 1,
       lignCounter: 0,
       membershipNumber: 0,
@@ -51,20 +52,58 @@ class MembershipList extends Component {
   // Launch of data extraction
   componentDidMount() {
     this.extractionDashbordData();
+    /*this.getDashbordData();*/
   }
   //---------------------------------------------
-
   // Extractions des données de la base MongoDB:
   // Data extraction from the MongoDB database
+  /*getDashbordData = () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/dashboard/parametrers", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          this.setState({ 
+            dashboardColumnListInit: data.dashboardColumnListInit,
+            dashboardColumnListShow: data.dashboardColumnListShow });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+  /*getMembershipData = () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/dashboard/memberships", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          /*this.setState({
+            membershipsJsonData: data,
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };*/
   //---------------------------------------------
 
   // préparation des données et 1er affichage
   // data preparation and 1st display
   extractionDashbordData = () => {
-    console.log("datademarrage");
-    let dashboardJsonDataInit = dashboardJson.dashboardColumnListInit;
-    let dashboardJsonDataShow = dashboardJson.dashboardColumnListShow;
-    let membershipsJsonData = membershipsJson.membershipData;
+    console.log("extractionDashbordData");
+    let dashboardJsonDataInit = dashboardJson[0].dashboardColumnListInit;
+    let dashboardJsonDataShow = dashboardJson[0].dashboardColumnListShow;
+    let membershipsJsonData = membershipsJson;
     let dashboardJsonDataInitKey = Object.keys(dashboardJsonDataShow[0]);
     //Constitution des données d'affichage
     //Display data creation
@@ -96,11 +135,11 @@ class MembershipList extends Component {
   // Reconstruit la liste filtrée avec pagination
   // build useful data for display in the table
   dashbordDataBuildInit = () => {
-    console.log("init");
+    console.log("dashbordDataBuildInit");
     //Pagination
     let first = this.state.dataRange[0];
     let last = this.state.dataRange[1];
-
+    console.log(last);
     this.setState({
       membershipFilterPaginationData: this.state.membershipColumFilterData.slice(
         first,
@@ -114,8 +153,7 @@ class MembershipList extends Component {
   // Construction des données filtrées pour affichage dans le tableau
   // build useful data for display in the table
   dashbordDataBuild = () => {
-    console.log("build tout court");
-    console.log("ici");
+    console.log("dashbordDataBuild");
     let membershipsData = this.state.membershipData;
     let dashboardDataShow = this.state.dashboardColumnListShow;
     let dataList = [];
@@ -154,6 +192,7 @@ class MembershipList extends Component {
   // Constrution du tableau des adhérents
   //build memberships header's table
   headerTable = () => {
+    console.log("headerTable");
     if (this.state.membershipFilterPaginationData) {
       return (
         <tr>
@@ -169,6 +208,7 @@ class MembershipList extends Component {
   // Construction des entêtes tableau des adhérents
   // build memberships boby's table
   textHeaderCreate = (objet) => {
+    console.log("textHeaderCreate");
     if (!objet) {
       return Object.keys(this.state.dashboardColumnListShow[0]).map(
         (element, index) => {
@@ -195,6 +235,7 @@ class MembershipList extends Component {
   // Construction du corps du tableau des adhérents
   // build memberships boby's table
   dataTable = () => {
+    console.log("dataTable");
     if (!this.state.membershipFilterPaginationData[0]) {
       let n = Object.keys(this.state.dashboardColumnListShow[0]).length;
       return (
@@ -221,6 +262,7 @@ class MembershipList extends Component {
   // Affichage des boutons de ligne
   // Display of line buttons
   boutonCreate = (index, id, status) => {
+    console.log("boutonCreate");
     let colorStatus, textStatus, disabledStatus;
     if (status === "oui") {
       colorStatus = "success";
@@ -240,7 +282,7 @@ class MembershipList extends Component {
           value={id}
           onClick={this.membershipSelection}
           disabled={disabledStatus}
-          name="activer"
+          name="ACTIVER"
         >
           {textStatus}
         </Button>
@@ -250,7 +292,7 @@ class MembershipList extends Component {
           variant="info"
           value={id}
           onClick={this.membershipSelection}
-          name="modifier"
+          name="MODIFIER"
         >
           Modifier
         </Button>
@@ -260,7 +302,7 @@ class MembershipList extends Component {
           variant="danger"
           value={id}
           onClick={this.membershipSelection}
-          name="supprimer"
+          name="SUPPRIMER"
         >
           Retirer
         </Button>
@@ -271,6 +313,7 @@ class MembershipList extends Component {
   // Récupération de la clé de recherche
   // Retrieving the search key
   textBodyCreate = (array) => {
+    console.log("textBodyCreate");
     return Object.keys(array).map((element, index) => {
       if (index > 1) {
         return (
@@ -285,6 +328,7 @@ class MembershipList extends Component {
   // Récupération de la clé de recherche
   // Retrieving the search key
   handleInput = (e) => {
+    console.log("handleInput");
     this.setState({ [e.target.name]: e.target.value });
     if (!e.target.value) {
       this.dashbordDataBuildInit();
@@ -299,6 +343,7 @@ class MembershipList extends Component {
   // Filtre de données
   // Data filter
   inputFilterTable = () => {
+    console.log("inputFilterTable");
     return (
       <InputGroup className="dashboardFilterSize">
         <FormControl
@@ -337,24 +382,33 @@ class MembershipList extends Component {
   //Gestion des confirmations de commandes
   //Management of order confirmations
   alertShow = () => {
+    let text;
     if (this.state.modalShow) {
+      if (this.state.textAction === "modifier") {
+        text = "Accès au profil en Modification";
+      } else if (this.state.textAction === "supprimer") {
+        text = "Supprimer le profil";
+      } else {
+        text = "Activer le profil";
+      }
       return (
         <>
           <Modal
+            size="sm"
             show={this.state.modalShow}
             onHide={() => {
               this.setState({ modalShow: !this.state.modalShow });
             }}
             animation={false}
           >
-            <Modal.Header closeButton>
-              <Modal.Title>
-                {this.state.textAction} : {this.state.id}
-              </Modal.Title>
+            <Modal.Header closeButton className="dashboardAlertButtonClose">
+              <Modal.Title>{this.state.textAction}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Voulez vous continuer la commande</Modal.Body>
-            <Modal.Footer>
+            <Modal.Body>{text}</Modal.Body>
+            <Modal.Footer className="">
               <Button
+                size="sm"
+                className="dashboardAlertButtonSize"
                 variant="secondary"
                 onClick={() =>
                   this.setState({ modalShow: !this.state.modalShow })
@@ -363,6 +417,8 @@ class MembershipList extends Component {
                 Annuler
               </Button>
               <Button
+                size="sm"
+                className="dashboardAlertButtonSize"
                 variant="primary"
                 onClick={() =>
                   this.setState({ modalShow: !this.state.modalShow })
@@ -380,6 +436,7 @@ class MembershipList extends Component {
   // Affichage de la pagination
   // Pagination display
   paginationTable = () => {
+    console.log("paginationTable");
     return (
       <Pagination className="dashboardPaginationStyle" size="sm">
         {this.paginationNumberItem()}
@@ -390,6 +447,7 @@ class MembershipList extends Component {
   // Calcul du nombre de page à afficher
   // Calculation of the number of pages to display
   paginationNumberItem = () => {
+    console.log("paginationNumberItem");
     let nItem = this.state.membershipFilterList.length;
     if (nItem > 0) {
       let n = this.state.nPerPage;
@@ -417,6 +475,7 @@ class MembershipList extends Component {
   // Calcul du contenu de la pagination
   // Content of the pagination calculation
   paginationData = (page) => {
+    console.log("paginationData");
     let first, last, activPage;
     if (!page) {
       first = this.state.dataRange[0];
@@ -440,6 +499,45 @@ class MembershipList extends Component {
       activePage: activPage,
     });
   };
+  //**********************************************
+  // Affichage du choix de la quantité de ligne par page
+  // Display of the choice of line quantity per page
+  paginationChoise = () => {
+    return (
+      <DropdownButton
+        size="sm"
+        id="dropdown-basic-button"
+        title="Pagination"
+        className="dashboardPaginationSize"
+      >
+        <Dropdown.Item
+          onClick={() => {
+            this.setState({ dataRange: [0, 10], activePage: 1, nPerPage: 10 });
+          }}
+          className="dashboardPaginationStyle"
+        >
+          x10
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
+            this.setState({ dataRange: [0, 20], activePage: 1, nPerPage: 20 });
+          }}
+          className="dashboardPaginationStyle"
+        >
+          x20
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
+            this.setState({ dataRange: [0, 30], activePage: 1, nPerPage: 30 });
+          }}
+          className="dashboardPaginationStyle"
+        >
+          x30
+        </Dropdown.Item>
+      </DropdownButton>
+    );
+  };
+
   //**********************************************
   // Afficahge de la modale de gestion des colonnes
   // Display of the column management mode
@@ -509,7 +607,7 @@ class MembershipList extends Component {
       currentList: currentListValues,
     });
   };
-
+  //---------------------------------------------
   // Afficahge de la modale de gestion des colonnes
   // Display of the column management mode
   modalListField = () => {
@@ -548,13 +646,17 @@ class MembershipList extends Component {
       </div>
     );
   };
-
+  //---------------------------------------------
+  // Affichage du contenu des listes de champs
+  // Displaying the content of field lists
   modalListShow = (list) => {
     return list.map((element) => {
       return <option className="dashboardInputText">{element}</option>;
     });
   };
-
+  //---------------------------------------------
+  // calcul des champs à enlever
+  // calculation of the fields to be removed
   subData = (e) => {
     let field = e.target.value;
     for (let i = 0; i < this.state.currentList.length; i++) {
@@ -570,7 +672,9 @@ class MembershipList extends Component {
     console.log(this.state.currentList);
     this.setState({ list1: 1 });
   };
-
+  //---------------------------------------------
+  // calcul des champs à ajouter
+  // calculation of fields to add
   addData = (e) => {
     let field = e.target.value;
     for (let i = 0; i < this.state.currentList.length; i++) {
@@ -588,15 +692,24 @@ class MembershipList extends Component {
   };
 
   render() {
+    console.log(this.state.dataRange);
+    console.log("render");
     return (
       <Container className="dashboardGlobalSize">
         <div className="dashboardFilter">{this.inputFilterTable()}</div>
         <div className="dashboardAlignButton">
-          <div>{this.paginationTable()}</div>
+          <div className="dashboardPaginationRow">
+            <div className="dashboardPaginationDivSize">
+              {this.paginationChoise()}
+            </div>
+            <div>{this.paginationTable()}</div>
+          </div>
+
           <div>{this.modalColumnList()}</div>
         </div>
         <p className="dashboardCounterText">
-          Nombre d'adhérents trouvé : {this.state.membershipNumber}
+          Affichage : x {this.state.nPerPage} - Nombre de membres trouvé :{" "}
+          {this.state.membershipNumber}
         </p>
         <Table striped bordered hover responsive className="">
           <thead>{this.headerTable()}</thead>
@@ -606,5 +719,8 @@ class MembershipList extends Component {
       </Container>
     );
   }
+  /*render() {
+    return <div>test</div>;
+  }*/
 }
 export default MembershipList;

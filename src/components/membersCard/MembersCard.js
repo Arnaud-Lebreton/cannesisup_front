@@ -10,6 +10,13 @@ import {
   ListGroupItem,
   Col,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import ReactGA from "react-ga";
+
+/************** Google Analytics *************/
+const trackingID = "UA-123504823-1";
+ReactGA.initialize(trackingID);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 class MembersCard extends Component {
   constructor(props) {
@@ -25,7 +32,8 @@ class MembersCard extends Component {
 
   /******* Récupération des données depuis le fichier membershipData.json ********/
   extraction = () => {
-    let membershipData = data.membershipData;
+    //let membershipData = data.membershipData;
+    let membershipData = data;
     this.setState({
       cardDeck: membershipData,
     });
@@ -77,11 +85,16 @@ class MembersCard extends Component {
               </ListGroupItem>
             </ListGroup>
           </Card.Body>
-          <Button className="memberBouton">voir le membre</Button>
+          <Link to={"profil/" + this.state.cardDeck.id}>
+            <Button className="memberBouton" id="memberBouton">
+              voir le membre
+            </Button>
+          </Link>
         </Card>
       );
     });
   };
+
   render() {
     return <CardDeck className="bodyContainer">{this.cardDeck()}</CardDeck>;
   }
