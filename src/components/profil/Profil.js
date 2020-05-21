@@ -44,11 +44,16 @@ class Profil extends Component{
         this.setState({name : event.target.value});
     } 
     DATA(){
-        fetch("")
+        const option = {
+            method: "GET",
+            headers: {"Content-Type" : "application/json"},
+            mode:"cors",
+        };
+        fetch("http://localhost:8080/appartement/", option)
         .then(res => res.json())
-        .then(json => {
+        .then(data => {
             this.setState({
-                
+
             });
         });
     }
