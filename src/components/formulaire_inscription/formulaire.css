@@ -1,17 +1,52 @@
 #formulaire form{
+    margin-top: 1%;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    
-}
-#formulaire{
     border-radius: 15px;
-    border : 1px solid;
-    margin-top: 5%;
+    border : 1.5px solid rgba(111, 125, 189, 0.973);
     margin-left: 25%;
     margin-right: 25%;
+}
+#formulaire{
+    
+    margin-top: 5%;
     margin-bottom: 2%;
+}
+#formulaire input{
+    margin-right: 35%;
+    border-radius: 5px;
+    border: 1px solid rgba(105, 40, 56, 0.973);
+}
+#formulaire select{
+    margin-right: 75%;
+    border-radius: 5px;
+    border: 1px solid rgba(105, 40, 56, 0.973);
 }
 #formulaire form textarea{
     border : 1px solid;
+}
+#formulaire h1 {
+    text-align: center;
+    color: white;
+    border-bottom: 2px solid white;
+    margin-left: 40%;
+    margin-right:40%;
+    font-weight: bold;
+}
+#formulaire #bande{
+    padding: 50px;
+    background-image: url("../Images/fond_equipe.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#formulaire #submit_but{
+    border: 2px solid rgba(105, 40, 56, 0.973);
+    border-radius: 15px;
+    margin-right: 40%;
+    margin-left: 40%;
+    padding: 5px;
+    font-weight: bold;
+    color: rgba(105, 40, 56, 0.973);
 }

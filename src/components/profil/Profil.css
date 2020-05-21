@@ -1,6 +1,4 @@
-#body{
-    background-color: rgb(243, 223, 223);
-}
+
 #image_fond{
     background-image: url(../Images/abstrait-bleu-formes-geometriques_1035-17545.jpg);
     background-repeat: no-repeat;
@@ -62,12 +60,12 @@
 }
 
 #middle_bloc{
-    margin-top: 15%;
+    margin-top: 10%;
     margin-left: 15%;
     left: 0px;
     background-color: white;
     width: 40%;
-    border: 2px solid #00ccff;
+    border: 2px solid #757575;
     border-radius: 20px;
 }
 #body input, textarea, button{
@@ -75,6 +73,7 @@
     background: none;
     border: none;
     outline: none;
+    border-radius: 5px;
 }
 #body textarea{
     width: 95%;
@@ -93,7 +92,7 @@
 }
 
 #side_bloc{
-    margin-top: 20%;
+    margin-top: 18%;
     margin-right: 15%;
     position: absolute;
     top: 0px;
@@ -101,7 +100,7 @@
     background-color: white;
     width: 25%;
     border-radius: 20px;
-    border: 2px solid #00ccff;
+    border: 2px solid #757575;
 }
 #side_bloc div{
     padding: 5px;

@@ -30,7 +30,11 @@ class inscrip extends Component{
     render(){
         return(
             <div id="formulaire">
-                <form>
+
+                <div id="bande">
+                    <h1>Inscription</h1>
+                </div>
+                <form> 
                     <h3>Infos Personnel</h3>
                     <label>Nom : </label>
                     <input type="text" placeholder="Nom..." required/>
@@ -44,6 +48,8 @@ class inscrip extends Component{
                     <input type="pass" placeholder="Password..." required/>
                     <label>Photo portrait : </label>
                     <input type="file" placeholder="Photo..." required/>
+                    <label>Previsualisation : </label>
+                    <img/>
                     
                     <br/>
                     <h3>Infos Societé</h3>
@@ -59,6 +65,9 @@ class inscrip extends Component{
                     <input type="file" placeholder="Presentation..." required/>
                     <label>Logo de la societé : </label>
                     <input type="file" placeholder="Societé..." required/>
+                    <label>Previsualisation : </label>
+                    <img/>
+                    <br/ >
                     <label>Ville : </label>
                     <input type="text" placeholder="Ville..." required/>
                     <label>Telephone : </label>
@@ -73,9 +82,10 @@ class inscrip extends Component{
                     </select>
                     {/* Si carte bancaire choisis affiche les input concernant la CB, si virement envoie mail avec RIB */}
                     <br/>
-                    <input type="checkbox" value="Je conscent avoir lu jspkoi" required/>
+                    <input type="checkbox" required/>
+                    <p>Je conscent</p>
                     <br/>
-                    <input type="submit" value="Comfirmer"/>
+                    <input type="submit" value="Confirmer" id="submit_but"/>
                     
                     
                 </form>
