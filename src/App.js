@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
 import Profil from "./components/profil/Profil";
+import Formulaire from "./components/formulaire_inscription/formulaire"
 
 class App extends Component {
   render() {
@@ -27,7 +28,14 @@ class App extends Component {
             <Route path="/dashboard">
               <Dashboard />
             </Route>
+<<<<<<< HEAD
           </Switch>
+=======
+            <Route path="/inscription">
+              <Formulaire/>
+            </Route>
+          </Switch> 
+>>>>>>> vadim
         </div>
         <Footer />
       </Router>
