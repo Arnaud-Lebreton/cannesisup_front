@@ -101,9 +101,9 @@ class MembershipList extends Component {
   // data preparation and 1st display
   extractionDashbordData = () => {
     console.log("extractionDashbordData");
-    let dashboardJsonDataInit = dashboardJson.dashboardColumnListInit;
-    let dashboardJsonDataShow = dashboardJson.dashboardColumnListShow;
-    let membershipsJsonData = membershipsJson.membershipData;
+    let dashboardJsonDataInit = dashboardJson[0].dashboardColumnListInit;
+    let dashboardJsonDataShow = dashboardJson[0].dashboardColumnListShow;
+    let membershipsJsonData = membershipsJson;
     let dashboardJsonDataInitKey = Object.keys(dashboardJsonDataShow[0]);
     //Constitution des données d'affichage
     //Display data creation
@@ -719,5 +719,8 @@ class MembershipList extends Component {
       </Container>
     );
   }
+  /*render() {
+    return <div>test</div>;
+  }*/
 }
 export default MembershipList;

@@ -3,8 +3,8 @@ import { Form, FormControl } from "react-bootstrap";
 import "./searchBar.css";
 import data from "../../fictivesdata/membershipData.json";
 
-let nbMembers = data.membershipData.length;
-
+//let nbMembers = data.membershipData.length;
+let nbMembers = data.length;
 class SearchBar extends Component {
   render() {
     return (

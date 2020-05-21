@@ -25,7 +25,8 @@ class MembersCard extends Component {
 
   /******* Récupération des données depuis le fichier membershipData.json ********/
   extraction = () => {
-    let membershipData = data.membershipData;
+    //let membershipData = data.membershipData;
+    let membershipData = data;
     this.setState({
       cardDeck: membershipData,
     });
