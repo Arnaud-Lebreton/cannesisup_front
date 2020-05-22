@@ -31,7 +31,7 @@ class inscrip extends Component{
         return(
             <div id="formulaire">
 
-                <div id="bande">
+                <div id="bande" style={{backgroundImage: "url(" + "Images/fond_contact.jpg" + ")"}}>
                     <h1>Inscription</h1>
                 </div>
                 <form> 
