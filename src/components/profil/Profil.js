@@ -19,14 +19,15 @@ class Profil extends Component{
             email : "",
             work : "",
             work_description : "",
-            isDisabled:false,
+            isDisabled:true,
             image_profil:"",
             image_fond: "",
             image_logo:"",
             facebook: "",
             twitter: "",
             linkedin: "",
-            background_color: "none",
+            border: "none",
+            background_color : "none",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,10 +35,10 @@ class Profil extends Component{
     hide(a){
         this.setState({isDisabled : a});
         if(this.state.isDisabled){
-            this.setState({background_color : "1px solid rgba(105, 40, 56, 0.973)"})
+            this.setState({background_color: "rgb(188, 229, 255)"})
         }
         else{
-            this.setState({background_color : "none"})
+            this.setState({border : "none"  , background_color: "white"})
         }
     }
     handleChange(event){
@@ -87,37 +88,37 @@ class Profil extends Component{
                             {!this.state.isDisabled && <button >Ajouter Image</button>}
                             
                         </div>
-                        <div id= "image_Logo" >
+                        <div id= "image_Logo" className="paddingthis">
                             <img id="logo_ent" src={this.state.image_logo}/>
                             {!this.state.isDisabled && <button>Ajouter Image</button>}
                             {!this.state.isDisabled && <button>Ajouter Brochure</button>}
-                            {this.state.isDisabled && <a href="#" download="Untitled.png"><button type="button"><p>Telecharger Brochure</p></button><img src="Images/Icones/download.png"/></a>}
+                            {this.state.isDisabled && <button id="download" type="button">Telecharger Brochure <img src="Images/Icones/download.png"/></button>}
                         </div>
-                        <div>
-                            <input style={{border: this.state.background_color}} placeholder = "Nom de Votre Societé..." disabled={this.state.isDisabled} name="society_name" value={this.state.society_name}/>
-                            <textarea style={{border: this.state.background_color}} placeholder = "Parlez-nous de celle-ci..."  disabled={this.state.isDisabled} name="society_info" value={this.state.society_description}/>
-                            <input style={{border: this.state.background_color}} placeholder = "Son Secteur d'Activité..."  disabled={this.state.isDisabled} name="society_sector" value={this.state.society_activity_sector}/>
+                        <div className="paddingthis">
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Nom de Votre Societé..." disabled={this.state.isDisabled} name="society_name" value={this.state.society_name}/>
+                            <textarea style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Parlez-nous de celle-ci..."  disabled={this.state.isDisabled} name="society_info" value={this.state.society_description}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Son Secteur d'Activité..."  disabled={this.state.isDisabled} name="society_sector" value={this.state.society_activity_sector}/>
                         </div>
-                        <div>
+                        <div className="paddingthis">
                             <h3>Coordonnées : </h3>
                             <label>Email de la Societé : </label>
-                            <input style={{border: this.state.background_color}} type = "email" placeholder = "Email" disabled={this.state.isDisabled} value={this.state.email}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "email" placeholder = "Email" disabled={this.state.isDisabled} value={this.state.email}/>
                             <label>Adresse : </label>
-                            <input style={{border: this.state.background_color}} type = "text" placeholder = "Adresse" disabled={this.state.isDisabled} value={this.state.society_adress} />
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "text" placeholder = "Adresse" disabled={this.state.isDisabled} value={this.state.society_adress} />
                             <label>Telephone : </label>
-                            <input style={{border: this.state.background_color}} type = "decimal" placeholder = "Telephone" disabled={this.state.isDisabled} value={this.state.phone_number}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "decimal" placeholder = "Telephone" disabled={this.state.isDisabled} value={this.state.phone_number}/>
                             <label>Site : </label>
                             <a href = {this.state.society_website}></a>
-                            <input style={{border: this.state.background_color}} type = "text" placeholder = "Site" disabled={this.state.isDisabled}  value={this.state.society_website}/>
-                        </div>
-                        <div>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "text" placeholder = "Site" disabled={this.state.isDisabled}  value={this.state.society_website}/>
+                        </div >
+                        <div id="social" className="paddingthis" >
                             <h3>Reseaux Sociaux : </h3>
                             <label>Linkedin : </label>
-                            <input style={{border: this.state.background_color}} placeholder="Linkedin..." disabled={this.state.isDisabled} value={this.state.linkedin}/>
+                            <input style={{border: this.state.border  , backgroundColor: this.state.background_color}} placeholder="Linkedin..." disabled={this.state.isDisabled} value={this.state.linkedin}/>
                             <label>Facebook : </label>
-                            <input style={{border: this.state.background_color}} placeholder="Facebook..." disabled={this.state.isDisabled} value={this.state.facebook}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Facebook..." disabled={this.state.isDisabled} value={this.state.facebook}/>
                             <label>Twitter : </label>
-                            <input style={{border: this.state.background_color}} placeholder="Twitter..." disabled={this.state.isDisabled} value={this.state.twitter}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Twitter..." disabled={this.state.isDisabled} value={this.state.twitter}/>
                         </div>
                     </div>
                     <div id = "side_bloc">
@@ -126,15 +127,15 @@ class Profil extends Component{
                             {!this.state.isDisabled && <button>Ajouter Photo</button>}
                         </div>
                         <div>
-                            <input style={{border: this.state.background_color}} placeholder="Nom" disabled={this.state.isDisabled} name="name" value={this.state.name} onChange={this.handleChange}/>
-                            <input style={{border: this.state.background_color}} placeholder="Prenom" disabled={this.state.isDisabled} name="surname" value={this.state.surname} onChange={this.handleChange}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Nom" disabled={this.state.isDisabled} name="name" value={this.state.name} onChange={this.handleChange}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Prenom" disabled={this.state.isDisabled} name="surname" value={this.state.surname} onChange={this.handleChange}/>
                         </div>
                         <div>
-                            <input style={{border: this.state.background_color}} placeholder="Profession..." disabled={this.state.isDisabled} name="profession" value={this.state.work}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Profession..." disabled={this.state.isDisabled} name="profession" value={this.state.work}/>
                         </div>
                         <div>
                             <h3>Parole de membre</h3>
-                            <textarea style={{border: this.state.background_color}} placeholder = "Description..." disabled={this.state.isDisabled} name="description" value={this.state.work_description}/>
+                            <textarea style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Description..." disabled={this.state.isDisabled} name="description" value={this.state.work_description}/>
                         </div>
                         <div id="interaction">
                             {this.state.isDisabled && <button onClick = {() => this.hide(false)} >Modifier</button>}
