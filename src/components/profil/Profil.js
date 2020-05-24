@@ -26,7 +26,8 @@ class Profil extends Component{
             facebook: "",
             twitter: "",
             linkedin: "",
-            background_color: "none",
+            border: "none",
+            background_color : "none",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,93 +35,107 @@ class Profil extends Component{
     hide(a){
         this.setState({isDisabled : a});
         if(this.state.isDisabled){
-            this.setState({background_color : "1px solid rgba(105, 40, 56, 0.973)"})
+            this.setState({background_color: "rgb(188, 229, 255)"})
         }
         else{
-            this.setState({background_color : "none"})
+            this.setState({border : "none"  , background_color: "white"})
         }
     }
     handleChange(event){
-        this.setState({name : event.target.value});
+        this.setState({[event.target.name] : event.target.value});
     } 
-    /*
-        DATA(){
-            const option = {
-                method: "GET",
-                headers: {"Content-Type" : "application/json"},
-                mode:"cors",
-            };
-            fetch("http://localhost:8080/appartement/", option)
-            .then(res => res.json())
-            .then(data => {
-                this.setState({
+    componentDidMount(){
+        this.datimport();
+    }
+    datimport(){
 
-                });
+        const option = {
+            method: "GET",
+            headers: {"Content-Type" : "application/json"},
+            mode:"cors",
+        };
+        fetch("http://localhost:8080/profil/upload?id=5ec686436bbe21510463a1ad", option)
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+                name :data[0].compagnyRepresentName,
+                surname: data[0].compagnyRepresentLastname,
+                society_name : data[0].compagnyName,
+                society_description : data[0].compagnyPresentationFile,
+                society_activity_sector : data[0].compagnyActivityArea,
+                society_adress : data[0].compagnyAdress,
+                phone_number : data[0].compagnyTelephon,
+                society_website : data[0].compagnyWebside,
+                email : data[0].compagnyEmail,
+                work : data[0].compagnyRepresentFunction,
+                work_description : data[0].compagnyRepresentQuote,
+                image_profil:data[0].compagnyRepresentPhoto,
+                image_fond: data[0].compagnyCoverPhoto,
+                image_logo:data[0].compagnyLogo,
+                facebook: data[0].compagnyFacebook,
+                twitter: data[0].compagnyTwitter,
+                linkedin: data[0].compagnyLinkedin,
             });
-        }
-    */
+        });
+    }
     
-   
     render(){
         return (
             <div>
                 <div id="body">
                     <div id = "middle_bloc" >
-                        <div id="image_fond">
-                            <img src={this.state.image_fond}/>
+                        <div id="image_fond" style={{backgroundImage: "url(" + this.state.image_fond + ")"}}>
                             {!this.state.isDisabled && <button >Ajouter Image</button>}
                             
                         </div>
-                        <div id= "image_Logo" >
-                            <img src={require("../Images/Untitled.png")}/>
+                        <div id= "image_Logo" className="paddingthis">
+                            <img id="logo_ent" src={this.state.image_logo}/>
                             {!this.state.isDisabled && <button>Ajouter Image</button>}
                             {!this.state.isDisabled && <button>Ajouter Brochure</button>}
-                            {this.state.isDisabled && <a href="../Images/Untitled.png" download="Untitled.png"><button type="button"><img src={require("../Images/download.png")}/><p>Telecharger Brochure</p></button></a>}
+                            {this.state.isDisabled && <button id="download" type="button">Telecharger Brochure <img src="Images/Icones/download.png"/></button>}
                         </div>
-                        <div>
-                            <input style={{border: this.state.background_color}} placeholder = "Nom de Votre Societé..." disabled={this.state.isDisabled} name="society_name"/>
-                            <textarea style={{border: this.state.background_color}} placeholder = "Parlez-nous de celle-ci..."  disabled={this.state.isDisabled} name="society_info"/>
-                            <input style={{border: this.state.background_color}} placeholder = "Son Secteur d'Activité..."  disabled={this.state.isDisabled} name="society_sector"/>
+                        <div className="paddingthis">
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Nom de Votre Societé..." disabled={this.state.isDisabled} name="society_name" value={this.state.society_name} onChange= {this.handleChange}/>
+                            <textarea style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Parlez-nous de celle-ci..."  disabled={this.state.isDisabled} name="society_info" value={this.state.society_description} onChange= {this.handleChange}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Son Secteur d'Activité..."  disabled={this.state.isDisabled} name="society_sector" value={this.state.society_activity_sector} onChange= {this.handleChange}/>
                         </div>
-                        <div>
+                        <div className="paddingthis">
                             <h3>Coordonnées : </h3>
-                            <label>Email : </label>
-                            <input style={{border: this.state.background_color}} type = "email" placeholder = "Email" disabled={this.state.isDisabled}/>
+                            <label>Email de la Societé : </label>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "email" placeholder = "Email" disabled={this.state.isDisabled} value={this.state.email} onChange= {this.handleChange}/>
                             <label>Adresse : </label>
-                            <input style={{border: this.state.background_color}} type = "text" placeholder = "Adresse" disabled={this.state.isDisabled} />
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "text" placeholder = "Adresse" disabled={this.state.isDisabled} value={this.state.society_adress} onChange= {this.handleChange}/>
                             <label>Telephone : </label>
-                            <input style={{border: this.state.background_color}} type = "decimal" placeholder = "Telephone" disabled={this.state.isDisabled}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "decimal" placeholder = "Telephone" disabled={this.state.isDisabled} value={this.state.phone_number} onChange= {this.handleChange}/>
                             <label>Site : </label>
                             <a href = {this.state.society_website}></a>
-                            <input style={{border: this.state.background_color}} type = "text" placeholder = "Site" disabled={this.state.isDisabled} />
-                        </div>
-                        <div>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "text" placeholder = "Site" disabled={this.state.isDisabled}  value={this.state.society_website} onChange= {this.handleChange}/>
+                        </div >
+                        <div id="social" className="paddingthis" >
                             <h3>Reseaux Sociaux : </h3>
-                            <a>{this.state.society_website}</a>
                             <label>Linkedin : </label>
-                            <input style={{border: this.state.background_color}} placeholder="Linkedin..." disabled={this.state.isDisabled}/>
+                            <input style={{border: this.state.border  , backgroundColor: this.state.background_color}} placeholder="Linkedin..." disabled={this.state.isDisabled} value={this.state.linkedin} onChange= {this.handleChange}/>
                             <label>Facebook : </label>
-                            <input style={{border: this.state.background_color}} placeholder="Facebook..." disabled={this.state.isDisabled}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Facebook..." disabled={this.state.isDisabled} value={this.state.facebook} onChange= {this.handleChange}/>
                             <label>Twitter : </label>
-                            <input style={{border: this.state.background_color}} placeholder="Twitter..." disabled={this.state.isDisabled}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Twitter..." disabled={this.state.isDisabled} value={this.state.twitter} onChange= {this.handleChange}/>
                         </div>
                     </div>
                     <div id = "side_bloc">
                         <div id="profil_image">
                             <img src={this.state.image_profil}/>
                             {!this.state.isDisabled && <button>Ajouter Photo</button>}
-                            
                         </div>
                         <div>
-                            <input style={{border: this.state.background_color}} placeholder="Nom" disabled={this.state.isDisabled} name="name" value={this.state.name} onChange={this.handleChange}/>
-                            <input style={{border: this.state.background_color}} placeholder="Prenom" disabled={this.state.isDisabled} name="surname" value={this.state.surname} onChange={this.handleChange}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Nom" disabled={this.state.isDisabled} name="name" value={this.state.name} onChange={this.handleChange}/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Prenom" disabled={this.state.isDisabled} name="surname" value={this.state.surname} onChange={this.handleChange}/>
                         </div>
                         <div>
-                            <input style={{border: this.state.background_color}} placeholder="Profession..." disabled={this.state.isDisabled} name="profession"/>
+                            <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Profession..." disabled={this.state.isDisabled} name="profession" value={this.state.work} onChange= {this.handleChange}/>
                         </div>
                         <div>
                             <h3>Parole de membre</h3>
-                            <textarea style={{border: this.state.background_color}} placeholder = "Description..." disabled={this.state.isDisabled} name="description"/>
+                            <textarea style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Description..." disabled={this.state.isDisabled} name="description" value={this.state.work_description} onChange= {this.handleChange}/>
                         </div>
                         <div id="interaction">
                             {this.state.isDisabled && <button onClick = {() => this.hide(false)} >Modifier</button>}

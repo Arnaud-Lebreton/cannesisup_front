@@ -52,3 +52,11 @@
   padding-top: 10px;
   border-bottom: 2px solid #f7316b;
 }
+
+.containtButtonSearchBar {
+  width: 50px;
+  background-color: white !important;
+  border-color: transparent;
+  margin-left: -50px;
+  border: 0px;
+}

@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 // Import des components
 import MembersCard from "./components/membersCard/MembersCard";
-import SearchBar from "./components/membersCard/searchBar/SearchBar";
 import Navbar from "./components/navbar/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Footer from "./components/footer/Footer";
@@ -22,7 +21,6 @@ class App extends Component {
         <div>
           <Switch>
             <Route path="/" exact>
-              <SearchBar />
               <MembersCard />
             </Route>
             <Route path="/profil">

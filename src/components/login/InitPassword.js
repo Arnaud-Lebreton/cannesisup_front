@@ -26,7 +26,7 @@ class InitPassword extends Component {
     const { password, confirmPassword } = this.state;
     if (password === "" || confirmPassword === "") {
       alert("Le champ mot de passe est vide");
-    } else if (password != confirmPassword) {
+    } else if (password !== confirmPassword) {
       alert("Les mots de passe saisis ne correspondent pas");
     } else if (password === confirmPassword)
       alert("Votre mot de passe a été modifié");
@@ -73,7 +73,7 @@ class InitPassword extends Component {
 
   render() {
     return (
-      <div>
+      <div className="containtInitPassword">
         <div className="containtLogoLogin">
           <img className="LogoLogin" src="Images/logo-icone.png" alt="logo" />
           <h1>
@@ -134,12 +134,14 @@ class InitPassword extends Component {
               </Button>
             </InputGroup.Append>
           </InputGroup>
-          <p>Votre mot de passe doit contenir ces conditions:</p>
-          <ul>
-            <li>Minimum 8 caractères</li>
-            <li>Au moins 1 majuscule</li>
-            <li>Au moins 1 chiffre</li>
-          </ul>
+          <div className="conditionTextPassword">
+            <p>Votre mot de passe doit contenir ces conditions:</p>
+            <ul>
+              <li>Minimum 8 caractères</li>
+              <li>Au moins 1 majuscule</li>
+              <li>Au moins 1 chiffre</li>
+            </ul>
+          </div>
 
           <div className="containtButtonLogin">
             <Button className="buttonLogin" type="submit">
