@@ -1,48 +1,43 @@
-
 #image_fond{
-    background-image: url(../Images/abstrait-bleu-formes-geometriques_1035-17545.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 150px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
 }
-#image_fond button{
-    position: relative;
-    top: 0px;
-    left: 25%;
-    top: 5%;
+#image_fond button{    
+    margin-top: 50px;
+    margin-right: 35%;
+    margin-left: 35%;
 }
-#body button{
+#body button {
     transition: background-color 0.2s linear;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #f7316b;
+    background-color: #fff;
+    border: 2px solid #f7316b;
 }
-#body button:hover{
+#body button:hover {
     transition: background-color 0.2s linear;
-    background-color: rgba(204, 184, 184, 0.473);
+    color: #fff;
+    background-color: #f7316b;
+    border-color: #f7316b;
 }
 #body label{
     float: left;
 }
-#image_Logo img{
-    width: 25%;
-}
-#image_Logo button{
-    margin-top: 5%;
-    position: relative;
-    right: 10px;
-    width: 100px;
-}
-#profil_image button{
-    position: absolute;
-    left: 25%;
-}
 #profil_image img{
-    position: relative;
-    left: 25%;
-    top: -100px;
     border-radius: 50%;
     width: 50%;
     border: 2px solid #00ccff;
+    margin: auto;
+    position: relative;
+    bottom: 100px;
+    margin-bottom: -75px;
 }
 #body input[name="society_name"]{
     font-size: 30px;
@@ -60,58 +55,63 @@
 }
 
 #middle_bloc{
+
     margin-top: 10%;
-    margin-left: 15%;
+    margin-left: 20%;
     left: 0px;
     background-color: white;
-    width: 40%;
-    border: 2px solid #757575;
-    border-radius: 20px;
+    width: 35%;
+    box-shadow: 0 0 4px rgb(29, 161, 242);
+    border-radius: 7px;
 }
 #body input, textarea, button{
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 5px;
     background: none;
     border: none;
     outline: none;
     border-radius: 5px;
 }
+#image_Logo button{
+    margin-left: 70%;
+    position: relative;
+    bottom: 70px;
+}
+#download img{
+    width: 20px;
+}
 #body textarea{
     width: 95%;
-    
     resize: vertical;
     overflow: auto;
 }
-#image_Logo button{
-    display: flex;
-    flex-direction: row;
+#logo_ent{
+    width: 45%;
 }
-#middle_bloc div{
-    padding: 10px;
+#middle_bloc .paddingthis{
+    border-bottom: 1px solid rgb(125, 205, 255) ;
+    margin:10px;
     display: flex;
     flex-direction: column;
+    
 }
-
 #side_bloc{
-    margin-top: 18%;
-    margin-right: 15%;
+    margin-top: 15%;
+    margin-right: 23%;
     position: absolute;
     top: 0px;
     right: 0px;
     background-color: white;
-    width: 25%;
-    border-radius: 20px;
-    border: 2px solid #757575;
+    width: 20%;
+    border-radius: 7px;
+    box-shadow: 0 0 10px rgb(125, 205, 255);
 }
 #side_bloc div{
     padding: 5px;
     display: flex;
     flex-direction: column;
 }
-
-/*.Hover :hover {
-  background-color: crimson;
-}*/
-#interaction button {
-  border-radius: 15px;
-  outline: none;
+#side_bloc button{
+    margin: auto;
 }
