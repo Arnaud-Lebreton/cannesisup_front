@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboardStyle.css";
 
-class MembershipList extends Component {
+class Test1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -965,4 +965,4 @@ class MembershipList extends Component {
   }
 }
 
-export default MembershipList;
+export default Test1;
