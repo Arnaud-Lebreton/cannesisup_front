@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { Form, Button, InputGroup, Nav } from "react-bootstrap";
 import "./login.css";
 import ForgotPassword from "./ForgotPassword";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      cardDeck: [],
       showForgotPassword: false,
       email: "",
       password: "",
@@ -35,11 +37,15 @@ class Login extends Component {
       body: JSON.stringify(body),
     };
 
-    fetch("", options)
+    fetch("http://localhost:8080/signIn", options)
       .then((res) => res.json())
       .then(
         (data) => {
           console.log(data);
+          this.setState({
+            email: data.membershipEmail,
+            password: data.membershipHashPassword,
+          });
         },
         (error) => {
           console.log(error);
@@ -65,7 +71,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="containtLogin">
         <div className="containtLogoLogin">
           <img className="LogoLogin" src="Images/logo-icone.png" alt="logo" />
           <h1>
@@ -73,7 +79,11 @@ class Login extends Component {
             dhérent
           </h1>
         </div>
-        <Form className="containtLoginForm">
+        <Form
+          className="containtLoginForm"
+          method="POST"
+          onSubmit={this.identify}
+        >
           <Form.Group className="containtGroupForm" controlId="formBasicEmail">
             <Form.Control
               className="containtInputForm"
@@ -107,16 +117,14 @@ class Login extends Component {
           <Nav className="resetPassword" onClick={this.changeShow}>
             <ForgotPassword />
           </Nav>
-
-          <div className="containtButtonLogin">
-            <Button
-              className="buttonLogin"
-              type="submit"
-              onClick={this.identify}
-            >
+          <Link
+            to={"profil/" + this.state.cardDeck.id}
+            className="containtButtonLogin"
+          >
+            <Button className="buttonLogin" onClick={this.identify}>
               S'Identifier
             </Button>
-          </div>
+          </Link>
         </Form>
       </div>
     );

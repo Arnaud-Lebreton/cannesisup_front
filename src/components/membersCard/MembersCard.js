@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./membersCard.css";
-import "./searchBar/searchBar.css";
+import "./searchBar.css";
 import {
   Card,
   CardDeck,
@@ -95,8 +95,11 @@ class MembersCard extends Component {
                 src={element.compagnyRepresentPhoto}
               />
             </Col>
-            <Col className="containtLogo">
-              <Card.Img className="logo" src={element.compagnyLogo} />
+            <Col className="containtLogoMembersCard">
+              <Card.Img
+                className="logoMembersCard"
+                src={element.compagnyLogo}
+              />
             </Col>
             <Card.Body className="bodyCard">
               <Card.Title className="compagnyName">
@@ -123,7 +126,10 @@ class MembersCard extends Component {
                 </ListGroupItem>
               </ListGroup>
             </Card.Body>
-            <Link to={"profil/" + this.state.cardDeck.id}>
+            <Link
+              to={"profil/" + this.state.cardDeck.id}
+              className="containtMemberBouton"
+            >
               <Button className="memberBouton" id="memberBouton">
                 voir le membre
               </Button>
