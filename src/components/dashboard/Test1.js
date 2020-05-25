@@ -34,14 +34,14 @@ class Test1 extends Component {
       nPerPage: "",
       activePage: 1,
       lignCounter: 0,
+      paginationChange: false,
       membershipNumber: 0,
       //
       modalColumnListShow: false,
-      listInit: ["a", "b", "c", "d", "e"],
-      currentList: ["a", "b", "c", "d"],
-      remainingList: ["e", "f"],
+      listInit: [],
+      currentList: [],
+      remainingList: [],
       list1: "",
-      paginationChange: false,
       //Tri colonne
       sortCulum: false,
       sortColumnActiv: "",
@@ -103,6 +103,7 @@ class Test1 extends Component {
       .then((res) => res.json())
       .then(
         (data) => {
+          console.log(data[0].dashboardColumnListShow);
           let dashboardJsonDataShow = data[0].dashboardColumnListShow;
           let membershipsJsonData = this.state.membershipData;
           let dashboardJsonDataInitKey = Object.keys(dashboardJsonDataShow[0]);
@@ -119,9 +120,30 @@ class Test1 extends Component {
           //Pagination
           let first = data[0].dashboardPagination[0];
           let last = data[0].dashboardPagination[1];
-          console.log("tour");
-          console.log(last);
-          console.log("fin tour");
+          // gestion des champs
+          delete data[0].dashboardColumnListInit[0]._id;
+          delete data[0].dashboardColumnListInit[0].memberActive;
+          let listInit = Object.values(
+            data[0].dashboardColumnListInit[0]
+          ).sort();
+
+          delete data[0].dashboardColumnListShow[0]._id;
+          delete data[0].dashboardColumnListShow[0].memberActive;
+          let currentList = Object.values(data[0].dashboardColumnListShow[0]);
+
+          let remainingList = [];
+          listInit.forEach((initElement) => {
+            let count = null;
+            currentList.forEach((curentElement) => {
+              if (initElement === curentElement) {
+                count++;
+              }
+            });
+            if (!count) {
+              remainingList.push(initElement);
+            }
+          });
+
           this.setState({
             dashboardColumnListInit: data[0].dashboardColumnListInit,
             dashboardColumnListShow: data[0].dashboardColumnListShow,
@@ -131,6 +153,9 @@ class Test1 extends Component {
             membershipColumFilterData: dataList,
             membershipFilterList: dataList,
             membershipNumber: dataList.length,
+            listInit: listInit,
+            currentList: currentList,
+            remainingList: remainingList,
           });
         },
         (error) => {
@@ -305,6 +330,8 @@ class Test1 extends Component {
         }
       );
     } else {
+      console.log(this.state.currentList);
+      console.log(this.state.dashboardColumnListShow[0]);
       return Object.keys(objet).map((element, index) => {
         if (index > 1) {
           return (
@@ -416,6 +443,7 @@ class Test1 extends Component {
   // Display of line buttons
   boutonCreate = (index, id, status) => {
     console.log("boutonCreate");
+    console.log(status);
     let colorStatus, textStatus, disabledStatus;
     if (status === "oui") {
       colorStatus = "success";
@@ -806,30 +834,7 @@ class Test1 extends Component {
       </>
     );
   };
-  //---------------------------------------------
-  // Afficahge de la modale de gestion des colonnes
-  // Display of the column management mode
-  modalDataList = () => {
-    //Liste des colonnes
-    let remainingList = this.state.dashboardColumnListInit[0];
-    let remainingListValues = Object.values(remainingList);
 
-    let currentList = this.state.dashboardColumnListShow[0];
-    let currentListValues = Object.values(currentList).slice(2);
-
-    let listMemory = [];
-    remainingListValues.slice(2).forEach((element) => {
-      if (!currentListValues.includes(element)) {
-        listMemory.push(element);
-      }
-    });
-    console.log(currentListValues);
-
-    this.setState({
-      remainingList: listMemory,
-      currentList: currentListValues,
-    });
-  };
   //---------------------------------------------
   // Afficahge de la modale de gestion des colonnes
   // Display of the column management mode
@@ -890,9 +895,6 @@ class Test1 extends Component {
         break;
       }
     }
-    console.log(field);
-    console.log(this.state.remainingList);
-    console.log(this.state.currentList);
     this.setState({ list1: 1 });
   };
   //---------------------------------------------
@@ -904,13 +906,9 @@ class Test1 extends Component {
       if (this.state.remainingList[i] == field) {
         this.state.remainingList.splice(i, 1);
         this.state.currentList.push(field);
-        this.state.currentList.sort();
         break;
       }
     }
-    console.log(field);
-    console.log(this.state.remainingList);
-    console.log(this.state.currentList);
     this.setState({ list1: 1 });
   };
   //---------------------------------------------
@@ -921,6 +919,11 @@ class Test1 extends Component {
       console.log("affichage");
       return (
         <Container className="dashboardGlobalSize">
+          <div className="dashboardDeconnexionButton">
+            <Button>
+              <i class="fas fa-sign-out-alt dashboardDeconnexionIcon"></i>
+            </Button>
+          </div>
           <div className="dashboardAlignButton">
             <div className="dashboardPaginationRow">
               <div className="dashboardFilter">{this.inputFilterTable()}</div>
@@ -929,7 +932,6 @@ class Test1 extends Component {
               </div>
               <div>{this.paginationTable()}</div>
             </div>
-
             <div>{this.modalColumnList()}</div>
           </div>
           <p className="dashboardCounterText">
@@ -955,12 +957,19 @@ class Test1 extends Component {
   };
 
   render() {
-    //console.log(this.state.membershipData); //Données extraite collection adhérent complète
-    //console.log(this.state.dashboardColumnListShow); //Données extraite collection Dashboard - liste colonnne a afficher
-    //console.log(this.state.dashboardColumnListInit); // Données extraite collection dashboard - Liste des colonnes disponibles
-    //console.log(this.state.membershipFilterList); //Données filtrées et paginées
-    //console.log(this.state.membershipFilterPaginationData);
-    //console.log(this.state.dataRange);
+    console.log(this.state.membershipData); //Données extraite collection adhérent complète
+    console.log(this.state.dashboardColumnListShow); //Données extraite collection Dashboard - liste colonnne a afficher
+    console.log(this.state.dashboardColumnListInit); // Données extraite collection dashboard - Liste des colonnes disponibles
+    console.log(this.state.membershipFilterList); //Données filtrées et paginées
+    console.log(this.state.membershipFilterPaginationData);
+    console.log(this.state.dataRange);
+    console.log("this.state.listInit");
+    console.log(this.state.listInit);
+    console.log("this.state.currentList");
+    console.log(this.state.currentList);
+    console.log("this.state.remainingList");
+    console.log(this.state.remainingList);
+
     return <div>{this.init()}</div>;
   }
 }

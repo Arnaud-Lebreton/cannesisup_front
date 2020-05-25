@@ -130,6 +130,13 @@ body {
 .dashboardModalButtonSize {
   width: 150px !important;
 }
+.dashboardDeconnexionButton {
+  text-align: right;
+  margin-bottom: 5px;
+}
+.dashboardDeconnexionIcon {
+  color: white;
+}
 .dashboardModalLogo {
   width: 28px;
   height: auto;
