@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import "./login.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 class InitPassword extends Component {
   constructor(props) {
@@ -71,6 +72,15 @@ class InitPassword extends Component {
     }
   };
 
+  showPwdConfirm = () => {
+    let x = document.getElementById("pwdConfirm");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  };
+
   render() {
     return (
       <div className="containtInitPassword">
@@ -110,7 +120,7 @@ class InitPassword extends Component {
             />
             <InputGroup.Append>
               <Button className="containtButtonPassword" onClick={this.showPwd}>
-                <img src="Images/Icones/eye-solid.svg" />
+                <i className="fas fa-eye" style={{ color: "#f7316b" }}></i>
               </Button>
             </InputGroup.Append>
           </InputGroup>
@@ -120,7 +130,7 @@ class InitPassword extends Component {
           >
             <Form.Control
               className="containtInputForm"
-              id="pwd"
+              id="pwdConfirm"
               name="confirmPassword"
               type="password"
               value={this.state.confirmPassword}
@@ -129,8 +139,11 @@ class InitPassword extends Component {
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             />
             <InputGroup.Append>
-              <Button className="containtButtonPassword" onClick={this.showPwd}>
-                <img src="Images/Icones/eye-solid.svg" />
+              <Button
+                className="containtButtonPassword"
+                onClick={this.showPwdConfirm}
+              >
+                <i className="fas fa-eye" style={{ color: "#f7316b" }}></i>
               </Button>
             </InputGroup.Append>
           </InputGroup>

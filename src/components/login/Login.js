@@ -3,6 +3,7 @@ import { Form, Button, InputGroup, Nav } from "react-bootstrap";
 import "./login.css";
 import ForgotPassword from "./ForgotPassword";
 import { Link } from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 class Login extends Component {
   constructor(props) {
@@ -110,7 +111,7 @@ class Login extends Component {
             />
             <InputGroup.Append>
               <Button className="containtButtonPassword" onClick={this.showPwd}>
-                <img src="Images/Icones/eye-solid.svg" />
+                <i className="fas fa-eye" style={{ color: "#f7316b" }}></i>
               </Button>
             </InputGroup.Append>
           </InputGroup>
