@@ -54,7 +54,7 @@ class Profil extends Component{
             headers: {"Content-Type" : "application/json"},
             mode:"cors",
         };
-        fetch("http://localhost:8080/profil/upload?id=5ec686436bbe21510463a1ad", option)
+        fetch("http://localhost:8080/profil/upload?id=5ecbb717508e124fdc8dc102", option)
         .then(res => res.json())
         .then(data => {
             this.setState({
@@ -100,7 +100,7 @@ class Profil extends Component{
                             <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Son Secteur d'Activité..."  disabled={this.state.isDisabled} name="society_sector" value={this.state.society_activity_sector} onChange= {this.handleChange}/>
                         </div>
                         <div className="paddingthis">
-                            <h3>Coordonnées : </h3>
+                            <h4>Coordonnées : </h4>
                             <label>Email de la Societé : </label>
                             <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "email" placeholder = "Email" disabled={this.state.isDisabled} value={this.state.email} onChange= {this.handleChange}/>
                             <label>Adresse : </label>
@@ -112,7 +112,7 @@ class Profil extends Component{
                             <input style={{border: this.state.border , backgroundColor: this.state.background_color}} type = "text" placeholder = "Site" disabled={this.state.isDisabled}  value={this.state.society_website} onChange= {this.handleChange}/>
                         </div >
                         <div id="social" className="paddingthis" >
-                            <h3>Reseaux Sociaux : </h3>
+                            <h4>Reseaux Sociaux : </h4>
                             <label>Linkedin : </label>
                             <input style={{border: this.state.border  , backgroundColor: this.state.background_color}} placeholder="Linkedin..." disabled={this.state.isDisabled} value={this.state.linkedin} onChange= {this.handleChange}/>
                             <label>Facebook : </label>
@@ -126,7 +126,7 @@ class Profil extends Component{
                             <img src={this.state.image_profil}/>
                             {!this.state.isDisabled && <button>Ajouter Photo</button>}
                         </div>
-                        <div>
+                        <div id="name">
                             <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Nom" disabled={this.state.isDisabled} name="name" value={this.state.name} onChange={this.handleChange}/>
                             <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Prenom" disabled={this.state.isDisabled} name="surname" value={this.state.surname} onChange={this.handleChange}/>
                         </div>
@@ -134,7 +134,7 @@ class Profil extends Component{
                             <input style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder="Profession..." disabled={this.state.isDisabled} name="profession" value={this.state.work} onChange= {this.handleChange}/>
                         </div>
                         <div>
-                            <h3>Parole de membre</h3>
+                            <h4>Parole de membre</h4>
                             <textarea style={{border: this.state.border , backgroundColor: this.state.background_color}} placeholder = "Description..." disabled={this.state.isDisabled} name="description" value={this.state.work_description} onChange= {this.handleChange}/>
                         </div>
                         <div id="interaction">
