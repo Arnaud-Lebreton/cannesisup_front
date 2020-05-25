@@ -104,7 +104,6 @@ class MembershipList extends Component {
       .then((res) => res.json())
       .then(
         (data) => {
-          console.log(data[0].dashboardColumnListShow);
           let dashboardJsonDataShow = data[0].dashboardColumnListShow;
           let membershipsJsonData = this.state.membershipData;
           let dashboardJsonDataInitKey = Object.keys(dashboardJsonDataShow[0]);
@@ -826,7 +825,7 @@ class MembershipList extends Component {
             <Button
               className="dashboardFilterText"
               variant="primary"
-              onClick={handleClose}
+              onClick={this.newHeaderColumn}
             >
               Save Changes
             </Button>
@@ -884,33 +883,93 @@ class MembershipList extends Component {
     });
   };
   //---------------------------------------------
+  // Lance calcul nouveau header
+  //
+  newHeaderColumn = () => {
+    console.log("newHeaderColumn*****************");
+    let dashboardColumnListInit = this.state.dashboardColumnListInit[0];
+    let currentList = this.state.currentList;
+    let dashboardNewColumn = ["_id", "memberActive"];
+    let dashboardNewObjet = { _id: "Identifiant", memberActive: "actif" };
+    let dashboardColumnListShow = [];
+    //Récupération des clés de la liste curante
+    currentList.forEach((element) => {
+      for (let i in dashboardColumnListInit) {
+        if (dashboardColumnListInit[i] === element) {
+          dashboardNewColumn.push(i);
+          dashboardNewObjet[i] = element;
+        }
+      }
+    });
+    dashboardColumnListShow.push(dashboardNewObjet);
+
+    //Création de la nouvelle liste
+    let membershipData = this.state.membershipData;
+    let dataList = [];
+    membershipData.forEach((elementData) => {
+      let dataObject = {};
+      dashboardNewColumn.forEach((elementkey) => {
+        if (elementData[elementkey]) {
+          dataObject[elementkey] = elementData[elementkey];
+        }
+      });
+      dataList.push(dataObject);
+    });
+    //Pagination
+    let first = 0;
+    let last = this.state.nPerPage;
+
+    console.log(dashboardColumnListInit);
+    console.log(currentList);
+    console.log(dashboardNewColumn);
+    console.log(dataList);
+    console.log(dashboardNewObjet);
+    console.log(this.state.membershipColumFilterData);
+    this.setState({
+      membershipFilterPaginationData: dataList.slice(first, last),
+      membershipFilterList: dataList,
+      membershipColumFilterData: dataList,
+      dashboardColumnListShow: dashboardColumnListShow,
+      activePage: 1,
+      dataRange: [0, this.state.nPerPage],
+      membershipNumber: dataList.length,
+      modalColumnListShow: false,
+    });
+
+    console.log("newHeaderColumn*****************");
+  };
+  //---------------------------------------------
   // calcul des champs à enlever
   // calculation of the fields to be removed
   subData = (e) => {
     let field = e.target.value;
-    for (let i = 0; i < this.state.currentList.length; i++) {
-      if (this.state.currentList[i] == field) {
-        this.state.currentList.splice(i, 1);
-        this.state.remainingList.push(field);
-        this.state.remainingList.sort();
+    let currentList = this.state.currentList;
+    let remainingList = this.state.remainingList;
+    for (let i = 0; i < currentList.length; i++) {
+      if (currentList[i] == field) {
+        currentList.splice(i, 1);
+        remainingList.push(field);
+        remainingList.sort();
         break;
       }
     }
-    this.setState({ list1: 1 });
+    this.setState({ currentList: currentList, remainingList: remainingList });
   };
   //---------------------------------------------
   // calcul des champs à ajouter
   // calculation of fields to add
   addData = (e) => {
     let field = e.target.value;
-    for (let i = 0; i < this.state.currentList.length; i++) {
-      if (this.state.remainingList[i] == field) {
-        this.state.remainingList.splice(i, 1);
-        this.state.currentList.push(field);
+    let currentList = this.state.currentList;
+    let remainingList = this.state.remainingList;
+    for (let i = 0; i < remainingList.length; i++) {
+      if (remainingList[i] == field) {
+        remainingList.splice(i, 1);
+        currentList.push(field);
         break;
       }
     }
-    this.setState({ list1: 1 });
+    this.setState({ currentList: currentList, remainingList: remainingList });
   };
   //---------------------------------------------
   // Lance l'affichage uniquement lorsque les données sont chargées
