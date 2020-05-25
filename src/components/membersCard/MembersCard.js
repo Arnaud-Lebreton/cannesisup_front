@@ -48,7 +48,7 @@ class MembersCard extends Component {
       headers: { "content-type": "application/json" },
       mode: "cors",
     };
-    fetch("http://localhost:8080/annuaire/all", options)
+    fetch("http://localhost:8080/profil/uploadAllActive", options)
       .then((res) => res.json())
       .then(
         (data) => {
@@ -56,6 +56,7 @@ class MembersCard extends Component {
             cardDeck: data,
             nbMembers: data.length,
           });
+          console.log(data);
         },
         (error) => {
           console.log(error);
@@ -126,10 +127,7 @@ class MembersCard extends Component {
                 </ListGroupItem>
               </ListGroup>
             </Card.Body>
-            <Link
-              to={"profil/" + this.state.cardDeck.id}
-              className="containtMemberBouton"
-            >
+            <Link to={"profil/" + element._id} className="containtMemberBouton">
               <Button className="memberBouton" id="memberBouton">
                 voir le membre
               </Button>

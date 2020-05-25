@@ -6,6 +6,7 @@ body {
   margin-top: 85px;
   position: relative;
   z-index: 0;
+  padding-top: 10px;
 }
 .dashboardGlobalSize {
   max-width: 95%;
@@ -13,9 +14,11 @@ body {
 .dashboardTableMargin {
   margin-bottom: 0px !important;
 }
+.dashBoardTableHeight {
+}
 /*Tableau lignes */
 .dashboardTableRowText {
-  font-size: 0.85rem;
+  font-size: small;
   color: #156ec6;
   text-align: center;
   width: fit-content;
@@ -31,25 +34,39 @@ body {
 }
 .dashboardTableButton {
   width: 62px;
-  padding: 0.2rem 0.2rem;
+  padding: 0.1rem 0.1rem !important;
   margin-left: 0.2rem;
   font-size: 0.65rem;
 }
 /*Tableau header */
 .dashboardTableHeaderText {
+  border: none;
   font-size: 0.85rem;
+  font-weight: bold;
   color: #156ec6;
   text-align: center;
-  width: 200px;
-  padding-left: 10px !important;
-  padding-right: 10px !important;
   background-color: white;
   vertical-align: middle !important;
   line-height: 100% !important;
+  padding: 3px !important;
+  width: 150px;
 }
 .dashboardTableHeaderCol1 {
-  min-width: 225px;
-  vertical-align: baseline !important;
+  min-width: 202px;
+}
+.dashboardTableSticky {
+  position: fixed;
+}
+.dashboardScrollbar {
+  position: relative;
+  height: 300px;
+  overflow: auto;
+}
+.dashboardScroll-y {
+  display: block;
+}
+.dashBoardTablePadding {
+  padding: 2px !important;
 }
 /* filtre */
 .dashboardFilterSize {
@@ -66,6 +83,7 @@ body {
 }
 .dashboardFilter {
   margin-bottom: 5px;
+  margin-right: 4px;
 }
 /* Pagination */
 .dashboardPaginationStyle {
@@ -86,8 +104,8 @@ body {
 /* Graphe */
 .dashboardGraphDim {
   width: auto;
-  height: 40vh;
-  padding: 7vh;
+  height: 25vh;
+  margin: 2vh;
   display: block;
 }
 .dashboardGrapheAlign {
@@ -112,7 +130,33 @@ body {
 .dashboardModalButtonSize {
   width: 150px !important;
 }
+.dashboardModalLogo {
+  width: 28px;
+  height: auto;
+}
 /*Modal alerte */
-.dashboardAlertButtonSize {
-  width: 65px;
+
+.dashBoardAlertButton {
+  width: 85px;
+  cursor: pointer;
+  margin: 5px 0px 5px 5px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f7316b;
+  background-color: #fff;
+  border: 2px solid #f7316b;
+}
+.dashBoardAlertButton:hover {
+  color: #fff;
+  background-color: #f7316b;
+  border-color: #f7316b;
+}
+.dashBoardAlertName {
+  font-weight: bold;
+  text-align: center;
+}
+.dashBoardAlertStyle {
+  color: #f7316b;
 }

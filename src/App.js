@@ -23,11 +23,7 @@ class App extends Component {
             <Route path="/" exact>
               <MembersCard />
             </Route>
-            <Route path="/profil">
-              {" "}
-              {/*/:id" component={Profil}*/}
-              <Profil />
-            </Route>
+            <Route path="/profil" component={Profil}></Route>
             <Route path="/dashboard">
               <Dashboard />
             </Route>
