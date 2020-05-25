@@ -416,6 +416,7 @@ class MembershipList extends Component {
   // Display of line buttons
   boutonCreate = (index, id, status) => {
     console.log("boutonCreate");
+    console.log(status);
     let colorStatus, textStatus, disabledStatus;
     if (status === "oui") {
       colorStatus = "success";
