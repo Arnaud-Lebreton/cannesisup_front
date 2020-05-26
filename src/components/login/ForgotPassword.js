@@ -23,6 +23,10 @@ class ForgotPassword extends Component {
     this.setState({ close: !this.state.close });
   };
 
+  message = () => {
+    alert("Un mail vous à été envoyé");
+  };
+
   /********* Fonction qui permet de réinitialiser le MDP ********/
 
   resetPassword = (e) => {
@@ -81,7 +85,7 @@ class ForgotPassword extends Component {
             <Button className="buttonLogin" onClick={this.changeclose}>
               Fermer
             </Button>
-            <Button className="buttonLogin" onClick={this.resetPassword}>
+            <Button className="buttonLogin" onClick={this.message}>
               Envoyer
             </Button>
           </Modal.Footer>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./membersCard.css";
-import data from "../fictivesdata/membershipData.json";
+import "./searchBar.css";
 import {
   Card,
   CardDeck,
@@ -9,6 +9,8 @@ import {
   ListGroup,
   ListGroupItem,
   Col,
+  Form,
+  FormControl,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactGA from "react-ga";
@@ -23,6 +25,8 @@ class MembersCard extends Component {
     super(props);
     this.state = {
       cardDeck: [],
+      search: null,
+      nbMembers: 0,
     };
   }
 
@@ -30,73 +34,137 @@ class MembersCard extends Component {
     this.extraction();
   }
 
-  /******* Récupération des données depuis le fichier membershipData.json ********/
-  extraction = () => {
-    //let membershipData = data.membershipData;
-    let membershipData = data;
-    this.setState({
-      cardDeck: membershipData,
-    });
+  /******* Récupère les données du champ Input Search ********/
+
+  searchSpace = (event) => {
+    let keyword = event.target.value;
+    this.setState({ search: keyword });
   };
 
-  /******* Boucle sur l'ensemble des données  ********/
-  cardDeck = () => {
-    return this.state.cardDeck.map((element, index) => {
-      return (
-        <Card className="containerMembersCard" style={{ width: "22rem" }}>
-          <Col className="containtCoverPhoto">
-            <Card.Img
-              className="coverPhoto"
-              variant="top"
-              src={element.compagnyCoverPhoto}
-            />
-          </Col>
-          <Col className="containtRepresentPhoto">
-            <Image
-              className="representPhoto"
-              src={element.compagnyRepresentPhoto}
-            />
-          </Col>
-          <Col className="containtLogo">
-            <Card.Img className="logo" src={element.compagnyLogo} />
-          </Col>
-          <Card.Body className="bodyCard">
-            <Card.Title className="compagnyName">
-              {element.compagnyName}
-            </Card.Title>
-            <Card.Text className="textDescription">
-              {element.compagnyActivityDescription}
-            </Card.Text>
-            <ListGroup>
-              <ListGroupItem className="listGroupItem">
-                <Card.Text className="textActivity">
-                  Secteur d'activité
-                </Card.Text>
-                <Card.Text className="textAreaActivity">
-                  {element.compagnyActivityArea}
-                </Card.Text>
-              </ListGroupItem>
-              <ListGroupItem className="listGroupItem">
-                <Card.Text className="textManager">Dirigeant</Card.Text>
-                <Card.Text className="textRepresent">
-                  {element.compagnyRepresentName}{" "}
-                  {element.compagnyRepresentLastname}
-                </Card.Text>
-              </ListGroupItem>
-            </ListGroup>
-          </Card.Body>
-          <Link to={"profil/" + this.state.cardDeck.id}>
-            <Button className="memberBouton" id="memberBouton">
-              voir le membre
-            </Button>
-          </Link>
-        </Card>
+  /******* Récupération des données depuis la base de données ********/
+  extraction = () => {
+    const options = {
+      method: "GET",
+      headers: { "content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/profil/uploadAllActive", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          this.setState({
+            cardDeck: data,
+            nbMembers: data.length,
+          });
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
       );
-    });
+  };
+
+  /******* Boucle sur l'ensemble des données + filtre des données pour la barre de recherche ********/
+  cardDeck = () => {
+    return this.state.cardDeck
+      .filter((data) => {
+        if (this.state.search === null) return data;
+        else if (
+          data.compagnyName
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          data.compagnyActivityArea
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          data.compagnyCity
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          data.compagnyRepresentName
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase())
+        ) {
+          return data;
+        }
+      })
+      .map((element, index) => {
+        return (
+          <Card className="containerMembersCard" style={{ width: "22rem" }}>
+            <Col className="containtCoverPhoto">
+              <Card.Img
+                className="coverPhoto"
+                variant="top"
+                src={element.compagnyCoverPhoto}
+              />
+            </Col>
+            <Col className="containtRepresentPhoto">
+              <Image
+                className="representPhoto"
+                src={element.compagnyRepresentPhoto}
+              />
+            </Col>
+            <Col className="containtLogoMembersCard">
+              <Card.Img
+                className="logoMembersCard"
+                src={element.compagnyLogo}
+              />
+            </Col>
+            <Card.Body className="bodyCard">
+              <Card.Title className="compagnyName">
+                {element.compagnyName}
+              </Card.Title>
+              <Card.Text className="textDescription">
+                {element.compagnyActivityDescription}
+              </Card.Text>
+              <ListGroup>
+                <ListGroupItem className="listGroupItem">
+                  <Card.Text className="textActivity">
+                    Secteur d'activité
+                  </Card.Text>
+                  <Card.Text className="textAreaActivity">
+                    {element.compagnyActivityArea}
+                  </Card.Text>
+                </ListGroupItem>
+                <ListGroupItem className="listGroupItem">
+                  <Card.Text className="textManager">Dirigeant</Card.Text>
+                  <Card.Text className="textRepresent">
+                    {element.compagnyRepresentName}{" "}
+                    {element.compagnyRepresentLastname}
+                  </Card.Text>
+                </ListGroupItem>
+              </ListGroup>
+            </Card.Body>
+            <Link to={"profil/" + element._id} className="containtMemberBouton">
+              <Button className="memberBouton" id="memberBouton">
+                voir le membre
+              </Button>
+            </Link>
+          </Card>
+        );
+      });
   };
 
   render() {
-    return <CardDeck className="bodyContainer">{this.cardDeck()}</CardDeck>;
+    return (
+      <div className="containtSearchBar">
+        <div className="containerImage">
+          <h1 className="containtTitle">annuaire des membres</h1>
+        </div>
+
+        <Form className="containtForm">
+          <FormControl
+            type="text"
+            placeholder="Recherchez : un membre, une activité, un mot clé..."
+            className="form"
+            onChange={(e) => this.searchSpace(e)}
+          />
+          <Button className="containtButtonSearchBar" disabled>
+            <img src="Images/Icones/search-solid.svg" />
+          </Button>
+        </Form>
+        <p className="textMembers">{this.state.nbMembers} membres</p>
+        <CardDeck className="bodyContainer">{this.cardDeck()}</CardDeck>
+      </div>
+    );
   }
 }
 

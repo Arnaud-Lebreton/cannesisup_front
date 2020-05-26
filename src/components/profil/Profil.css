@@ -1,27 +1,28 @@
-#image_fond{
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 150px;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+#image_fond {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 150px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 }
-#image_fond button{    
-    margin-top: 50px;
-    margin-right: 35%;
-    margin-left: 35%;
+#image_fond button {
+  margin-top: 50px;
+  margin-right: 35%;
+  margin-left: 35%;
 }
 #body button {
-    transition: background-color 0.2s linear;
-    border-radius: 8px;
-    padding: 10px 15px;
-    font-size: 15px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #f7316b;
-    background-color: #fff;
-    border: 2px solid #f7316b;
+  transition: background-color 0.2s linear;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f7316b;
+  background-color: #fff;
+  border: 2px solid #f7316b;
 }
 #body button:hover {
+<<<<<<< HEAD
     transition: background-color 0.2s linear;
     color: #fff;
     background-color: #f7316b;
@@ -124,3 +125,99 @@
 #side_bloc button{
     margin: auto;
 }
+=======
+  transition: background-color 0.2s linear;
+  color: #fff;
+  background-color: #f7316b;
+  border-color: #f7316b;
+}
+#body label {
+  float: left;
+}
+#profil_image img {
+  border-radius: 50%;
+  width: 50%;
+  border: 2px solid #00ccff;
+  margin: auto;
+  position: relative;
+  bottom: 100px;
+  margin-bottom: -75px;
+}
+#body input[name="society_name"] {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ff0000;
+}
+#body h3 {
+  color: #0099ff;
+  font-weight: bold;
+}
+#body input[name="name"],
+#body input[name="surname"] {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6666;
+}
+
+#middle_bloc {
+  margin-top: 10%;
+  margin-left: 20%;
+  left: 0px;
+  background-color: white;
+  width: 35%;
+  box-shadow: 0 0 4px rgb(29, 161, 242);
+  border-radius: 7px;
+}
+#body input,
+#body textarea,
+#body button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+#image_Logo button {
+  margin-left: 70%;
+  position: relative;
+  bottom: 70px;
+}
+#download img {
+  width: 20px;
+}
+#body textarea {
+  width: 95%;
+  resize: vertical;
+  overflow: auto;
+}
+#logo_ent {
+  width: 45%;
+}
+#middle_bloc .paddingthis {
+  border-bottom: 1px solid rgb(125, 205, 255);
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+#side_bloc {
+  margin-top: 15%;
+  margin-right: 23%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: white;
+  width: 20%;
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgb(125, 205, 255);
+}
+#side_bloc div {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+#side_bloc button {
+  margin: auto;
+}
+>>>>>>> 490331fb935ebab138d680319795018f895bd3f9
