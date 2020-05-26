@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./footer.css";
-import {a} from "react-bootstrap-icons";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 class Footer extends Component {
   render() {
@@ -18,19 +18,19 @@ class Footer extends Component {
               </div>
               <div className="col-md-4">
                 <a href="https://www.facebook.com/cannesisup/" target="_blank">
-                  <i className="fa fa-4x fa-facebook-square"></i>
+                  <i className="fab fa-4x fa-facebook-square"></i>
                 </a>
                 <a href="https://www.instagram.com/cannesisup/" target="_blank">
-                  <i className="fa fa-4x fa-instagram"></i>
+                  <i className="fab fa-4x fa-instagram"></i>
                 </a>
                 <a
                   href="https://www.youtube.com/channel/UCBIpW614EFQGZrFVl6ARsAw"
                   target="_blank"
                 >
-                  <i className="fa fa-4x fa-youtube-square"></i>
+                  <i className="fab fa-4x fa-youtube-square"></i>
                 </a>
                 <a href="https://twitter.com/cannesisup" target="_blank">
-                  <i className="fa fa-4x fa-twitter-square"></i>
+                  <i className="fab fa-4x fa-twitter-square"></i>
                 </a>
               </div>
             </div>

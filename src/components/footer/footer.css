@@ -60,11 +60,6 @@ a {
   text-decoration: none;
 }
 
-.hts-footer,
-.col-md-4 {
-  text-align: right;
-}
-
 .col-md-4 {
   float: left;
   position: relative;
@@ -91,4 +86,13 @@ a {
   display: inline-block;
   font: normal normal normal 14px/1;
   text-rendering: auto;
+}
+
+.hts-footer a:hover i {
+  color: #fecb1e;
+}
+
+.hts-footer a:hover {
+  color: #fecb1e;
+  text-decoration: none;
 }
