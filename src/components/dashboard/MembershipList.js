@@ -182,7 +182,7 @@ class MembershipList extends Component {
     };
     fetch("http://localhost:8080/profil/uploadAll?id=5ec67da33a89f8685c35a52f", options)
     //*********************************************************************************************/
-    fetch("http://localhost:8080/profil/TEST", options)
+    fetch("http://localhost:8080/profil/delete", options)
       .then((res) => res.json())
       .then(
         (data) => {
@@ -195,8 +195,11 @@ class MembershipList extends Component {
   };
   updateMembershipData = () => {
     console.log("updateMembershipData");
+    const validationDate = new Date();
     const body = {
       _id: this.state.id,
+      memberActive: "oui",
+      validationDate: validationDate,
     };
     const options = {
       method: "PUT",
@@ -212,12 +215,10 @@ class MembershipList extends Component {
     };
     fetch("http://localhost:8080/profil/uploadAll?id=5ec67da33a89f8685c35a52f", options)
     //*********************************************************************************************/
-    fetch("http://localhost:8080/profil/TEST", options)
+    fetch("http://localhost:8080/profil/activate", options)
       .then((res) => res.json())
       .then(
-        (data) => {
-          console.log(data);
-        },
+        (data) => {},
         (error) => {
           console.log(error);
         }
@@ -579,9 +580,9 @@ class MembershipList extends Component {
         list.forEach((element, index) => {
           if (element._id === id) {
             lastnameNameCompagny =
-              element.compagnyRepresentLastname +
+              element.compagnyRepresentFirstname +
               " " +
-              element.compagnyRepresentName +
+              element.compagnyRepresentLastname +
               " ( " +
               element.compagnyName +
               " ) ";
@@ -614,9 +615,13 @@ class MembershipList extends Component {
       let actionData = () => {
         if (this.state.textAction === "SUPPRIMER") {
           this.deleteMembershipData();
+          this.getMembershipData();
+          this.getDashbordData();
           this.setState({ modalShow: !this.state.modalShow });
         } else if (this.state.textAction === "ACTIVER") {
           this.updateMembershipData();
+          this.getMembershipData();
+          this.getDashbordData();
           this.setState({ modalShow: !this.state.modalShow });
         }
       };
