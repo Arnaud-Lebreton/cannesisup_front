@@ -24,6 +24,7 @@ class App extends Component {
               <MembersCard />
             </Route>
             <Route path="/profil/:id" component={Profil}></Route>
+            <Route path="/profil" component={Profil}></Route>
             <Route path="/dashboard">
               <Dashboard />
             </Route>

@@ -26,9 +26,10 @@ class Login extends Component {
 
   identify = (e) => {
     e.preventDefault();
+    console.log("test");
     const body = {
-      email: this.state.email,
-      password: this.state.password,
+      membershipEmail: this.state.email,
+      membershipHashPassword: this.state.password,
     };
 
     const options = {
@@ -43,10 +44,9 @@ class Login extends Component {
       .then(
         (data) => {
           console.log(data);
-          this.setState({
-            email: data.membershipEmail,
-            password: data.membershipHashPassword,
-          });
+          let token = "bearer " + data.token;
+          localStorage.setItem("token", token);
+          localStorage.setItem("_id", data.membershipId);
         },
         (error) => {
           console.log(error);
@@ -85,7 +85,7 @@ class Login extends Component {
           method="POST"
           onSubmit={this.identify}
         >
-          <Form.Group className="containtGroupForm" controlId="formBasicEmail">
+          <Form.Group className="containtGroupForm">
             <Form.Control
               className="containtInputForm"
               type="email"
@@ -118,13 +118,8 @@ class Login extends Component {
           <Nav className="resetPassword" onClick={this.changeShow}>
             <ForgotPassword />
           </Nav>
-          <Link
-            to={"profil/" + this.state.cardDeck.id}
-            className="containtButtonLogin"
-          >
-            <Button className="buttonLogin" onClick={this.identify}>
-              S'Identifier
-            </Button>
+          <Link to={"/profil"} className="containtButtonLogin">
+            <Button className="buttonLogin">S'Identifier</Button>
           </Link>
         </Form>
       </div>

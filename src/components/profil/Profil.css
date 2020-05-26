@@ -10,6 +10,13 @@
   margin-right: 35%;
   margin-left: 35%;
 }
+
+#deconnexion {
+  position: absolute;
+  right: 0px;
+  margin-top: -60px;
+}
+
 #body button {
   transition: background-color 0.2s linear;
   border-radius: 8px;
@@ -33,7 +40,8 @@
 #profil_image img {
   border-radius: 50%;
   width: 50%;
-  border: 2px solid #00ccff;
+  border: 2px solid rgb(196, 185, 185);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   margin: auto;
   position: relative;
   bottom: 100px;

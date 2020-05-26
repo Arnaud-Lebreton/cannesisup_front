@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Button } from "react-bootstrap";
 import "./Profil.css";
 import ProfilJson from "../fictivesdata/membershipData.json";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 //Il faut faire en sorte qu'à l'appuie du button confirmer || modifier certain element disparaissent ou reaparaisse
 //Pour cacher plusieur element dans une condition ternaire on peut entourer tout les elements d'une balise
@@ -86,13 +88,19 @@ class Profil extends Component {
         });
     } else {
       //Mode modification
-      const _id = localStorage.getItem("_id");
+      const body = { _id: localStorage.getItem("_id") };
+      console.log("contôle du body import");
+      console.log(body);
       const option = {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: localStorage.getItem("token"),
+        },
         mode: "cors",
+        body: JSON.stringify(body),
       };
-      fetch("http://localhost:8080/profil/uploadSingle?id=" + _id, option)
+      fetch("http://localhost:8080/profil/uploadSingle", option)
         .then((res) => res.json())
         .then((data) => {
           this.setState({
@@ -118,11 +126,22 @@ class Profil extends Component {
         });
     }
   }
+  /*disconnect = () => {
+    localStorage.removeItem("_id");
+    localStorage.removeItem("token");
+  };*/
 
   render() {
     return (
       <div>
         <div id="body">
+          {this.state.isConnected && (
+            <button id="deconnexion" type="button">
+              <a href="https://cannesisup.com/#home" onClick={this.disconnect}>
+                Déconnexion
+              </a>
+            </button>
+          )}
           <div id="middle_bloc">
             <div
               id="image_fond"
@@ -297,16 +316,21 @@ class Profil extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div id="interaction">
-              {this.state.isDisabled && (
-                <button onClick={() => this.hide(false)}>Modifier</button>
-              )}
-              {!this.state.isDisabled && (
-                <button type="submit" onClick={() => this.hide(true)}>
-                  Confirmer
-                </button>
-              )}
-            </div>
+            {this.state.isConnected && (
+              <div
+                id="interaction"
+                style={{ visibility: this.state.isConnected }}
+              >
+                {this.state.isDisabled && (
+                  <button onClick={() => this.hide(false)}>Modifier</button>
+                )}
+                {!this.state.isDisabled && (
+                  <button type="submit" onClick={() => this.hide(true)}>
+                    Confirmer
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

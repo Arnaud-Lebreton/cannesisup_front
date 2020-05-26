@@ -29,27 +29,27 @@ class InitPassword extends Component {
       alert("Le champ mot de passe est vide");
     } else if (password !== confirmPassword) {
       alert("Les mots de passe saisis ne correspondent pas");
-    } else if (password === confirmPassword)
-      alert("Votre mot de passe a été modifié");
+    } else if (password === confirmPassword) {
+      this.updatePassword();
+    }
   };
 
   /********* Fonction qui envoie la mise à jour du MDP ********/
 
-  /*updatePassword = (e) => {
-    e.preventDefault();
+  updatePassword = () => {
     const body = {
-      email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
+      membershipEmail: this.state.email,
+      membershipHashPassword: this.state.password,
     };
+    console.log(this.state.email);
     const options = {
-      method: "POST",
+      method: "PUT",
       headers: { "Content-type": "application/json" },
       mode: "cors",
       body: JSON.stringify(body),
     };
 
-    fetch("", options)
+    fetch("http://localhost:8080/profil/mdp", options)
       .then((res) => res.json())
       .then(
         (data) => {
@@ -60,7 +60,7 @@ class InitPassword extends Component {
         }
       );
   };
-*/
+
   /********* Fonction Affiche/Cache le mot de passe ********/
 
   showPwd = () => {
