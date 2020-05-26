@@ -75,6 +75,12 @@ class MembersCard extends Component {
             .includes(this.state.search.toLowerCase()) ||
           data.compagnyActivityArea
             .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          data.compagnyCity
+            .toLowerCase()
+            .includes(this.state.search.toLowerCase()) ||
+          data.compagnyRepresentName
+            .toLowerCase()
             .includes(this.state.search.toLowerCase())
         ) {
           return data;
