@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from "moment";
 import {
   Container,
   Table,
@@ -11,8 +12,9 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 //Import style
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboardStyle.css";
 
@@ -45,11 +47,17 @@ class Test1 extends Component {
       //Tri colonne
       sortCulum: false,
       sortColumnActiv: "",
+      //
+      redirect: false,
     };
   }
   componentDidMount() {
-    this.getMembershipData();
-    this.getDashbordData();
+    if (localStorage.getItem("statut")) {
+      this.getMembershipData();
+      this.getDashbordData();
+    } else {
+      return <div className="dashboardGlobalSize">Erreur</div>;
+    }
   }
   //**********************************************
   // Extractions des données de la base MongoDB:
@@ -120,15 +128,14 @@ class Test1 extends Component {
           let first = data[0].dashboardPagination[0];
           let last = data[0].dashboardPagination[1];
           // gestion des champs
-          delete data[0].dashboardColumnListInit[0]._id;
-          delete data[0].dashboardColumnListInit[0].memberActive;
-          let listInit = Object.values(
-            data[0].dashboardColumnListInit[0]
-          ).sort();
+          let memDashboardColumnListInit = data[0].dashboardColumnListInit[0];
+          delete memDashboardColumnListInit._id;
+          delete memDashboardColumnListInit.memberActive;
+          let listInit = Object.values(memDashboardColumnListInit).sort();
 
-          delete data[0].dashboardColumnListShow[0]._id;
-          delete data[0].dashboardColumnListShow[0].memberActive;
-          let currentList = Object.values(data[0].dashboardColumnListShow[0]);
+          let memDashboardColumnListShow = data[0].dashboardColumnListShow[0];
+          delete memDashboardColumnListShow._id;
+          let currentList = Object.values(memDashboardColumnListShow).slice(1);
 
           let remainingList = [];
           listInit.forEach((initElement) => {
@@ -142,7 +149,6 @@ class Test1 extends Component {
               remainingList.push(initElement);
             }
           });
-
           this.setState({
             dashboardColumnListInit: data[0].dashboardColumnListInit,
             dashboardColumnListShow: data[0].dashboardColumnListShow,
@@ -181,11 +187,13 @@ class Test1 extends Component {
     };
     fetch("http://localhost:8080/profil/uploadAll?id=5ec67da33a89f8685c35a52f", options)
     //*********************************************************************************************/
-    fetch("http://localhost:8080/profil/TEST", options)
-      .then((res) => res.json())
+    fetch("http://localhost:8080/profil/delete", options)
+      .then((response) => response.json())
       .then(
         (data) => {
-          console.log(data);
+          this.getMembershipData();
+          this.getDashbordData();
+          alert("suppression effectuée!");
         },
         (error) => {
           console.log(error);
@@ -194,8 +202,13 @@ class Test1 extends Component {
   };
   updateMembershipData = () => {
     console.log("updateMembershipData");
+    const validationDate = moment().format("DD/MM/YYYY");
+
+    console.log(validationDate);
     const body = {
       _id: this.state.id,
+      memberActive: "oui",
+      validationDate: validationDate,
     };
     const options = {
       method: "PUT",
@@ -211,11 +224,12 @@ class Test1 extends Component {
     };
     fetch("http://localhost:8080/profil/uploadAll?id=5ec67da33a89f8685c35a52f", options)
     //*********************************************************************************************/
-    fetch("http://localhost:8080/profil/TEST", options)
+    fetch("http://localhost:8080/profil/activate", options)
       .then((res) => res.json())
       .then(
         (data) => {
-          console.log(data);
+          this.getMembershipData();
+          this.getDashbordData();
         },
         (error) => {
           console.log(error);
@@ -291,8 +305,8 @@ class Test1 extends Component {
         <tr>
           <th className="dashboardTableHeaderText dashboardTableHeaderCol1">
             <button
-              key={1}
-              name={1}
+              key={0}
+              name={0}
               className="dashboardTableHeaderText"
               onClick={this.columnSelection}
             >
@@ -316,8 +330,8 @@ class Test1 extends Component {
             return (
               <th className="dashboardTableHeaderText">
                 <button
-                  key={index}
-                  name={index}
+                  key={index - 1}
+                  name={index - 1}
                   className="dashboardTableHeaderText"
                   onClick={this.columnSelection}
                 >
@@ -336,8 +350,8 @@ class Test1 extends Component {
           return (
             <th className="dashboardTableHeaderText">
               <button
-                key={index}
-                name={index}
+                key={index - 1}
+                name={index - 1}
                 className=" dashboardTableHeaderText"
                 onClick={this.columnSelection}
               >
@@ -370,18 +384,20 @@ class Test1 extends Component {
       membershipFilterList.forEach((element, index) => {
         let elementUpper = element[column].toUpperCase();
         let elementConvE = elementUpper.replace(/é|è|ê|ë/gi, "E");
-        let elementConvI = elementConvE.replace(/ï|î/gi, "I");
+        let elementConvI = elementConvE.replace(/ï|î|-/gi, "I");
         let elementConvA = elementConvI.replace(/à|ä|â/gi, "A");
-        //console.log(str);
         listText.push(elementConvA + "-" + index);
       });
-      console.log(listText.sort());
       listText.sort().forEach((element, index) => {
         let n = element.split("-")[1];
         listData.push(membershipFilterList[n]);
       });
+      let first = 0;
+      let last = this.state.nPerPage;
       this.setState({
-        membershipFilterPaginationData: listData,
+        membershipFilterPaginationData: listData.slice(first, last),
+        membershipFilterList: listData,
+        activePage: 1,
         sortCulum: true,
         sortColumnActiv: e.target.name,
       });
@@ -389,11 +405,10 @@ class Test1 extends Component {
     //Tri décroissant
     if (sortCulum && sortColumnActiv === e.target.name) {
       let column = Object.keys(dashboardColumnListShow)[e.target.name];
-      console.log(membershipFilterList);
       membershipFilterList.forEach((element, index) => {
         let elementUpper = element[column].toUpperCase();
-        let elementConvE = elementUpper.replace(/é|è|ê|ë/gi, "E");
-        let elementConvI = elementConvE.replace(/ï|î/gi, "I");
+        let elementConvE = elementUpper.replace(/é|è|ê|ë|@/gi, "E");
+        let elementConvI = elementConvE.replace(/ï|î|-/gi, "I");
         let elementConvA = elementConvI.replace(/à|ä|â/gi, "A");
         //console.log(str);
         listText.push(elementConvA + "-" + index);
@@ -403,8 +418,12 @@ class Test1 extends Component {
         let n = element.split("-")[1];
         listData.push(membershipFilterList[n]);
       });
+      let first = 0;
+      let last = this.state.nPerPage;
       this.setState({
-        membershipFilterPaginationData: listData,
+        membershipFilterPaginationData: listData.slice(first, last),
+        membershipFilterList: listData,
+        activePage: 1,
         sortCulum: false,
         sortColumnActiv: "",
       });
@@ -426,6 +445,7 @@ class Test1 extends Component {
       if (this.state.membershipFilterPaginationData) {
         return this.state.membershipFilterPaginationData.map(
           (element, index) => {
+            console.log(element);
             return (
               <tr key={index} className="">
                 {this.boutonCreate(index, element._id, element.memberActive)}
@@ -578,9 +598,9 @@ class Test1 extends Component {
         list.forEach((element, index) => {
           if (element._id === id) {
             lastnameNameCompagny =
-              element.compagnyRepresentLastname +
+              element.compagnyRepresentFirstname +
               " " +
-              element.compagnyRepresentName +
+              element.compagnyRepresentLastname +
               " ( " +
               element.compagnyName +
               " ) ";
@@ -605,11 +625,6 @@ class Test1 extends Component {
         );
       };
 
-      let actionProfil = () => {
-        if (this.state.textAction === "MODIFIER") {
-          return "/profil/" + this.state.id;
-        }
-      };
       let actionData = () => {
         if (this.state.textAction === "SUPPRIMER") {
           this.deleteMembershipData();
@@ -617,6 +632,9 @@ class Test1 extends Component {
         } else if (this.state.textAction === "ACTIVER") {
           this.updateMembershipData();
           this.setState({ modalShow: !this.state.modalShow });
+        } else if (this.state.textAction === "MODIFIER") {
+          localStorage.setItem("_idMembership", this.state.id);
+          this.setState({ redirect: true });
         }
       };
 
@@ -644,19 +662,24 @@ class Test1 extends Component {
               >
                 Annuler
               </Button>
-              <Link to={actionProfil()}>
-                <Button
-                  size="sm"
-                  className="dashBoardAlertButton"
-                  onClick={actionData}
-                >
-                  valider
-                </Button>
-              </Link>
+
+              <Button
+                size="sm"
+                className="dashBoardAlertButton"
+                onClick={actionData}
+              >
+                valider
+              </Button>
+              {this.redirect()}
             </Modal.Footer>
           </Modal>
         </>
       );
+    }
+  };
+  redirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/profil" />;
     }
   };
   //**********************************************
@@ -885,7 +908,7 @@ class Test1 extends Component {
   // Lance calcul nouveau header
   //
   newHeaderColumn = () => {
-    console.log("newHeaderColumn*****************");
+    console.log("newHeaderColumn");
     let dashboardColumnListInit = this.state.dashboardColumnListInit[0];
     let currentList = this.state.currentList;
     let dashboardNewColumn = ["_id", "memberActive"];
@@ -934,8 +957,6 @@ class Test1 extends Component {
       membershipNumber: dataList.length,
       modalColumnListShow: false,
     });
-
-    console.log("newHeaderColumn*****************");
   };
   //---------------------------------------------
   // calcul des champs à enlever
@@ -971,6 +992,15 @@ class Test1 extends Component {
     this.setState({ currentList: currentList, remainingList: remainingList });
   };
   //---------------------------------------------
+  // suppréssion des données du localStorage
+  // -
+  disconnect = () => {
+    localStorage.removeItem("_id");
+    localStorage.removeItem("token");
+    localStorage.removeItem("statut");
+    localStorage.removeItem("_idMembership");
+  };
+  //---------------------------------------------
   // Lance l'affichage uniquement lorsque les données sont chargées
   // Starts display only when data is loaded
   init = () => {
@@ -979,7 +1009,7 @@ class Test1 extends Component {
       return (
         <Container className="dashboardGlobalSize">
           <div className="dashboardDeconnexionButton">
-            <Button>
+            <Button onClick={this.disconnect}>
               <i class="fas fa-sign-out-alt dashboardDeconnexionIcon"></i>
             </Button>
           </div>

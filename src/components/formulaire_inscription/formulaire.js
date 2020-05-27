@@ -28,6 +28,10 @@ class inscrip extends Component {
     };
   }
 
+  handleInput = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   dataHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -40,13 +44,33 @@ class inscrip extends Component {
       body: formData, //JSON.stringify(body),
     };
 
-    //Envoie de la requete
+    //Envoie de la requete inscription
     fetch("http://localhost:8080/profil/insertSingle", options)
       .then((response) => response.json())
       .then(
         (data) => {
-          alert("Votre demande a bien été prise en compte!");
+          alert("Votre demande a bien été prise en compte !");
         },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+    const bodyMail = {
+      membershipEmail: this.state.email,
+    };
+    console.log(bodyMail);
+    const optionMail = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      body: JSON.stringify(bodyMail),
+    };
+    //Envoie de la requete
+    fetch("http://localhost:8080/mail/subscribe", optionMail)
+      .then((response) => response.json())
+      .then(
+        (data) => {},
         (error) => {
           console.log(error);
         }
@@ -88,8 +112,9 @@ class inscrip extends Component {
           <label>Email Privé : </label>
           <input
             type="email"
-            name="membershipEmail"
+            name="email"
             placeholder="Email..."
+            onChange={this.handleInput}
             required
           />
           <label>Mot de passe : </label>

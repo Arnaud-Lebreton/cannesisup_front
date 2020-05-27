@@ -11,6 +11,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Profil from "./components/profil/Profil";
 import Formulaire from "./components/formulaire_inscription/formulaire";
 import Login from "./components/login/Login";
+import TestLogin from "./components/login/TestLogin";
 import InitPassword from "./components/login/InitPassword";
 
 class App extends Component {

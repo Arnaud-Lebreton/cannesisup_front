@@ -5,7 +5,7 @@ import ForgotPassword from "./ForgotPassword";
 import { Redirect } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-class Login extends Component {
+class TestLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,18 +28,14 @@ class Login extends Component {
 
   identify = (e) => {
     e.preventDefault();
+    console.log("test");
     const body = {
       membershipEmail: this.state.email,
       membershipHashPassword: this.state.password,
       superAdminEmail: this.state.email,
       superAdminHashPassword: this.state.password,
     };
-    this.identifyAdmin(body);
 
-    this.identifyMemberShip(body);
-  };
-
-  identifyAdmin = (body) => {
     const options = {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -52,45 +48,34 @@ class Login extends Component {
       .catch((err) => console.log("pas admin"))
       .then(
         (data) => {
-          console.log("admin");
+          console.log(data);
           let token = "bearer " + data.token;
           localStorage.setItem("token", token);
           localStorage.setItem("_id", data.superAdminId);
-          localStorage.setItem("statut", data.statut);
+
           if (data.token) {
             this.setState({ redirectAdmin: true });
-          } else {
-            alert("Adresse ou mot de passe invalide, veuillez recommencer");
+            console.log("redirectAdmin");
+            console.log(this.state.redirectAdmin);
           }
         },
         (error) => {
           console.log(error);
-          console.log("error admin");
         }
       );
-  };
-
-  identifyMemberShip = (body) => {
-    const options = {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      mode: "cors",
-      body: JSON.stringify(body),
-    };
     //Contrôle membre
-    fetch("http://localhost:8080/signIn/membership", options)
+    fetch("http://localhost:8080/signIn", options)
       .then((res) => res.json())
       .then(
         (data) => {
           console.log(data);
-          console.log("membership");
           let token = "bearer " + data.token;
           localStorage.setItem("token", token);
           localStorage.setItem("_id", data.membershipId);
           if (data.token) {
             this.setState({ redirectMember: true });
-          } else {
-            alert("Adresse ou mot de passe invalide, veuillez recommencer");
+            console.log("redirectMember");
+            console.log(this.state.redirectMember);
           }
         },
         (error) => {
@@ -178,4 +163,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default TestLogin;
