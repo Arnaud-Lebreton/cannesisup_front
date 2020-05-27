@@ -26,12 +26,11 @@ class Login extends Component {
 
   identify = (e) => {
     e.preventDefault();
-    console.log("test");
     const body = {
       membershipEmail: this.state.email,
       membershipHashPassword: this.state.password,
     };
-
+    console.log(body);
     const options = {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -80,11 +79,7 @@ class Login extends Component {
             dhérent
           </h1>
         </div>
-        <Form
-          className="containtLoginForm"
-          method="POST"
-          onSubmit={this.identify}
-        >
+        <Form className="containtLoginForm" onSubmit={this.identify}>
           <Form.Group className="containtGroupForm">
             <Form.Control
               className="containtInputForm"
@@ -118,7 +113,7 @@ class Login extends Component {
           <Nav className="resetPassword" onClick={this.changeShow}>
             <ForgotPassword />
           </Nav>
-          <Link to={"/profil"} className="containtButtonLogin">
+          <Link to={"profil"} className="containtButtonLogin">
             <Button className="buttonLogin">S'Identifier</Button>
           </Link>
         </Form>

@@ -157,9 +157,7 @@ class InitPassword extends Component {
           </div>
 
           <div className="containtButtonLogin">
-            <Button className="buttonLogin" type="submit">
-              Confirmer
-            </Button>
+            <Button className="buttonLogin">Confirmer</Button>
           </div>
         </Form>
       </div>

@@ -55,8 +55,13 @@
 
 .containtButtonSearchBar {
   width: 50px;
-  background-color: white !important;
+  background-color: transparent !important;
   border-color: transparent;
   margin-left: -50px;
   border: 0px;
+  padding: 0;
+}
+
+.containtButtonSearchBar i {
+  color: black;
 }

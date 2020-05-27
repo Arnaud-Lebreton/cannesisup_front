@@ -79,7 +79,7 @@ class MembersCard extends Component {
           data.compagnyCity
             .toLowerCase()
             .includes(this.state.search.toLowerCase()) ||
-          data.compagnyRepresentName
+          data.compagnyRepresentLastname
             .toLowerCase()
             .includes(this.state.search.toLowerCase())
         ) {
@@ -127,7 +127,7 @@ class MembersCard extends Component {
                 <ListGroupItem className="listGroupItem">
                   <Card.Text className="textManager">Dirigeant</Card.Text>
                   <Card.Text className="textRepresent">
-                    {element.compagnyRepresentName}{" "}
+                    {element.compagnyRepresentFirstname}{" "}
                     {element.compagnyRepresentLastname}
                   </Card.Text>
                 </ListGroupItem>
@@ -158,7 +158,7 @@ class MembersCard extends Component {
             onChange={(e) => this.searchSpace(e)}
           />
           <Button className="containtButtonSearchBar" disabled>
-            <img src="Images/Icones/search-solid.svg" />
+            <i class="fas fa-2x fa-search"></i>
           </Button>
         </Form>
         <p className="textMembers">{this.state.nbMembers} membres</p>

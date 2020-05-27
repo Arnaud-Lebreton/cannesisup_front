@@ -126,10 +126,10 @@ class Profil extends Component {
         });
     }
   }
-  /*disconnect = () => {
+  disconnect = () => {
     localStorage.removeItem("_id");
     localStorage.removeItem("token");
-  };*/
+  };
 
   render() {
     return (
