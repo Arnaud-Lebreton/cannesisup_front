@@ -54,6 +54,7 @@ class Profil extends Component {
   datimport() {
     if (this.props.match.params.id) {
       //Mode lecture
+      console.log("lecture");
       const option = {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -88,9 +89,17 @@ class Profil extends Component {
         });
     } else {
       //Mode modification
-      const body = { _id: localStorage.getItem("_id") };
-      console.log("contôle du body import");
-      console.log(body);
+      console.log("modification");
+
+      let body;
+      if (localStorage.getItem("_idMembership")) {
+        body = {
+          _id: localStorage.getItem("_id"),
+          _idMembership: localStorage.getItem("_idMembership"),
+        };
+      } else {
+        body = { _id: localStorage.getItem("_id") };
+      }
       const option = {
         method: "POST",
         headers: {
@@ -129,6 +138,7 @@ class Profil extends Component {
   disconnect = () => {
     localStorage.removeItem("_id");
     localStorage.removeItem("token");
+    localStorage.removeItem("_idMembership");
   };
 
   render() {

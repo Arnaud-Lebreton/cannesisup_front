@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import "./login.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Redirect } from "react-router-dom";
 
 class InitPassword extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class InitPassword extends Component {
       email: "",
       password: "",
       confirmPassword: "",
+      redirect: false,
     };
     this.submitData = this.submitData.bind(this);
   }
@@ -40,20 +42,39 @@ class InitPassword extends Component {
     const body = {
       membershipEmail: this.state.email,
       membershipHashPassword: this.state.password,
+      superAdminEmail: this.state.email,
+      superAdminHashPassword: this.state.password,
     };
-    console.log(this.state.email);
     const options = {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       mode: "cors",
       body: JSON.stringify(body),
     };
-
+    //Membre
     fetch("http://localhost:8080/profil/mdp", options)
       .then((res) => res.json())
       .then(
         (data) => {
-          console.log(data);
+          if (data.memberShipId.n === 1) {
+            this.setState({ redirect: true });
+            alert("Votre mot de passe membre a été modifié");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+    //Admin
+    fetch("http://localhost:8080/profil/mdpAdmin", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          if (data.superAdminId.n === 1) {
+            this.setState({ redirect: true });
+            alert("Votre mot de passe admin a été modifié");
+          }
         },
         (error) => {
           console.log(error);
@@ -78,6 +99,12 @@ class InitPassword extends Component {
       x.type = "text";
     } else {
       x.type = "password";
+    }
+  };
+
+  redirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/login" />;
     }
   };
 
@@ -157,7 +184,10 @@ class InitPassword extends Component {
           </div>
 
           <div className="containtButtonLogin">
-            <Button className="buttonLogin">Confirmer</Button>
+            <Button className="buttonLogin" type="submit">
+              Confirmer
+            </Button>
+            {this.redirect()}
           </div>
         </Form>
       </div>
