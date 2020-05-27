@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 15px;
-    border : 1.5px solid rgba(111, 125, 189, 0.973);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     margin-left: 25%;
     margin-right: 25%;
 }
@@ -14,9 +14,10 @@
     margin-bottom: 2%;
 }
 #formulaire input{
-    margin-right: 35%;
+    margin-right: 60%;
     border-radius: 5px;
-    border: 1px solid rgba(105, 40, 56, 0.973);
+    background-color: rgb(242, 242, 242) ;
+    border: none;
 }
 #formulaire select{
     margin-right: 75%;

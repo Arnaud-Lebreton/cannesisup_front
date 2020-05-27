@@ -1,25 +1,25 @@
-#image_fond{
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 150px;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+#image_fond {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 150px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 }
-#image_fond button{    
-    margin-top: 50px;
-    margin-right: 35%;
-    margin-left: 35%;
+#image_fond button {
+  margin-top: 50px;
+  margin-right: 35%;
+  margin-left: 35%;
 }
 #body button {
-    transition: background-color 0.2s linear;
-    border-radius: 8px;
-    padding: 10px 15px;
-    font-size: 15px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #f7316b;
-    background-color: #fff;
-    border: 2px solid #f7316b;
+  transition: background-color 0.2s linear;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f7316b;
+  background-color: #fff;
+  border: 2px solid #f7316b;
 }
 #body button:hover {
     transition: background-color 0.2s linear;
@@ -42,29 +42,34 @@
 #body input[name="society_name"]{
     font-size: 30px;
     font-weight: bold;
-    color: #ff0000;
+    color: rgb(73, 73, 73);
 }
-#body h3{
+#body h4{
     color: #0099ff;
     font-weight: bold;
 }
 #body input[name="name"], input[name="surname"]{
     font-size: 20px;
     font-weight: bold;
-    color: #ff6666;
+    color: rgb(73, 73, 73);
+    width: 100px;
+    margin-left: 2px;
 }
-
+#body #name{
+    display: flex;
+    flex-direction: row;
+}
 #middle_bloc{
 
     margin-top: 10%;
-    margin-left: 20%;
+    margin-left: 14%;
     left: 0px;
     background-color: white;
-    width: 35%;
-    box-shadow: 0 0 4px rgb(29, 161, 242);
+    width: 47%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 7px;
 }
-#body input, textarea, button{
+#body input, #body textarea, #body button{
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 5px;
@@ -72,6 +77,10 @@
     border: none;
     outline: none;
     border-radius: 5px;
+    
+}
+#body textarea{
+    overflow: visible;
 }
 #image_Logo button{
     margin-left: 70%;
@@ -90,22 +99,22 @@
     width: 45%;
 }
 #middle_bloc .paddingthis{
-    border-bottom: 1px solid rgb(125, 205, 255) ;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3) ;
     margin:10px;
     display: flex;
     flex-direction: column;
     
 }
 #side_bloc{
-    margin-top: 15%;
-    margin-right: 23%;
+    margin-top: 16%;
+    margin-right: 16%;
     position: absolute;
     top: 0px;
     right: 0px;
     background-color: white;
-    width: 20%;
+    width: 21%;
     border-radius: 7px;
-    box-shadow: 0 0 10px rgb(125, 205, 255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 #side_bloc div{
     padding: 5px;

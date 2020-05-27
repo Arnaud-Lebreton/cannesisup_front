@@ -66,7 +66,7 @@ class inscrip extends Component{
                     <label>Logo de la societé : </label>
                     <input type="file" placeholder="Societé..." required/>
                     <label>Previsualisation : </label>
-                    <img/>
+                    <img />
                     <br/ >
                     <label>Ville : </label>
                     <input type="text" placeholder="Ville..." required/>
@@ -81,6 +81,9 @@ class inscrip extends Component{
                         <option>Virement</option>
                     </select>
                     {/* Si carte bancaire choisis affiche les input concernant la CB, si virement envoie mail avec RIB */}
+                    <br/>
+                    <input type="checkbox" required/>
+                    <p>Je conscent</p>
                     <br/>
                     <input type="checkbox" required/>
                     <p>Je conscent</p>
