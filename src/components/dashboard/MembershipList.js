@@ -49,6 +49,7 @@ class MembershipList extends Component {
       sortColumnActiv: "",
       //
       redirect: false,
+      redirectAccueil: false,
     };
   }
   componentDidMount() {
@@ -169,18 +170,13 @@ class MembershipList extends Component {
     };
     const options = {
       method: "DELETE",
-      headers: { "Content-type": "application/json" },
+      headers: {
+        "Content-type": "application/json",
+        authorization: localStorage.getItem("token"),
+      },
       mode: "cors",
       body: JSON.stringify(body),
     };
-    /****** avec le token d'authorisation ******************************************************
-    const options = {
-      method: "DELETE",
-      headers: { "Content-type": "application/json", token : localStorage.getItem("token")  },
-      mode: "cors",
-    };
-    fetch("http://localhost:8080/profil/uploadAll?id=5ec67da33a89f8685c35a52f", options)
-    //*********************************************************************************************/
     fetch("http://localhost:8080/profil/delete", options)
       .then((response) => response.json())
       .then(
@@ -224,21 +220,21 @@ class MembershipList extends Component {
           console.log(error);
         }
       );
-
-    //mail
-    const bodyMail = {
+  };
+  activateMail = () => {
+    const body = {
       _id: this.state.id,
     };
-    const optionMail = {
+    const options = {
       method: "POST",
       headers: {
         "Content-type": "application/json",
         authorization: localStorage.getItem("token"),
       },
       mode: "cors",
-      body: JSON.stringify(bodyMail),
+      body: JSON.stringify(body),
     };
-    fetch("http://localhost:8080/mail/activate", optionMail)
+    fetch("http://localhost:8080/mail/activate", options)
       .then((res) => res.json())
       .then(
         (data) => {},
@@ -247,7 +243,6 @@ class MembershipList extends Component {
         }
       );
   };
-
   //**********************************************
   // Reconstruit la liste filtrée avec pagination
   // build useful data for display in the table
@@ -639,10 +634,11 @@ class MembershipList extends Component {
       let actionData = () => {
         if (this.state.textAction === "SUPPRIMER") {
           this.deleteMembershipData();
-          this.setState({ modalShow: !this.state.modalShow });
+          this.setState({ modalShow: !this.state.modalShow, activePage: 1 });
         } else if (this.state.textAction === "ACTIVER") {
           this.updateMembershipData();
-          this.setState({ modalShow: !this.state.modalShow });
+          this.activateMail();
+          this.setState({ modalShow: !this.state.modalShow, activePage: 1 });
         } else if (this.state.textAction === "MODIFIER") {
           localStorage.setItem("_idMembership", this.state.id);
           this.setState({ redirect: true });
@@ -1010,6 +1006,12 @@ class MembershipList extends Component {
     localStorage.removeItem("token");
     localStorage.removeItem("statut");
     localStorage.removeItem("_idMembership");
+    this.setState({ redirectAccueil: true });
+  };
+  redirectDeconnexion = () => {
+    if (this.state.redirectAccueil) {
+      return <Redirect to="/" />;
+    }
   };
   //---------------------------------------------
   // Lance l'affichage uniquement lorsque les données sont chargées
@@ -1051,25 +1053,13 @@ class MembershipList extends Component {
             </Table>
           </div>
           {this.alertShow()}
+          {this.redirectDeconnexion()}
         </Container>
       );
     }
   };
 
   render() {
-    console.log(this.state.membershipData); //Données extraite collection adhérent complète
-    console.log(this.state.dashboardColumnListShow); //Données extraite collection Dashboard - liste colonnne a afficher
-    console.log(this.state.dashboardColumnListInit); // Données extraite collection dashboard - Liste des colonnes disponibles
-    console.log(this.state.membershipFilterList); //Données filtrées et paginées
-    console.log(this.state.membershipFilterPaginationData);
-    console.log(this.state.dataRange);
-    console.log("this.state.listInit");
-    console.log(this.state.listInit);
-    console.log("this.state.currentList");
-    console.log(this.state.currentList);
-    console.log("this.state.remainingList");
-    console.log(this.state.remainingList);
-
     return <div>{this.init()}</div>;
   }
 }

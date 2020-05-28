@@ -41,7 +41,7 @@
   border-radius: 50%;
   width: 50%;
   border: 2px solid rgb(196, 185, 185);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   margin: auto;
   position: relative;
   bottom: 100px;
@@ -100,7 +100,7 @@ input[name="surname"] {
   width: 20px;
 }
 #body textarea {
-  width: 95%;
+  width: 100%;
   resize: vertical;
   overflow: auto;
 }
@@ -131,4 +131,44 @@ input[name="surname"] {
 }
 #side_bloc button {
   margin: auto;
+}
+.input_label {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+.adresse {
+  display: flex;
+  flex-direction: column;
+}
+.titreH3 {
+  font-size: 1.3rem !important;
+  color: #1da1f2;
+}
+.nomPrenom {
+  display: flex;
+  flex-direction: row;
+}
+.padding1 {
+  margin: 10px;
+}
+.reseaux {
+  color: #f7316b;
+  margin-right: 10px;
+}
+.dimTextarea1 {
+  min-height: 350px;
+}
+.download {
+  color: #f7316b;
+}
+.downloadText {
+  text-align: right;
+}
+.logout {
+  color: #f7316b;
+  cursor: pointer;
+}
+.logoutDiv {
+  margin-top: 10px;
 }

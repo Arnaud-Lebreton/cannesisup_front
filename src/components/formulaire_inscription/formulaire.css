@@ -148,3 +148,6 @@ body {
   background-color: white !important;
   border-color: transparent;
 }
+.previewImage {
+  max-width: 350px;
+}

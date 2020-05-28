@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./formulaire.css";
 import { Row, Col, Container, Button } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 class inscrip extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class inscrip extends Component {
       Site_web_Societe: "",
       Email_Societe: "",
       Telephone: "",
-      email: "",
+      membershipEmail: "",
       work: "",
       work_description: "",
       isShow: true,
@@ -25,6 +26,7 @@ class inscrip extends Component {
       facebook: "",
       twitter: "",
       linkedin: "",
+      redirect: false,
     };
   }
 
@@ -40,11 +42,11 @@ class inscrip extends Component {
   dataHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    console.log(formData);
 
     //Configuration de la requete
     const options = {
       method: "POST",
-      //headers: {}, // { "Content-Type": "application/json" },
       mode: "cors",
       body: formData, //JSON.stringify(body),
     };
@@ -62,7 +64,7 @@ class inscrip extends Component {
       );
 
     const bodyMail = {
-      membershipEmail: this.state.email,
+      membershipEmail: this.state.membershipEmail,
     };
     console.log(bodyMail);
     const optionMail = {
@@ -80,6 +82,22 @@ class inscrip extends Component {
           console.log(error);
         }
       );
+  };
+
+  redirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/inscription" />;
+    }
+  };
+
+  preview_image = (e) => {
+    let image = e.target.name;
+    let reader = new FileReader();
+    reader.onload = () => {
+      let output = document.getElementById(image);
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   render() {
@@ -127,6 +145,7 @@ class inscrip extends Component {
               <label>Email</label>
               <input
                 type="email"
+                name="membershipEmail"
                 placeholder="Email de connexion..."
                 onChange={this.handleInput}
                 required
@@ -153,8 +172,9 @@ class inscrip extends Component {
               <label>Confirmation du Mot de passe</label>
               <input
                 type="password"
-                placeholder="Confirmation..."
-                pattern=""
+                name="membershipHashPassword"
+                placeholder="Mot de passe..."
+                //pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 required
               />
             </div>
@@ -291,12 +311,13 @@ class inscrip extends Component {
                 type="file"
                 name="compagnyLogo"
                 placeholder="Societé..."
+                onChange={this.preview_image}
                 required
               />
             </div>
             <div className="containtField">
               <label>Previsualisation</label>
-              <img />
+              <img className="previewImage" id="compagnyLogo" />
             </div>
             <div className="containtField">
               <label>Photo de couverture</label>
@@ -304,11 +325,12 @@ class inscrip extends Component {
                 type="file"
                 name="compagnyCoverPhoto"
                 placeholder="Societé..."
+                onChange={this.preview_image}
               />
             </div>
             <div className="containtField">
               <label>Previsualisation</label>
-              <img />
+              <img className="previewImage" id="compagnyCoverPhoto" />
             </div>
             <div className="containtField">
               <label>Dossier de presentation en pdf</label>
@@ -355,7 +377,7 @@ class inscrip extends Component {
               <label>Citation sur CIU</label>
               <textarea
                 type="text"
-                name="citation"
+                name="compagnyRepresentQuote"
                 placeholder="Citation..."
                 rows="5"
                 cols="33"
@@ -367,13 +389,22 @@ class inscrip extends Component {
                 type="file"
                 name="compagnyRepresentPhoto"
                 placeholder="Votre Photo..."
+                onChange={this.preview_image}
                 required
               />
             </div>
             <div className="containtField">
               <label>Previsualisation</label>
-              <img />
+              <img className="previewImage" id="compagnyRepresentPhoto" />
             </div>
+          </div>
+          <div className="containtInformationTitle">
+            <h3>Cotisation : </h3>
+            <p>La cotisation annuelle est de 50€</p>
+            <span>
+              Vous serez contacté par email pour les modalités de paiement de la
+              cotisation
+            </span>
           </div>
           <div className="containtField">
             <label>Mode de paiement</label>
@@ -391,9 +422,17 @@ class inscrip extends Component {
             <p>J'accepte les RGPD</p>
           </div>
           <div className="containtButtonFormulaire">
-            <input type="submit" value="Confirmer" id="submit_but" />
+            <input
+              type="submit"
+              value="Confirmer"
+              id="submit_but"
+              onClick={() => {
+                this.setState({ redirect: true });
+              }}
+            />
           </div>
         </form>
+        {this.redirect()}
       </div>
     );
   }

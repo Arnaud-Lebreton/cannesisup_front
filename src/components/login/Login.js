@@ -35,7 +35,6 @@ class Login extends Component {
       superAdminHashPassword: this.state.password,
     };
     this.identifyAdmin(body);
-
     this.identifyMemberShip(body);
   };
 
@@ -59,8 +58,6 @@ class Login extends Component {
           localStorage.setItem("statut", data.statut);
           if (data.token) {
             this.setState({ redirectAdmin: true });
-          } else {
-            alert("Adresse ou mot de passe invalide, veuillez recommencer");
           }
         },
         (error) => {

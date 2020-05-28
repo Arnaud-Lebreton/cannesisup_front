@@ -5,10 +5,15 @@ import axios from "axios";
 import "./dashboardStyle.css";
 
 class Graphe extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null,
+    };
+  }
   fileHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
     //Configuration de la requete
     const options = {
       method: "POST",
@@ -16,7 +21,6 @@ class Graphe extends Component {
       mode: "cors",
       body: formData, //JSON.stringify(body),
     };
-
     //Envoie de la requete
     fetch("http://localhost:8080/testMulter", options)
       .then((response) => response.json())
@@ -29,6 +33,19 @@ class Graphe extends Component {
         }
       );
   };
+  changeImage = (e) => {
+    let chemin = e.target.value;
+  };
+
+  preview_image = (e) => {
+    console.log("test");
+    let reader = new FileReader();
+    reader.onload = () => {
+      let output = document.getElementById("output_image");
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   render() {
     return (
@@ -36,7 +53,8 @@ class Graphe extends Component {
         <form onSubmit={this.fileHandler} className="dashboardPaginationRow">
           <input type="text" name="superAdminEmail" placeholder="mail" />
           <input type="text" name="superAdminHashPassword" placeholder="mdp" />
-          <input type="file" name="image" />
+          <input type="file" accept="image/*" onChange={this.preview_image} />
+          <img style={{ maxWidth: 300 }} id="output_image" />
           <button type="submit">Envoyer</button>
         </form>
       </div>
