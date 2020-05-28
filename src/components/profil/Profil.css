@@ -1,10 +1,17 @@
 #image_fond {
+  width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 150px;
+  height: 200px;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
 }
+
+#image_Logo {
+  display: flex;
+  margin: 2%;
+}
+
 #image_fond button {
   margin-top: 50px;
   margin-right: 35%;
@@ -13,7 +20,7 @@
 
 #deconnexion {
   position: absolute;
-  right: 0px;
+  right: 10px;
   margin-top: -60px;
 }
 
@@ -37,6 +44,9 @@
 #body label {
   float: left;
 }
+#profil_image {
+  display: flex;
+}
 #profil_image img {
   border-radius: 50%;
   width: 50%;
@@ -48,9 +58,10 @@
   margin-bottom: -75px;
 }
 #body input[name="society_name"] {
-  font-size: 30px;
-  font-weight: bold;
-  color: rgb(73, 73, 73);
+  font-size: 25px;
+  text-transform: uppercase;
+  color: #f7316b;
+  font-weight: 500;
 }
 #body h4 {
   color: #0099ff;
@@ -70,19 +81,16 @@ input[name="surname"] {
 }
 #middle_bloc {
   margin-top: 10%;
-  margin-left: 14%;
+  margin-left: 15%;
   left: 0px;
   background-color: white;
-  width: 47%;
+  width: 40%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 7px;
 }
 #body input,
 #body textarea,
 #body button {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding: 5px;
   background: none;
   border: none;
   outline: none;
@@ -103,12 +111,12 @@ input[name="surname"] {
   width: 100%;
   resize: vertical;
   overflow: auto;
+  text-align: justify;
 }
 #logo_ent {
-  width: 45%;
+  width: 50%;
 }
 #middle_bloc .paddingthis {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -126,8 +134,8 @@ input[name="surname"] {
 }
 #side_bloc div {
   padding: 5px;
-  display: flex;
-  flex-direction: column;
+  /*display: flex;
+  flex-direction: column;*/
 }
 #side_bloc button {
   margin: auto;
@@ -142,6 +150,8 @@ input[name="surname"] {
   flex-direction: column;
 }
 .titreH3 {
+  padding-left: 5px;
+  margin-bottom: 0;
   font-size: 1.3rem !important;
   color: #1da1f2;
 }
@@ -162,8 +172,23 @@ input[name="surname"] {
 .download {
   color: #f7316b;
 }
+
+.containtDownloadDoc {
+  margin-top: 2%;
+  display: flex;
+  width: 50%;
+  justify-content: right;
+}
 .downloadText {
+  margin-right: 6px;
+  margin-top: 2px;
+  line-height: 1rem;
   text-align: right;
+  font-size: 12px;
+}
+.downloadText p {
+  margin-top: 0;
+  font-weight: 500;
 }
 .logout {
   color: #f7316b;
@@ -171,4 +196,89 @@ input[name="surname"] {
 }
 .logoutDiv {
   margin-top: 10px;
+}
+
+.containtTextSociety {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin-bottom: 2%;
+}
+
+.containtActivitySector {
+  font-size: 19px;
+  padding-left: 5px;
+  font-weight: 500;
+  color: black;
+}
+
+.activitySector {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding-bottom: 10px;
+}
+
+.paddingthis label {
+  padding-left: 5px;
+  width: 20%;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.coordAdress input {
+  width: 80%;
+  font-size: 14px;
+}
+
+.containtPostal {
+  width: 15%;
+}
+.coordPostal {
+  display: flex;
+  margin-left: 20%;
+}
+.coordCity {
+  width: 100%;
+  margin-left: -10px;
+}
+.containtSocialNetwork {
+  padding-left: 5px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.containtSideBloc {
+  margin-top: -15px;
+}
+.containtSideBloc h3 {
+  font-size: 1.3rem !important;
+  color: #1da1f2;
+  padding-left: 5px;
+  margin-bottom: 0;
+}
+
+.FieldName {
+  margin-top: 5px;
+}
+.containtFieldName {
+  margin-top: inherit;
+}
+
+.containtFieldName input {
+  font-weight: 600;
+  color: black;
+}
+.containtFieldName input[name="work"] {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.containtWordMember {
+  padding: 0px;
+}
+
+.containtWordMember textarea {
+  height: 200px;
+  padding: 0 5px;
+}
+
+#interaction {
+  display: flex;
 }

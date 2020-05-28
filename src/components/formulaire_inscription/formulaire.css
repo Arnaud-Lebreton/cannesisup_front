@@ -32,6 +32,13 @@ body {
   font-size: 16px;
   margin-right: 50px;
   width: 150px;
+  font-weight: bold;
+}
+.containtField p {
+  margin-top: -20px;
+  font-size: 12px;
+  text-align: end;
+  margin-right: 25px;
 }
 .containtField input,
 .containtField textarea,
@@ -150,4 +157,5 @@ body {
 }
 .previewImage {
   max-width: 350px;
+  margin-bottom: 15px;
 }

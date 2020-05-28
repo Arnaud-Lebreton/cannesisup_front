@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./formulaire.css";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Accordion, Card } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
 class inscrip extends Component {
@@ -27,11 +27,23 @@ class inscrip extends Component {
       twitter: "",
       linkedin: "",
       redirect: false,
+      icone_eye: "fas fa-eye-slash",
     };
   }
 
   handleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  showPwd = () => {
+    let x = document.getElementById("pwd");
+    if (x.type === "password") {
+      x.type = "text";
+      this.setState({ icone_eye: "fas fa-eye" });
+    } else {
+      x.type = "password";
+      this.setState({ icone_eye: "fas fa-eye-slash" });
+    }
   };
 
   /********* Fonction qui change l'état de la Modal d'oubli de mot de passe ********/
@@ -153,30 +165,23 @@ class inscrip extends Component {
             </div>
             <div className="containtField">
               <label>Mot de passe</label>
-              <div>
-                <input
-                  type="password"
-                  placeholder="Mot de passe..."
-                  pattern=""
-                  required
-                />
-                <Button
-                  className="containtButtonPasswordFormulaire"
-                  onClick={this.showPwd}
-                >
-                  <i className="fas fa-eye" style={{ color: "#f7316b" }}></i>
-                </Button>
-              </div>
-            </div>
-            <div className="containtField">
-              <label>Confirmation du Mot de passe</label>
               <input
+                id="pwd"
                 type="password"
-                name="membershipHashPassword"
                 placeholder="Mot de passe..."
-                //pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 required
               />
+              <i
+                className={this.state.icone_eye}
+                style={{
+                  color: "#f7316b",
+                  cursor: "pointer",
+                  marginLeft: "-25px",
+                }}
+                onClick={this.showPwd}
+              ></i>
+              <p>Min. 8 caractères, 1 Majuscule et 1 Chiffre</p>
             </div>
           </div>
           <div>

@@ -80,7 +80,7 @@ class MembersCard extends Component {
     this.setState({ cardDeckFilter: list, nbMembers: list.length });
   };
 
-  /******* Boucle sur l'ensemble des données + filtre des données pour la barre de recherche ********/
+  /******* Boucle sur l'ensemble des données des membres actifs dans la BDD ********/
   cardDeck = () => {
     return this.state.cardDeckFilter.map((element, index) => {
       return (
