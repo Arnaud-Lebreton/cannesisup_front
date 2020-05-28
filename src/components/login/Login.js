@@ -130,8 +130,8 @@ class Login extends Component {
         <div className="containtLogoLogin">
           <img className="LogoLogin" src="Images/logo-icone.png" alt="logo" />
           <h1>
-            <span>B</span>ienvenue sur votre <span>E</span>space <span>A</span>
-            dhérent
+            <span>B</span>ienvenue sur votre <span>E</span>space <span>C</span>
+            onnexion
           </h1>
         </div>
         <Form className="containtLoginForm">

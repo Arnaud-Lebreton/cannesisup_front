@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./formulaire.css";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
 
 class inscrip extends Component {
   constructor(props) {
@@ -30,6 +30,11 @@ class inscrip extends Component {
 
   handleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  /********* Fonction qui change l'état de la Modal d'oubli de mot de passe ********/
+  changeShow = () => {
+    this.setState({ showForgotPassword: true });
   };
 
   dataHandler = (e) => {
@@ -129,12 +134,20 @@ class inscrip extends Component {
             </div>
             <div className="containtField">
               <label>Mot de passe</label>
-              <input
-                type="password"
-                placeholder="Mot de passe..."
-                pattern=""
-                required
-              />
+              <div>
+                <input
+                  type="password"
+                  placeholder="Mot de passe..."
+                  pattern=""
+                  required
+                />
+                <Button
+                  className="containtButtonPasswordFormulaire"
+                  onClick={this.showPwd}
+                >
+                  <i className="fas fa-eye" style={{ color: "#f7316b" }}></i>
+                </Button>
+              </div>
             </div>
             <div className="containtField">
               <label>Confirmation du Mot de passe</label>

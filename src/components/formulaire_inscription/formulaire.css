@@ -142,3 +142,9 @@ body {
   display: grid;
   justify-content: center;
 }
+
+.containtButtonPasswordFormulaire {
+  width: 50px;
+  background-color: white !important;
+  border-color: transparent;
+}
