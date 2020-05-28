@@ -840,23 +840,29 @@ class MembershipList extends Component {
           animation={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Gestion des champs</Modal.Title>
+            <Modal.Title>
+              <img
+                className="dashboardModalLogo"
+                src="/images/logo-icone.png"
+              ></img>{" "}
+              Gestion des champs
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>{this.modalListField()}</Modal.Body>
           <Modal.Footer>
             <Button
-              className="dashboardFilterText"
+              className="dashboardFilterText dashBoardAlertButton"
               variant="secondary"
               onClick={handleClose}
             >
-              Close
+              Fermer
             </Button>
             <Button
-              className="dashboardFilterText"
+              className="dashboardFilterText dashBoardModalButton"
               variant="primary"
               onClick={this.newHeaderColumn}
             >
-              Save Changes
+              Sauvegarder
             </Button>
           </Modal.Footer>
         </Modal>
@@ -869,15 +875,16 @@ class MembershipList extends Component {
   // Display of the column management mode
   modalListField = () => {
     return (
-      <div className="">
+      <div className="dashboardModalList">
         <Form.Group
           className="dashboardModalListWidth"
           controlId="exampleForm.ControlSelect2"
         >
-          <Form.Label className="dashboardInputText">
+          <Form.Label className="dashboardModalText">
             Champs disponibles
           </Form.Label>
           <Form.Control
+            className="dashboardModalListHeight"
             name="list1"
             as="select"
             multiple
@@ -890,8 +897,11 @@ class MembershipList extends Component {
           className="dashboardModalListWidth"
           controlId="exampleForm.ControlSelect2"
         >
-          <Form.Label className=" ">Champs affichés</Form.Label>
+          <Form.Label className="dashboardModalText ">
+            Champs affichés
+          </Form.Label>
           <Form.Control
+            className="dashboardModalListHeight"
             name="list2"
             as="select"
             multiple
@@ -1022,7 +1032,10 @@ class MembershipList extends Component {
       return (
         <Container className="dashboardGlobalSize">
           <div className="dashboardDeconnexionButton">
-            <Button onClick={this.disconnect}>
+            <Button
+              onClick={this.disconnect}
+              className="dashboardDeconnexionSize"
+            >
               <i class="fas fa-sign-out-alt dashboardDeconnexionIcon"></i>
             </Button>
           </div>

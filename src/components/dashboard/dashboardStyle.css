@@ -122,27 +122,63 @@ body {
 }
 /*Modal des champs */
 .dashboardModalListWidth {
-  width: 50%;
+  width: auto;
+  margin: 10px;
+}
+.dashboardModalListHeight {
+  height: 150px !important;
+}
+.dashboardModalText {
+  color: #f7316b;
+  margin-bottom: 0px !important;
+}
+
+.dashboardModalList {
+  padding: 0px !important;
+  display: flex;
 }
 .dashboardModalListMargin {
   margin: 1px;
 }
 .dashboardModalButtonSize {
   width: 150px !important;
+  cursor: pointer;
+  margin: 5px 0px 5px 5px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f7316b;
+  background-color: #fff;
+  border: 2px solid #f7316b;
 }
-.dashboardDeconnexionButton {
-  text-align: right;
-  margin-bottom: 5px;
-}
-.dashboardDeconnexionIcon {
-  color: white;
+.dashboardModalButtonSize:hover {
+  color: #fff;
+  background-color: #f7316b;
+  border-color: #f7316b;
 }
 .dashboardModalLogo {
   width: 28px;
   height: auto;
 }
+.dashBoardModalButton {
+  width: 130px;
+  cursor: pointer;
+  margin: 5px 0px 5px 5px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f7316b;
+  background-color: #fff;
+  border: 2px solid #f7316b;
+}
+.dashBoardModalButton:hover {
+  color: #fff;
+  background-color: #f7316b;
+  border-color: #f7316b;
+}
 /*Modal alerte */
-
 .dashBoardAlertButton {
   width: 85px;
   cursor: pointer;
@@ -166,4 +202,29 @@ body {
 }
 .dashBoardAlertStyle {
   color: #f7316b;
+}
+/*Déconnexion*/
+.dashboardDeconnexionButton {
+  text-align: right;
+  margin-bottom: 5px;
+}
+.dashboardDeconnexionIcon {
+  color: #f7316b;
+}
+.dashboardDeconnexionSize {
+  width: 150px !important;
+  cursor: pointer;
+  margin: 5px 0px 5px 5px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+  background-color: #fff;
+  border: 2px solid #f7316b;
+}
+.dashboardDeconnexionSize:hover {
+  color: #fff;
+  background-color: #f7316b;
+  border-color: #f7316b;
 }
