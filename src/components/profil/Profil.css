@@ -10,6 +10,13 @@
   margin-right: 35%;
   margin-left: 35%;
 }
+
+#deconnexion {
+  position: absolute;
+  right: 0px;
+  margin-top: -60px;
+}
+
 #body button {
   transition: background-color 0.2s linear;
   border-radius: 8px;
@@ -103,7 +110,6 @@
     margin:10px;
     display: flex;
     flex-direction: column;
-    
 }
 #side_bloc{
     margin-top: 16%;
@@ -123,4 +129,9 @@
 }
 #side_bloc button{
     margin: auto;
+}
+.input_label{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
 }

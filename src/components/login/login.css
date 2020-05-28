@@ -1,9 +1,12 @@
 /*************** CSS Login.js ***************/
 
+.containtLogin {
+  margin: 10% 0;
+}
+
 .containtLogoLogin {
   display: flex;
   justify-content: center;
-  margin-top: 150px;
 }
 
 .containtLogoLogin h1 {
@@ -41,6 +44,10 @@
 .containtButtonLogin {
   display: flex;
   justify-content: center;
+}
+
+.containtButtonLogin:hover {
+  text-decoration: none;
 }
 
 .containtButtonPassword {
@@ -108,3 +115,20 @@
 }
 
 /*************** CSS InitPassword.js ***************/
+
+.containtInitPassword {
+  margin: 10% 0;
+}
+
+.conditionTextPassword {
+  margin-top: -20px;
+}
+
+.conditionTextPassword p {
+  margin: 0;
+}
+
+.conditionTextPassword ul {
+  font-size: 14px;
+  font-style: italic;
+}

@@ -18,7 +18,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboardStyle.css";
 
-class MembershipList extends Component {
+class Test1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,14 +65,19 @@ class MembershipList extends Component {
   getMembershipData = () => {
     console.log("getMembershipData");
     const options = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        authorization: localStorage.getItem("token"),
-      },
+      method: "GET",
+      headers: { "Content-type": "application/json" },
       mode: "cors",
-      body: JSON.stringify({ _id: localStorage.getItem("_id") }),
     };
+
+    /****** avec le token d'authorisation ******************************************************
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json", token : localStorage.getItem("token")  },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/profil/uploadAll?id=5ec67da33a89f8685c35a52f", options)
+    //*********************************************************************************************/
     fetch("http://localhost:8080/profil/uploadAll", options)
       .then((res) => res.json())
       .then(
@@ -88,20 +93,21 @@ class MembershipList extends Component {
   };
   getDashbordData = () => {
     console.log("getDashbordData");
-
     const options = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        authorization: localStorage.getItem("token"),
-      },
+      method: "GET",
+      headers: { "Content-type": "application/json" },
       mode: "cors",
-      body: JSON.stringify({ _id: localStorage.getItem("_id") }),
     };
-    fetch("http://localhost:8080/dashboard/upload", options)
-      //*********************************************************************************************/
+    /****** avec le token d'authorisation ******************************************************
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json", token : localStorage.getItem("token")  },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/profil/uploadAll?id=5ec67da33a89f8685c35a52f", options)
+    //*********************************************************************************************/
 
-      //fetch("http://localhost:8080/dashboard/upload", options)
+    fetch("http://localhost:8080/dashboard/upload", options)
       .then((res) => res.json())
       .then(
         (data) => {
@@ -206,13 +212,18 @@ class MembershipList extends Component {
     };
     const options = {
       method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-        authorization: localStorage.getItem("token"),
-      },
+      headers: { "Content-type": "application/json" },
       mode: "cors",
       body: JSON.stringify(body),
     };
+    /****** avec le token d'authorisation ******************************************************
+    const options = {
+      method: "DELETE",
+      headers: { "Content-type": "application/json", token : localStorage.getItem("token")  },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/profil/uploadAll?id=5ec67da33a89f8685c35a52f", options)
+    //*********************************************************************************************/
     fetch("http://localhost:8080/profil/activate", options)
       .then((res) => res.json())
       .then(
@@ -220,28 +231,6 @@ class MembershipList extends Component {
           this.getMembershipData();
           this.getDashbordData();
         },
-        (error) => {
-          console.log(error);
-        }
-      );
-
-    //mail
-    const bodyMail = {
-      _id: this.state.id,
-    };
-    const optionMail = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        authorization: localStorage.getItem("token"),
-      },
-      mode: "cors",
-      body: JSON.stringify(bodyMail),
-    };
-    fetch("http://localhost:8080/mail/activate", optionMail)
-      .then((res) => res.json())
-      .then(
-        (data) => {},
         (error) => {
           console.log(error);
         }
@@ -1074,4 +1063,4 @@ class MembershipList extends Component {
   }
 }
 
-export default MembershipList;
+export default Test1;

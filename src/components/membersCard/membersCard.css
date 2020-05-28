@@ -7,7 +7,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  margin: 0 10%;
+  margin: 5% 10%;
 }
 
 .containerMembersCard {
@@ -35,6 +35,8 @@ body {
   width: 50%;
   border-radius: 50%;
   border: 5px solid white;
+  min-height: 160px;
+  max-height: 160px;
 }
 
 .textDescription {
@@ -61,8 +63,7 @@ body {
   margin-top: 3px;
 }
 
-.textActivity,
-.textManager {
+.textActivity,.textManager {
   color: #1da1f2;
   font-weight: 600;
   font-size: 20px;
@@ -75,6 +76,15 @@ body {
   font-weight: 600;
   font-size: 16px;
 }
+
+.containtMemberBouton {
+  display: grid;
+}
+
+.containtMemberBouton:hover {
+  text-decoration: none;
+}
+
 .memberBouton {
   width: auto;
   cursor: pointer;
@@ -108,14 +118,14 @@ body {
   border-top-right-radius: 8px;
 }
 
-.containtLogo {
+.containtLogoMembersCard {
   max-width: 100%;
   position: static;
   display: grid;
   justify-content: center;
   margin-bottom: 15px;
 }
-.logo {
+.logoMembersCard {
   height: 75px;
 }
 

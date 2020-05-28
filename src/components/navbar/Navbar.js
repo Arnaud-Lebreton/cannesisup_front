@@ -19,7 +19,7 @@ class Navbar extends Component {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/#home" className="navLink">
+            <Nav.Link href="/inscription" className="navLink">
               Devenez adhérent
             </Nav.Link>
           </Nav.Item>

@@ -23,11 +23,15 @@ class ForgotPassword extends Component {
     this.setState({ close: !this.state.close });
   };
 
+  message = () => {
+    alert("Un mail vous à été envoyé");
+  };
+
   /********* Fonction qui permet de réinitialiser le MDP ********/
 
   resetPassword = (e) => {
     e.preventDefault();
-    const body = this.state.email;
+    const body = { membershipEmail: this.state.email };
     const options = {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -35,7 +39,7 @@ class ForgotPassword extends Component {
       body: JSON.stringify(body),
     };
 
-    fetch("", options)
+    fetch("http://localhost:8080/mail/mdp", options)
       .then((res) => res.json())
       .then(
         (data) => {
@@ -45,6 +49,10 @@ class ForgotPassword extends Component {
           console.log(error);
         }
       );
+    alert(
+      "Un mail vous a été envoyé pour la réinitialisation de votre mot de passe"
+    );
+    this.changeclose();
   };
 
   render() {

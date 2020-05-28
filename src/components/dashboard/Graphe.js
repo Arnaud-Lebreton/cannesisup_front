@@ -1,23 +1,45 @@
 import React, { Component } from "react";
-import { Container, Image, Row, Col } from "react-bootstrap";
+import { Container, Image, Row, Col, Button } from "react-bootstrap";
+import axios from "axios";
 //Import css
 import "./dashboardStyle.css";
 
 class Graphe extends Component {
-  ShowGraph1 = () => {
-    return <Image src="Graphe1.gif" className="dashboardGraphDim"></Image>;
+  fileHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    //Configuration de la requete
+    const options = {
+      method: "POST",
+      //headers: {}, // { "Content-Type": "application/json" },
+      mode: "cors",
+      body: formData, //JSON.stringify(body),
+    };
+
+    //Envoie de la requete
+    fetch("http://localhost:8080/testMulter", options)
+      .then((response) => response.json())
+      .then(
+        (data) => {
+          alert("Votre message a été pris en compte, merci");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   };
-  ShowGraph2 = () => {
-    return <Image src="Graphe1.gif" className="dashboardGraphDim"></Image>;
-  };
+
   render() {
     return (
-      <Container className="dashboardGrapheAlign">
-        <Row className="">
-          <Col lg={6}>{this.ShowGraph1()}</Col>
-          <Col lg={6}>{this.ShowGraph2()}</Col>
-        </Row>
-      </Container>
+      <div>
+        <form onSubmit={this.fileHandler} className="dashboardPaginationRow">
+          <input type="text" name="superAdminEmail" placeholder="mail" />
+          <input type="text" name="superAdminHashPassword" placeholder="mdp" />
+          <input type="file" name="image" />
+          <button type="submit">Envoyer</button>
+        </form>
+      </div>
     );
   }
 }
