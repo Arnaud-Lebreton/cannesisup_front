@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
 import "./Profil.css";
-import ProfilJson from "../fictivesdata/membershipData.json";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 //Il faut faire en sorte qu'à l'appuie du button confirmer || modifier certain element disparaissent ou reaparaisse
