@@ -15,7 +15,7 @@ class inscrip extends Component {
       Email_Societe: "",
 
       Telephone: "",
-      email: "",
+      membershipEmail: "",
       work: "",
       work_description: "",
       isShow: true,
@@ -39,7 +39,6 @@ class inscrip extends Component {
     //Configuration de la requete
     const options = {
       method: "POST",
-      //headers: {}, // { "Content-Type": "application/json" },
       mode: "cors",
       body: formData, //JSON.stringify(body),
     };
@@ -57,7 +56,7 @@ class inscrip extends Component {
       );
 
     const bodyMail = {
-      membershipEmail: this.state.email,
+      membershipEmail: this.state.membershipEmail,
     };
     console.log(bodyMail);
     const optionMail = {
@@ -112,7 +111,7 @@ class inscrip extends Component {
           <label>Email Privé : </label>
           <input
             type="email"
-            name="email"
+            name="membershipEmail"
             placeholder="Email..."
             onChange={this.handleInput}
             required
