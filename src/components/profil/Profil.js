@@ -32,6 +32,9 @@ class Profil extends Component {
       background_color: "none",
       //Mode lecture
       isConnected: false,
+      Show_Link : false,
+      Show_Twit : false,
+      Show_Face : false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -50,6 +53,17 @@ class Profil extends Component {
   }
   componentDidMount() {
     this.datimport();
+  }
+  addres(){
+    if (this.state.linkedin.length > 6) {
+      this.setState({Show_Link : true})
+    }
+    if (this.state.facebook.length > 6) {
+      this.setState({Show_Face : true})
+    }
+    if (this.state.twitter.length > 6) {
+      this.setState({Show_Twit : true})
+    }
   }
   datimport() {
     if (this.props.match.params.id) {
@@ -140,7 +154,6 @@ class Profil extends Component {
     localStorage.removeItem("token");
     localStorage.removeItem("_idMembership");
   };
-
   render() {
     return (
       <div>
@@ -181,7 +194,8 @@ class Profil extends Component {
                 value={this.state.society_name}
                 onChange={this.handleChange}
               />
-              <textarea
+              <p>{this.state.society_description}</p>
+              {!this.state.isDisabled && <textarea
                 style={{
                   border: this.state.border,
                   backgroundColor: this.state.background_color,
@@ -191,7 +205,7 @@ class Profil extends Component {
                 name="society_info"
                 value={this.state.society_description}
                 onChange={this.handleChange}
-              />
+              />}
               <input
                 style={{
                   border: this.state.border,
@@ -206,91 +220,96 @@ class Profil extends Component {
             </div>
             <div className="paddingthis">
               <h3>Coordonnées : </h3>
-              <label>Email de la Societé : </label>
-              <input
-                style={{
-                  border: this.state.border,
-                  backgroundColor: this.state.background_color,
-                }}
-                type="email"
-                placeholder="Email"
-                disabled={this.state.isDisabled}
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-              <label>Adresse : </label>
-              <input
-                style={{
-                  border: this.state.border,
-                  backgroundColor: this.state.background_color,
-                }}
-                type="text"
-                placeholder="Adresse"
-                disabled={this.state.isDisabled}
-                value={this.state.society_adress}
-                onChange={this.handleChange}
-              />
-              <label>Telephone : </label>
-              <input
-                style={{
-                  border: this.state.border,
-                  backgroundColor: this.state.background_color,
-                }}
-                type="decimal"
-                placeholder="Telephone"
-                disabled={this.state.isDisabled}
-                value={this.state.phone_number}
-                onChange={this.handleChange}
-              />
-              <label>Site : </label>
-              <a href={this.state.society_website}></a>
-              <input
-                style={{
-                  border: this.state.border,
-                  backgroundColor: this.state.background_color,
-                }}
-                type="text"
-                placeholder="Site"
-                disabled={this.state.isDisabled}
-                value={this.state.society_website}
-                onChange={this.handleChange}
-              />
+              <div>
+                <label>Email de la Societé : </label>
+                <input
+                  style={{
+                    border: this.state.border,
+                    backgroundColor: this.state.background_color,
+                  }}
+                  type="email"
+                  placeholder="Email"
+                  disabled={this.state.isDisabled}
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </div>
+              
+              <div className="input_label">
+                  <label>Adresse : </label>
+                <input
+                  style={{
+                    border: this.state.border,
+                    backgroundColor: this.state.background_color,
+                  }}
+                  type="text"
+                  placeholder="Adresse"
+                  disabled={this.state.isDisabled}
+                  value={this.state.society_adress}
+                  onChange={this.handleChange}
+                />
+              </div>
+              
+              <div className="input_label">
+                  <label>Telephone : </label>
+                <input
+                  style={{
+                    border: this.state.border,
+                    backgroundColor: this.state.background_color,
+                  }}
+                  type="decimal"
+                  placeholder="Telephone"
+                  disabled={this.state.isDisabled}
+                  value={this.state.phone_number}
+                  onChange={this.handleChange}
+                />
+              </div>
+              
+              <div className="input_label">
+                <label>Site : </label>
+                <a href={this.state.society_website}></a>
+                <input
+                  style={{
+                    border: this.state.border,
+                    backgroundColor: this.state.background_color,
+                  }}
+                  type="text"
+                  placeholder="Site"
+                  disabled={this.state.isDisabled}
+                  value={this.state.society_website}
+                  onChange={this.handleChange}
+                />
+              </div>
+              
             </div>
             <div id="social" className="paddingthis">
               <h3>Reseaux Sociaux : </h3>
-              <label>Linkedin : </label>
-              <input
-                style={{
-                  border: this.state.border,
-                  backgroundColor: this.state.background_color,
-                }}
-                placeholder="Linkedin..."
-                disabled={this.state.isDisabled}
-                value={this.state.linkedin}
-                onChange={this.handleChange}
-              />
-              <label>Facebook : </label>
-              <input
-                style={{
-                  border: this.state.border,
-                  backgroundColor: this.state.background_color,
-                }}
-                placeholder="Facebook..."
-                disabled={this.state.isDisabled}
-                value={this.state.facebook}
-                onChange={this.handleChange}
-              />
-              <label>Twitter : </label>
-              <input
-                style={{
-                  border: this.state.border,
-                  backgroundColor: this.state.background_color,
-                }}
-                placeholder="Twitter..."
-                disabled={this.state.isDisabled}
-                value={this.state.twitter}
-                onChange={this.handleChange}
-              />
+              <div className="input_label">
+                <div>
+                {this.state.Show_Face && <img href={this.state.facebook} src="facebook_icon.png" alt="facebook"/>}
+                </div>
+                <div>
+                  {this.state.Show_Link && <img href={this.state.linkedin} src="linkedin_icon.png" alt="linkedin"/>}
+                </div>
+                <div>
+                  {this.state.Show_Link && <img href={this.state.twitter} src="twitter_icon.png" alt="twitter"/>}
+                </div>
+              </div>
+              
+              {!this.state.isDisabled && <div>
+                <div className="input_label">
+                  <label>Facebook : </label>
+                  <input value={this.state.facebook}/>
+                </div>
+                <div className="input_label">
+                  <label>Linkedin : </label>
+                  <input value={this.state.linkedin}/>
+                </div>
+                <div className="input_label">
+                  <label>Twitter : </label>
+                  <input value={this.state.twitter}/>
+                </div>
+              </div>}
             </div>
           </div>
           <div id="side_bloc">
@@ -314,7 +333,8 @@ class Profil extends Component {
             </div>
             <div>
               <h3>Parole de membre</h3>
-              <textarea
+              <p>{this.state.work_description}</p>
+              {!this.state.isDisabled && <textarea
                 style={{
                   border: this.state.border,
                   backgroundColor: this.state.background_color,
@@ -324,7 +344,7 @@ class Profil extends Component {
                 name="description"
                 value={this.state.work_description}
                 onChange={this.handleChange}
-              />
+              />}
             </div>
             {this.state.isConnected && (
               <div

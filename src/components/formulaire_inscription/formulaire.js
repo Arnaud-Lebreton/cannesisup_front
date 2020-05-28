@@ -235,6 +235,9 @@ class inscrip extends Component {
             required
           />
           <br />
+          <input type="file"/>
+          <p>Previsualisation</p>
+          <br/>
           <label>Facebook: </label>
           <input
             type="text"
