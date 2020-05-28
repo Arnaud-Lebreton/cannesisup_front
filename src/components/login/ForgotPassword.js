@@ -23,10 +23,6 @@ class ForgotPassword extends Component {
     this.setState({ close: !this.state.close });
   };
 
-  message = () => {
-    alert("Un mail vous à été envoyé");
-  };
-
   /********* Fonction qui permet de réinitialiser le MDP ********/
 
   resetPassword = (e) => {

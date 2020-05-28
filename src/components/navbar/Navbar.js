@@ -14,7 +14,7 @@ class Navbar extends Component {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/#home" className="navLink">
+            <Nav.Link href="/" className="navLink">
               Annuaire
             </Nav.Link>
           </Nav.Item>
