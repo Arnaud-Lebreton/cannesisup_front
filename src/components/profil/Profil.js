@@ -285,39 +285,78 @@ class Profil extends Component {
                     onChange={this.preview_image}
                   />
                 )}
-                {!this.state.isDisabled && (
-                  <input
-                    type="file"
-                    name="compagnyPresentationFile"
-                    accept="application/pdf"
-                  />
-                )}
-
-                {this.state.isDisabled && (
-                  <div className="downloadText">
-                    <div>
-                      <p>Telecharger la brochure de la société</p>
-                    </div>
-                    <div>
-                      <a
-                        id="download"
-                        href={this.state.compagnyPresentationFile}
-                        target="_blank"
-                      >
-                        <i class="fas fa-2x fa-download download"></i>
-                      </a>
-                    </div>
-                  </div>
-                )}
               </div>
-              <div className="paddingthis">
+            </div>
+            <div id="image_Logo">
+              <img id="logo_ent" src={this.state.image_logo} />
+              {!this.state.isDisabled && (
+                <input
+                  type="file"
+                  name="logo_ent"
+                  onChange={this.preview_image}
+                />
+              )}
+              {!this.state.isDisabled && (
+                <input type="file" accept="application/pdf" />
+              )}
+
+              {this.state.isDisabled && (
+                <div className="containtDownloadDoc">
+                  <div className="downloadText">
+                    <p>
+                      Télécharger la brochure
+                      <br /> de la société
+                    </p>
+                  </div>
+                  <div>
+                    <a
+                      id="download"
+                      href={this.state.compagnyPresentationFile}
+                      target="_blank"
+                    >
+                      <i class="fas fa-2x fa-download download"></i>
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="paddingthis">
+              <input
+                style={{
+                  border: this.state.border,
+                  color: "#f7316b",
+                  backgroundColor: this.state.background_color,
+                }}
+                placeholder="Nom de Votre Societé..."
+                disabled={this.state.isDisabled}
+                name="society_name"
+                value={this.state.society_name}
+                onChange={this.handleChange}
+              />
+              <div className="containtTextSociety">
+                <textarea
+                  style={{
+                    border: this.state.border,
+                    backgroundColor: this.state.background_color,
+                  }}
+                  placeholder="Parlez-nous de celle-ci..."
+                  disabled={this.state.isDisabled}
+                  name="society_description"
+                  value={this.state.society_description}
+                  onChange={this.handleChange}
+                  className="dimTextarea1"
+                />
+              </div>
+              <div className="activitySector">
+                <h3 className="titreH3">Secteur d'activité</h3>
                 <input
                   style={{
                     border: this.state.border,
                     color: "#f7316b",
                     backgroundColor: this.state.background_color,
                   }}
-                  placeholder="Nom de Votre Societé..."
+                  className="containtActivitySector"
+                  placeholder="Son Secteur d'Activité..."
                   disabled={this.state.isDisabled}
                   name="society_name"
                   value={this.state.society_name}
@@ -353,75 +392,74 @@ class Profil extends Component {
                   />
                 </div>
               </div>
-              <div className="paddingthis">
-                <h3 className="titreH3">Coordonnées : </h3>
-                <label>Email de la Societé : </label>
-                <input
-                  style={{
-                    border: this.state.border,
-                    backgroundColor: this.state.background_color,
-                  }}
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  disabled={this.state.isDisabled}
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
+            </div>
+            <div className="paddingthis">
+              <h3 className="titreH3">Coordonnées</h3>
+              <div className="containtCoordAdress">
                 <label>Adresse : </label>
-                <div>
-                  <input
-                    style={{
-                      border: this.state.border,
-                      backgroundColor: this.state.background_color,
-                    }}
-                    type="text"
-                    name="society_adress"
-                    placeholder="Adresse.."
-                    disabled={this.state.isDisabled}
-                    value={this.state.society_adress}
-                    onChange={this.handleChange}
-                  />
-                  <input
-                    style={{
-                      border: this.state.border,
-                      backgroundColor: this.state.background_color,
-                    }}
-                    type="text"
-                    name="compagnyAdditionalAdress"
-                    placeholder="Complément d'adresse..."
-                    disabled={this.state.isDisabled}
-                    value={this.state.compagnyAdditionalAdress}
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div>
-                  <input
-                    style={{
-                      border: this.state.border,
-                      backgroundColor: this.state.background_color,
-                    }}
-                    type="text"
-                    name="compagnyPostalCode"
-                    placeholder="Code postal..."
-                    disabled={this.state.isDisabled}
-                    value={this.state.compagnyPostalCode}
-                    onChange={this.handleChange}
-                  />
-                  <input
-                    style={{
-                      border: this.state.border,
-                      backgroundColor: this.state.background_color,
-                    }}
-                    type="text"
-                    name="compagnyCity"
-                    placeholder="Ville..."
-                    disabled={this.state.isDisabled}
-                    value={this.state.compagnyCity}
-                    onChange={this.handleChange}
-                  />
-                </div>
+                <div className="coordAdress">
+                  <div>
+                    <input
+                      style={{
+                        border: this.state.border,
+                        backgroundColor: this.state.background_color,
+                      }}
+                      type="text"
+                      name="society_adress"
+                      placeholder="Adresse.."
+                      disabled={this.state.isDisabled}
+                      value={this.state.society_adress}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      style={{
+                        border: this.state.border,
+                        backgroundColor: this.state.background_color,
+                      }}
+                      type="text"
+                      name="compagnyAdditionalAdress"
+                      placeholder="Complément d'adresse..."
+                      disabled={this.state.isDisabled}
+                      value={this.state.compagnyAdditionalAdress}
+                      onChange={this.handleChange}
+                    />
+                  </div>
 
+                  <div className="coordPostal">
+                    <div className="containtPostal">
+                      <input
+                        style={{
+                          border: this.state.border,
+                          backgroundColor: this.state.background_color,
+                        }}
+                        type="text"
+                        name="compagnyPostalCode"
+                        placeholder="Code postal..."
+                        disabled={this.state.isDisabled}
+                        value={this.state.compagnyPostalCode}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                    <div className="coordCity">
+                      <input
+                        style={{
+                          border: this.state.border,
+                          backgroundColor: this.state.background_color,
+                        }}
+                        type="text"
+                        name="compagnyCity"
+                        placeholder="Ville..."
+                        disabled={this.state.isDisabled}
+                        value={this.state.compagnyCity}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="coordAdress">
                 <label>Telephone : </label>
                 <input
                   style={{
@@ -435,6 +473,23 @@ class Profil extends Component {
                   value={this.state.phone_number}
                   onChange={this.handleChange}
                 />
+              </div>
+              <div className="coordAdress">
+                <label>Email :</label>
+                <input
+                  style={{
+                    border: this.state.border,
+                    backgroundColor: this.state.background_color,
+                  }}
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  disabled={this.state.isDisabled}
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="coordAdress">
                 <label>Site : </label>
                 <a href={this.state.society_website}></a>
                 <input
@@ -442,7 +497,7 @@ class Profil extends Component {
                     border: this.state.border,
                     backgroundColor: this.state.background_color,
                   }}
-                  type="text"
+                  type="url"
                   name="society_website"
                   placeholder="Site"
                   disabled={this.state.isDisabled}
@@ -450,13 +505,12 @@ class Profil extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <div id="social" className="paddingthis">
-                <h3 className="titreH3">Reseaux Sociaux : </h3>
-                <a href={this.state.linkedin}>
-                  <i
-                    className="fab fa-2x fa-linkedin reseaux"
-                    target="_blank"
-                  ></i>
+            </div>
+            <div id="social" className="paddingthis">
+              <h3 className="titreH3">Reseaux Sociaux</h3>
+              <div className="containtSocialNetwork">
+                <a href={this.state.linkedin} target="_blank">
+                  <i className="fab fa-3x fa-linkedin reseaux"></i>
                 </a>
                 {!this.state.isDisabled && (
                   <input
@@ -471,8 +525,9 @@ class Profil extends Component {
                     onChange={this.handleChange}
                   />
                 )}
+
                 <a href={this.state.facebook} target="_blank">
-                  <i className="fab fa-2x fa-facebook-square reseaux"></i>
+                  <i className="fab fa-3x fa-facebook-square reseaux"></i>
                 </a>
                 {!this.state.isDisabled && (
                   <input
@@ -488,11 +543,8 @@ class Profil extends Component {
                   />
                 )}
 
-                <a href={this.state.twitter}>
-                  <i
-                    className="fab fa-2x fa-twitter-square reseaux"
-                    target="_blank"
-                  ></i>
+                <a href={this.state.twitter} target="_blank">
+                  <i className="fab fa-3x fa-twitter-square reseaux"></i>
                 </a>
                 {!this.state.isDisabled && (
                   <input
@@ -507,11 +559,8 @@ class Profil extends Component {
                     name="twitter"
                   />
                 )}
-                <a href={this.state.instagram}>
-                  <i
-                    className="fab fa-2x fa-instagram reseaux"
-                    target="_blank"
-                  ></i>
+                <a href={this.state.instagram} target="_blank">
+                  <i className="fab fa-3x fa-instagram reseaux"></i>
                 </a>
                 {!this.state.isDisabled && (
                   <input
@@ -528,61 +577,59 @@ class Profil extends Component {
                 )}
               </div>
             </div>
-            {/**/}
-            <div id="side_bloc">
-              <div id="profil_image">
-                <img
-                  src={this.state.compagnyRepresentPhoto}
-                  id="compagnyRepresentPhoto"
+          </div>
+          {/**/}
+          <div id="side_bloc">
+            <div id="profil_image">
+              <img src={this.state.image_profil} id="image_profil" />
+              {!this.state.isDisabled && (
+                <input
+                  type="file"
+                  name="image_profil"
+                  onChange={this.preview_image}
                 />
-                {!this.state.isDisabled && (
+              )}
+            </div>
+            <div className="containtSideBloc">
+              <h3>Dirigeant</h3>
+              <div className="containtFieldName">
+                <div className="FieldName">
                   <input
-                    type="file"
-                    name="compagnyRepresentPhoto"
-                    onChange={this.preview_image}
+                    style={{
+                      border: this.state.border,
+                      backgroundColor: this.state.background_color,
+                    }}
+                    placeholder="Prénom..."
+                    disabled={this.state.isDisabled}
+                    name="compagnyRepresentFirstname"
+                    value={this.state.compagnyRepresentFirstname}
+                    onChange={this.handleChange}
                   />
-                )}
+                  <input
+                    style={{
+                      border: this.state.border,
+                      backgroundColor: this.state.background_color,
+                    }}
+                    placeholder="Nom..."
+                    disabled={this.state.isDisabled}
+                    name="compagnyRepresentLastname"
+                    value={this.state.compagnyRepresentLastname}
+                    onChange={this.handleChange}
+                  />
+                  <input
+                    style={{
+                      border: this.state.border,
+                      backgroundColor: this.state.background_color,
+                    }}
+                    placeholder="Profession..."
+                    disabled={this.state.isDisabled}
+                    name="work"
+                    value={this.state.work}
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
-              <div>
-                <input
-                  style={{
-                    border: this.state.border,
-                    backgroundColor: this.state.background_color,
-                  }}
-                  placeholder="Nom..."
-                  disabled={this.state.isDisabled}
-                  name="compagnyRepresentLastname"
-                  value={this.state.compagnyRepresentLastname}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
-                <input
-                  style={{
-                    border: this.state.border,
-                    backgroundColor: this.state.background_color,
-                  }}
-                  placeholder="Prénom..."
-                  disabled={this.state.isDisabled}
-                  name="compagnyRepresentFirstname"
-                  value={this.state.compagnyRepresentFirstname}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
-                <input
-                  style={{
-                    border: this.state.border,
-                    backgroundColor: this.state.background_color,
-                  }}
-                  placeholder="Profession..."
-                  disabled={this.state.isDisabled}
-                  name="work"
-                  value={this.state.work}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
+              <div className="containtWordMember">
                 <h3 className="titreH3">Parole de membre</h3>
                 <textarea
                   style={{
@@ -596,8 +643,8 @@ class Profil extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="buttonDiv"> {this.testBouton()}</div>
             </div>
+            <div className="buttonDiv"> {this.testBouton()}</div>
           </div>
         </form>
       </div>

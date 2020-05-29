@@ -15,6 +15,7 @@ class Login extends Component {
       password: "",
       redirectAdmin: false,
       redirectMember: false,
+      icone_eye: "fas fa-eye-slash",
     };
   }
 
@@ -84,8 +85,10 @@ class Login extends Component {
     let x = document.getElementById("pwd");
     if (x.type === "password") {
       x.type = "text";
+      this.setState({ icone_eye: "fas fa-eye" });
     } else {
       x.type = "password";
+      this.setState({ icone_eye: "fas fa-eye-slash" });
     }
   };
 
@@ -135,7 +138,10 @@ class Login extends Component {
             />
             <InputGroup.Append>
               <Button className="containtButtonPassword" onClick={this.showPwd}>
-                <i className="fas fa-eye" style={{ color: "#f7316b" }}></i>
+                <i
+                  className={this.state.icone_eye}
+                  style={{ color: "#f7316b" }}
+                ></i>
               </Button>
             </InputGroup.Append>
           </InputGroup>

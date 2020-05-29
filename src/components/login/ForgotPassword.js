@@ -45,8 +45,12 @@ class ForgotPassword extends Component {
           console.log(error);
         }
       );
+    if (this.state.email === "") {
+      alert("Veuillez renseigner votre email");
+      return;
+    }
     alert(
-      "Un mail vous a été envoyé pour la réinitialisation de votre mot de passe"
+      "Un email vous a été envoyé pour la réinitialisation de votre mot de passe"
     );
     this.changeclose();
   };

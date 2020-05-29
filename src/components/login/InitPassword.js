@@ -12,6 +12,8 @@ class InitPassword extends Component {
       password: "",
       confirmPassword: "",
       redirect: false,
+      icone_eye: "fas fa-eye-slash",
+      icone_eye_confirm: "fas fa-eye-slash",
     };
     this.submitData = this.submitData.bind(this);
   }
@@ -88,17 +90,21 @@ class InitPassword extends Component {
     let x = document.getElementById("pwd");
     if (x.type === "password") {
       x.type = "text";
+      this.setState({ icone_eye: "fas fa-eye" });
     } else {
       x.type = "password";
+      this.setState({ icone_eye: "fas fa-eye-slash" });
     }
   };
 
   showPwdConfirm = () => {
     let x = document.getElementById("pwdConfirm");
     if (x.type === "password") {
+      this.setState({ icone_eye_confirm: "fas fa-eye" });
       x.type = "text";
     } else {
       x.type = "password";
+      this.setState({ icone_eye_confirm: "fas fa-eye-slash" });
     }
   };
 
@@ -147,7 +153,10 @@ class InitPassword extends Component {
             />
             <InputGroup.Append>
               <Button className="containtButtonPassword" onClick={this.showPwd}>
-                <i className="fas fa-eye" style={{ color: "#f7316b" }}></i>
+                <i
+                  className={this.state.icone_eye}
+                  style={{ color: "#f7316b" }}
+                ></i>
               </Button>
             </InputGroup.Append>
           </InputGroup>
@@ -170,7 +179,10 @@ class InitPassword extends Component {
                 className="containtButtonPassword"
                 onClick={this.showPwdConfirm}
               >
-                <i className="fas fa-eye" style={{ color: "#f7316b" }}></i>
+                <i
+                  className={this.state.icone_eye_confirm}
+                  style={{ color: "#f7316b" }}
+                ></i>
               </Button>
             </InputGroup.Append>
           </InputGroup>
