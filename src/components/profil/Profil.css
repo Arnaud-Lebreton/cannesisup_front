@@ -23,29 +23,6 @@
   right: 10px;
   margin-top: -60px;
 }
-.buttonDiv {
-  display: flex;
-  align-items: center;
-}
-.buttonSave {
-  transition: background-color 0.2s linear;
-  border-radius: 8px;
-  padding: 10px 15px;
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #f7316b;
-  background-color: #fff;
-  border: 2px solid #f7316b !important;
-  width: 150px;
-}
-.buttonSave:hover {
-  transition: background-color 0.2s linear;
-  color: #fff !important;
-  background-color: #f7316b !important;
-  border-color: #f7316b !important;
-  border-width: 1px !important;
-}
 
 #body button {
   transition: background-color 0.2s linear;

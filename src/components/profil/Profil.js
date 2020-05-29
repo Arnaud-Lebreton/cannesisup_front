@@ -21,9 +21,9 @@ class Profil extends Component {
       work: "",
       work_description: "",
       isDisabled: true,
-      compagnyRepresentPhoto: "",
-      compagnyCoverPhoto: "",
-      compagnyLogo: "",
+      image_profil: "",
+      image_fond: "",
+      image_logo: "",
       facebook: "",
       twitter: "",
       linkedin: "",
@@ -37,12 +37,22 @@ class Profil extends Component {
       compagnyPostalCode: "",
       compagnyCity: "",
       adminConnect: false,
-      imageList: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
+  hide(a) {
+    this.setState({ isDisabled: a });
+    if (this.state.isDisabled) {
+      this.setState({ background_color: "rgb(188, 229, 255)" });
+    } else {
+      this.setState({ border: "none", background_color: "white" });
+    }
+  }
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
   componentDidMount() {
     this.dataImport();
   }
@@ -75,9 +85,9 @@ class Profil extends Component {
             email: data[0].compagnyEmail,
             work: data[0].compagnyRepresentFunction,
             work_description: data[0].compagnyRepresentQuote,
-            compagnyRepresentPhoto: data[0].compagnyRepresentPhoto,
-            compagnyCoverPhoto: data[0].compagnyCoverPhoto,
-            compagnyLogo: data[0].compagnyLogo,
+            image_profil: data[0].compagnyRepresentPhoto,
+            image_fond: data[0].compagnyCoverPhoto,
+            image_logo: data[0].compagnyLogo,
             facebook: data[0].compagnyFacebook,
             twitter: data[0].compagnyTwitter,
             linkedin: data[0].compagnyLinkedin,
@@ -119,7 +129,8 @@ class Profil extends Component {
             adminConnect = true;
             memberConnected = false;
           }
-          console.log(data[0].compagnyLogo);
+          console.log(localStorage.getItem("statut"));
+
           this.setState({
             compagnyRepresentLastname: data[0].compagnyRepresentLastname,
             compagnyRepresentFirstname: data[0].compagnyRepresentFirstname,
@@ -132,9 +143,9 @@ class Profil extends Component {
             email: data[0].compagnyEmail,
             work: data[0].compagnyRepresentFunction,
             work_description: data[0].compagnyRepresentQuote,
-            compagnyRepresentPhoto: data[0].compagnyRepresentPhoto,
-            compagnyCoverPhoto: data[0].compagnyCoverPhoto,
-            compagnyLogo: data[0].compagnyLogo,
+            image_profil: data[0].compagnyRepresentPhoto,
+            image_fond: data[0].compagnyCoverPhoto,
+            image_logo: data[0].compagnyLogo,
             facebook: data[0].compagnyFacebook,
             twitter: data[0].compagnyTwitter,
             linkedin: data[0].compagnyLinkedin,
@@ -153,25 +164,7 @@ class Profil extends Component {
   dataExport(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-
-    //Configuration de la requete
-    const options = {
-      method: "PUT",
-      mode: "cors",
-      body: formData, //JSON.stringify(body),
-    };
-
-    //Envoie de la requete inscription
-    fetch("http://localhost:8080/profil/updateProfil", options)
-      .then((response) => response.json())
-      .then(
-        (data) => {
-          alert("Vos modifications ont bien été prises en compte !");
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    console.log(formData);
   }
 
   disconnect = () => {
@@ -188,101 +181,48 @@ class Profil extends Component {
     };
     reader.readAsDataURL(e.target.files[0]);
   };
-  //Affichage en mode lecture/ecriture
-  hide(a) {
-    this.setState({ isDisabled: a });
-    if (this.state.isDisabled) {
-      this.setState({ background_color: "rgb(188, 229, 255)" });
-    } else {
-      this.setState({ border: "none", background_color: "white" });
-    }
-  }
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  testBouton = () => {
-    if (this.state.adminConnect || this.state.isConnected) {
-      if (this.state.isDisabled) {
-        return (
-          <input
-            className="buttonSave"
-            type="submit"
-            onClick={() => this.hide(false)}
-            value="MODIFIER"
-          ></input>
-        );
-      } else {
-        return (
-          <input
-            type="button"
-            onClick={() => this.hide(true)}
-            className="buttonSave"
-            value="ENREGISTRER"
-          ></input>
-        );
-      }
-    } else {
-      return;
-    }
-  };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.dataExport}>
-          <div id="body">
-            <div className="logoutDiv">
-              {this.state.isConnected && (
-                <a href="http://localhost:3000" onClick={this.disconnect}>
-                  {" "}
-                  <i
-                    class="fas fa-2x fa-sign-out-alt logout"
-                    id="deconnexion"
-                    title="Déconnexion"
-                  ></i>
-                </a>
-              )}
-            </div>
-            <div className="logoutDiv">
-              {/*visible que pour l'admin*/}
-              {this.state.adminConnect && (
-                <a href="http://localhost:3000/dashboard">
-                  {" "}
-                  <i
-                    class="fas fa-2x fa-arrow-right logout"
-                    id="deconnexion"
-                    title="Retour Admin"
-                  ></i>
-                </a>
-              )}
-            </div>
-            <div id="middle_bloc">
+        <div id="body">
+          <div className="logoutDiv">
+            {this.state.isConnected && (
+              <a href="http://localhost:3000" onClick={this.disconnect}>
+                {" "}
+                <i
+                  class="fas fa-2x fa-sign-out-alt logout"
+                  id="deconnexion"
+                  title="Déconnexion"
+                ></i>
+              </a>
+            )}
+          </div>
+          <div className="logoutDiv">
+            {/*visible que pour l'admin*/}
+            {this.state.adminConnect && (
+              <a href="http://localhost:3000/dashboard">
+                {" "}
+                <i
+                  class="fas fa-2x fa-arrow-right logout"
+                  id="deconnexion"
+                  title="Retour Admin"
+                ></i>
+              </a>
+            )}
+          </div>
+          <div id="middle_bloc">
+            <div>
               <div>
-                <div>
-                  <img
-                    id="compagnyCoverPhoto"
-                    src={this.state.compagnyCoverPhoto}
-                  />
-                </div>
-                <div>
-                  {" "}
-                  {!this.state.isDisabled && (
-                    <input
-                      type="file"
-                      onChange={this.preview_image}
-                      name="compagnyCoverPhoto"
-                    />
-                  )}
-                </div>
+                <img id="image_fond" src={this.state.image_fond} />
               </div>
-              <div id="image_Logo" className="paddingthis">
-                <img id="compagnyLogo" src={this.state.compagnyLogo} />
+              <div>
+                {" "}
                 {!this.state.isDisabled && (
                   <input
                     type="file"
-                    name="compagnyLogo"
                     onChange={this.preview_image}
+                    name="image_fond"
                   />
                 )}
               </div>
@@ -352,45 +292,16 @@ class Profil extends Component {
                 <input
                   style={{
                     border: this.state.border,
-                    color: "#f7316b",
+                    width: "100%",
                     backgroundColor: this.state.background_color,
                   }}
                   className="containtActivitySector"
                   placeholder="Son Secteur d'Activité..."
                   disabled={this.state.isDisabled}
-                  name="society_name"
-                  value={this.state.society_name}
+                  name="society_activity_sector"
+                  value={this.state.society_activity_sector}
                   onChange={this.handleChange}
                 />
-                <div>
-                  <textarea
-                    style={{
-                      border: this.state.border,
-                      backgroundColor: this.state.background_color,
-                    }}
-                    placeholder="Parlez-nous de celle-ci..."
-                    disabled={this.state.isDisabled}
-                    name="society_description"
-                    value={this.state.society_description}
-                    onChange={this.handleChange}
-                    className="dimTextarea1"
-                  />
-                </div>
-                <div>
-                  <h3 className="titreH3">Secteur d'activité : </h3>
-                  <input
-                    style={{
-                      border: this.state.border,
-                      width: "100%",
-                      backgroundColor: this.state.background_color,
-                    }}
-                    placeholder="Son Secteur d'Activité..."
-                    disabled={this.state.isDisabled}
-                    name="society_activity_sector"
-                    value={this.state.society_activity_sector}
-                    onChange={this.handleChange}
-                  />
-                </div>
               </div>
             </div>
             <div className="paddingthis">
@@ -644,9 +555,23 @@ class Profil extends Component {
                 />
               </div>
             </div>
-            <div className="buttonDiv"> {this.testBouton()}</div>
+            {this.state.isConnected && (
+              <div
+                id="interaction"
+                style={{ visibility: this.state.isConnected }}
+              >
+                {this.state.isDisabled && (
+                  <button onClick={() => this.hide(false)}>Modifier</button>
+                )}
+                {!this.state.isDisabled && (
+                  <button type="submit" onClick={() => this.hide(true)}>
+                    Confirmer
+                  </button>
+                )}
+              </div>
+            )}
           </div>
-        </form>
+        </div>
       </div>
     );
   }
