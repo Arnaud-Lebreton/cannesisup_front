@@ -1,11 +1,11 @@
-#compagnyCoverPhoto {
+#image_fond {
   background-repeat: no-repeat;
   background-size: cover;
   height: 150px;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
 }
-#compagnyCoverPhoto button {
+#image_fond button {
   margin-top: 50px;
   margin-right: 35%;
   margin-left: 35%;
@@ -127,7 +127,7 @@ input[name="surname"] {
   resize: vertical;
   overflow: auto;
 }
-#compagnyLogo {
+#logo_ent {
   width: 45%;
 }
 #middle_bloc .paddingthis {

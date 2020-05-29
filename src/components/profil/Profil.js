@@ -21,9 +21,9 @@ class Profil extends Component {
       work: "",
       work_description: "",
       isDisabled: true,
-      image_profil: "",
-      image_fond: "",
-      image_logo: "",
+      compagnyRepresentPhoto: "",
+      compagnyCoverPhoto: "",
+      compagnyLogo: "",
       facebook: "",
       twitter: "",
       linkedin: "",
@@ -75,9 +75,9 @@ class Profil extends Component {
             email: data[0].compagnyEmail,
             work: data[0].compagnyRepresentFunction,
             work_description: data[0].compagnyRepresentQuote,
-            image_profil: data[0].compagnyRepresentPhoto,
-            image_fond: data[0].compagnyCoverPhoto,
-            image_logo: data[0].compagnyLogo,
+            compagnyRepresentPhoto: data[0].compagnyRepresentPhoto,
+            compagnyCoverPhoto: data[0].compagnyCoverPhoto,
+            compagnyLogo: data[0].compagnyLogo,
             facebook: data[0].compagnyFacebook,
             twitter: data[0].compagnyTwitter,
             linkedin: data[0].compagnyLinkedin,
@@ -132,9 +132,9 @@ class Profil extends Component {
             email: data[0].compagnyEmail,
             work: data[0].compagnyRepresentFunction,
             work_description: data[0].compagnyRepresentQuote,
-            image_profil: data[0].compagnyRepresentPhoto,
-            image_fond: data[0].compagnyCoverPhoto,
-            image_logo: data[0].compagnyLogo,
+            compagnyRepresentPhoto: data[0].compagnyRepresentPhoto,
+            compagnyCoverPhoto: data[0].compagnyCoverPhoto,
+            compagnyLogo: data[0].compagnyLogo,
             facebook: data[0].compagnyFacebook,
             twitter: data[0].compagnyTwitter,
             linkedin: data[0].compagnyLinkedin,
@@ -156,13 +156,13 @@ class Profil extends Component {
 
     //Configuration de la requete
     const options = {
-      method: "POST",
+      method: "PUT",
       mode: "cors",
       body: formData, //JSON.stringify(body),
     };
 
     //Envoie de la requete inscription
-    fetch("http://localhost:8080/profil/insertSingle", options)
+    fetch("http://localhost:8080/profil/updateProfil", options)
       .then((response) => response.json())
       .then(
         (data) => {
@@ -260,33 +260,36 @@ class Profil extends Component {
             <div id="middle_bloc">
               <div>
                 <div>
-                  <img id="image_fond" src={this.state.image_fond} />
+                  <img
+                    id="compagnyCoverPhoto"
+                    src={this.state.compagnyCoverPhoto}
+                  />
                 </div>
                 <div>
                   {" "}
                   {!this.state.isDisabled && (
                     <input
                       type="file"
-                      onChange={(this.preview_image, this.listFile)}
-                      name="image_fond"
+                      onChange={this.preview_image}
+                      name="compagnyCoverPhoto"
                     />
                   )}
                 </div>
               </div>
               <div id="image_Logo" className="paddingthis">
-                <img id="logo_ent" src={this.state.image_logo} />
+                <img id="compagnyLogo" src={this.state.compagnyLogo} />
                 {!this.state.isDisabled && (
                   <input
                     type="file"
-                    name="logo_ent"
-                    onChange={(this.preview_image, this.listFile)}
+                    name="compagnyLogo"
+                    onChange={this.preview_image}
                   />
                 )}
                 {!this.state.isDisabled && (
                   <input
                     type="file"
+                    name="compagnyPresentationFile"
                     accept="application/pdf"
-                    onChange={this.listFile}
                   />
                 )}
 
@@ -528,12 +531,15 @@ class Profil extends Component {
             {/**/}
             <div id="side_bloc">
               <div id="profil_image">
-                <img src={this.state.image_profil} id="image_profil" />
+                <img
+                  src={this.state.compagnyRepresentPhoto}
+                  id="compagnyRepresentPhoto"
+                />
                 {!this.state.isDisabled && (
                   <input
                     type="file"
-                    name="image_profil"
-                    onChange={(this.preview_image, this.listFile)}
+                    name="compagnyRepresentPhoto"
+                    onChange={this.preview_image}
                   />
                 )}
               </div>
