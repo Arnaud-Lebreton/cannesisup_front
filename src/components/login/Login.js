@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Button, InputGroup, Nav } from "react-bootstrap";
 import "./login.css";
 import ForgotPassword from "./ForgotPassword";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 class Login extends Component {
@@ -31,14 +31,7 @@ class Login extends Component {
     const body = {
       membershipEmail: this.state.email,
       membershipHashPassword: this.state.password,
-      superAdminEmail: this.state.email,
-      superAdminHashPassword: this.state.password,
     };
-    this.identifyAdmin(body);
-    this.identifyMemberShip(body);
-  };
-
-  identifyAdmin = (body) => {
     const options = {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -46,52 +39,36 @@ class Login extends Component {
       body: JSON.stringify(body),
     };
     //Contrôle Admin
-    fetch("http://localhost:8080/signIn/superAdmin", options)
+    fetch("http://localhost:8080/signIn", options)
       .then((res) => res.json())
       .catch((err) => console.log("pas admin"))
       .then(
         (data) => {
-          console.log("admin");
-          let token = "bearer " + data.token;
-          localStorage.setItem("token", token);
-          localStorage.setItem("_id", data.superAdminId);
-          localStorage.setItem("statut", data.statut);
+          console.log(data);
           if (data.token) {
-            this.setState({ redirectAdmin: true });
+            let token = "bearer " + data.token;
+            localStorage.setItem("token", token);
+            if (data.superAdminId) {
+              localStorage.setItem("_id", data.superAdminId);
+            }
+            if (data.membershipId) {
+              localStorage.setItem("_id", data.membershipId);
+            }
+            if (data.statut) {
+              localStorage.setItem("statut", data.statut);
+            }
+            if (!data.statut) {
+              this.setState({ redirectMember: true });
+            } else {
+              this.setState({ redirectAdmin: true });
+            }
+          } else {
+            alert(data.message);
           }
         },
         (error) => {
           console.log(error);
           console.log("error admin");
-        }
-      );
-  };
-
-  identifyMemberShip = (body) => {
-    const options = {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      mode: "cors",
-      body: JSON.stringify(body),
-    };
-    //Contrôle membre
-    fetch("http://localhost:8080/signIn/membership", options)
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          console.log(data);
-          console.log("membership");
-          let token = "bearer " + data.token;
-          localStorage.setItem("token", token);
-          localStorage.setItem("_id", data.membershipId);
-          if (data.token) {
-            this.setState({ redirectMember: true });
-          } else {
-            alert("Adresse ou mot de passe invalide, veuillez recommencer");
-          }
-        },
-        (error) => {
-          console.log(error);
         }
       );
   };

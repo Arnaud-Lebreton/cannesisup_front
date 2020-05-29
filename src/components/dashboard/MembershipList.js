@@ -589,7 +589,7 @@ class MembershipList extends Component {
   //Management of order confirmations
   alertShow = () => {
     if (this.state.modalShow) {
-      let lastnameNameCompagny;
+      let lastnameNameCompagny, compagny;
       let adText;
       let text = () => {
         if (this.state.textAction === "MODIFIER") {
@@ -606,16 +606,15 @@ class MembershipList extends Component {
             lastnameNameCompagny =
               element.compagnyRepresentFirstname +
               " " +
-              element.compagnyRepresentLastname +
-              " ( " +
-              element.compagnyName +
-              " ) ";
+              element.compagnyRepresentLastname;
+            compagny = element.compagnyName;
           }
         });
         return (
           <div>
             <p>{adText}</p>
             <p className="dashBoardAlertName">{lastnameNameCompagny}</p>
+            <p className="dashBoardAlertName">{compagny}</p>
           </div>
         );
       };
@@ -858,7 +857,7 @@ class MembershipList extends Component {
               Fermer
             </Button>
             <Button
-              className="dashboardFilterText dashBoardModalButton"
+              className="dashboardFilterText dashBoardModalButton1"
               variant="primary"
               onClick={this.newHeaderColumn}
             >
@@ -1032,12 +1031,12 @@ class MembershipList extends Component {
       return (
         <Container className="dashboardGlobalSize">
           <div className="dashboardDeconnexionButton">
-            <Button
+            <button
               onClick={this.disconnect}
               className="dashboardDeconnexionSize"
             >
-              <i class="fas fa-sign-out-alt dashboardDeconnexionIcon"></i>
-            </Button>
+              <i class="fas fa-2x fa-sign-out-alt dashboardDeconnexionIcon"></i>
+            </button>
           </div>
           <div className="dashboardAlignButton">
             <div className="dashboardPaginationRow">
