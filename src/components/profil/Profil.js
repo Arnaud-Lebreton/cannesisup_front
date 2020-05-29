@@ -182,6 +182,32 @@ class Profil extends Component {
     reader.readAsDataURL(e.target.files[0]);
   };
 
+  testBouton = () => {
+    if (this.state.adminConnect || this.state.isConnected) {
+      if (this.state.isDisabled) {
+        return (
+          <input
+            className="buttonSave"
+            type="submit"
+            onClick={() => this.hide(false)}
+            value="MODIFIER"
+          ></input>
+        );
+      } else {
+        return (
+          <input
+            type="button"
+            onClick={() => this.hide(true)}
+            className="buttonSave"
+            value="ENREGISTRER"
+          ></input>
+        );
+      }
+    } else {
+      return;
+    }
+  };
+
   render() {
     return (
       <div>
@@ -219,25 +245,35 @@ class Profil extends Component {
               <div>
                 {" "}
                 {!this.state.isDisabled && (
-                  <input
-                    type="file"
-                    onChange={this.preview_image}
-                    name="image_fond"
-                  />
+                  <div>
+                    <span>Couverture : </span>
+                    <input
+                      type="file"
+                      onChange={this.preview_image}
+                      name="image_fond"
+                    />
+                  </div>
                 )}
               </div>
             </div>
             <div id="image_Logo">
               <img id="logo_ent" src={this.state.image_logo} />
               {!this.state.isDisabled && (
-                <input
-                  type="file"
-                  name="logo_ent"
-                  onChange={this.preview_image}
-                />
+                <div>
+                  {" "}
+                  <span>Logo : </span>
+                  <input
+                    type="file"
+                    name="logo_ent"
+                    onChange={this.preview_image}
+                  />
+                </div>
               )}
               {!this.state.isDisabled && (
-                <input type="file" accept="application/pdf" />
+                <div>
+                  <span>Brochure (pdf) : </span>
+                  <input type="file" accept="application/pdf" />
+                </div>
               )}
 
               {this.state.isDisabled && (
@@ -494,11 +530,14 @@ class Profil extends Component {
             <div id="profil_image">
               <img src={this.state.image_profil} id="image_profil" />
               {!this.state.isDisabled && (
-                <input
-                  type="file"
-                  name="image_profil"
-                  onChange={this.preview_image}
-                />
+                <div>
+                  <span>Profil :</span>
+                  <input
+                    type="file"
+                    name="image_profil"
+                    onChange={this.preview_image}
+                  />
+                </div>
               )}
             </div>
             <div className="containtSideBloc">
@@ -555,21 +594,7 @@ class Profil extends Component {
                 />
               </div>
             </div>
-            {this.state.isConnected && (
-              <div
-                id="interaction"
-                style={{ visibility: this.state.isConnected }}
-              >
-                {this.state.isDisabled && (
-                  <button onClick={() => this.hide(false)}>Modifier</button>
-                )}
-                {!this.state.isDisabled && (
-                  <button type="submit" onClick={() => this.hide(true)}>
-                    Confirmer
-                  </button>
-                )}
-              </div>
-            )}
+            <div className="buttonDiv"> {this.testBouton()}</div>
           </div>
         </div>
       </div>

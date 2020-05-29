@@ -168,6 +168,7 @@ class inscrip extends Component {
               <input
                 id="pwd"
                 type="password"
+                name="membershipHashPassword"
                 placeholder="Mot de passe..."
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 required

@@ -9,7 +9,9 @@
 
 #image_Logo {
   display: flex;
+  flex-direction: column;
   margin: 2%;
+  position: relative;
 }
 
 #image_fond button {
@@ -46,6 +48,7 @@
 }
 #profil_image {
   display: flex;
+  flex-direction: column;
 }
 #profil_image img {
   border-radius: 50%;
@@ -56,6 +59,8 @@
   position: relative;
   bottom: 100px;
   margin-bottom: -75px;
+  max-width: 160px;
+  max-height: 160px;
 }
 #body input[name="society_name"] {
   font-size: 25px;
@@ -178,6 +183,8 @@ input[name="surname"] {
   display: flex;
   width: 50%;
   justify-content: right;
+  position: absolute;
+  right: -120px;
 }
 .downloadText {
   margin-right: 6px;
@@ -281,4 +288,27 @@ input[name="surname"] {
 
 #interaction {
   display: flex;
+}
+.buttonDiv {
+  display: flex;
+  align-items: center;
+}
+.buttonSave {
+  transition: background-color 0.2s linear;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f7316b;
+  background-color: #fff;
+  border: 2px solid #f7316b !important;
+  width: 150px;
+}
+.buttonSave:hover {
+  transition: background-color 0.2s linear;
+  color: #fff !important;
+  background-color: #f7316b !important;
+  border-color: #f7316b !important;
+  border-width: 1px !important;
 }
